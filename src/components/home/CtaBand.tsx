@@ -8,8 +8,8 @@ type CtaBandProps = {
 };
 
 export function CtaBand({
-  title = "Ready to talk through your installation?",
-  description = "Share a few details about your site and what you need. We will use that to guide the next step.",
+  title = "Want to talk about an installation?",
+  description = "Open the contact page to see how to reach Skylink. Online enquiry and live phone or WhatsApp details will appear there when they are available.",
 }: CtaBandProps) {
   return (
     <section
@@ -28,7 +28,7 @@ export function CtaBand({
         </div>
         <div className="flex flex-wrap gap-3">
           <ButtonLink to="/contact?intent=quote" variant="primaryOnDark">
-            Request a quote
+            Go to contact
           </ButtonLink>
           <ButtonLink to="/about" variant="secondaryOnDark">
             About {site.brandName}
