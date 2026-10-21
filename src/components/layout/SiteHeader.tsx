@@ -36,7 +36,7 @@ export function SiteHeader() {
           aria-label={`${site.brandName} home`}
           onClick={() => setOpen(false)}
         >
-          <Logo width={188} />
+          <Logo width={200} />
         </TextLink>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">

@@ -14,7 +14,7 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-white/10 bg-navy-950 text-white">
       <Container className="grid gap-10 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div>
-          <Logo width={168} onDark />
+          <Logo width={176} onDark />
           <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-200/90">
             {site.relationshipPhrase}
           </p>

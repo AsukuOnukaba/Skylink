@@ -1,8 +1,11 @@
 import { cn } from "@/lib/cn";
 
 const LOGO_SRC = "/brand/skylink-logo-primary.png";
-/** Intrinsic pixel size of the approved primary logo asset. */
-export const LOGO_INTRINSIC = { width: 1024, height: 682 } as const;
+/**
+ * Intrinsic pixel size of the web-serving primary logo
+ * (`public/brand/skylink-logo-primary.png`, display-cropped from the cleared original).
+ */
+export const LOGO_INTRINSIC = { width: 396, height: 287 } as const;
 
 type LogoProps = {
   className?: string;
@@ -16,7 +19,7 @@ type LogoProps = {
  * Approved Skylink primary logo only.
  * Do not substitute DataGram marks or CSS-drawn wordmarks.
  */
-export function Logo({ className, width = 188, onDark = false }: LogoProps) {
+export function Logo({ className, width = 200, onDark = false }: LogoProps) {
   const height = Math.round(
     (width * LOGO_INTRINSIC.height) / LOGO_INTRINSIC.width,
   );
