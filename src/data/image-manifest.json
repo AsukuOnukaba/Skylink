@@ -1,0 +1,19 @@
+{
+  "/images/pipeline-fixture.png": {
+    "src": "/images/pipeline-fixture.png",
+    "width": 960,
+    "height": 640,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/pipeline-fixture.w480.avif",
+        "webp": "/images/pipeline-fixture.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/pipeline-fixture.w768.avif",
+        "webp": "/images/pipeline-fixture.w768.webp"
+      }
+    ]
+  }
+}

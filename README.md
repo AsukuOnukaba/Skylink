@@ -34,6 +34,14 @@ pnpm preview      # preview the production build
 
 Copy `.env.example` to `.env` and fill Skylink-owned values only. Server enquiry secrets (later phase) must not use the `VITE_` prefix.
 
+## Image pipeline
+
+```bash
+pnpm images:pipeline   # generate local fixture + optimize → public/images + src/data/image-manifest.json
+```
+
+Originals live in `media-originals/`. Brand logo originals live in `brand-assets/originals/` (do not run through the photo optimizer as marketing photography). Rights tracking: `src/data/image-rights-log.md`. Do not copy DataGram assets until rights are cleared.
+
 ## Current phase
 
-**PH-01 — foundation.** The `/` route is a development placeholder, not the public homepage. Branding (PH-02) and homepage design (PH-03) come next after owner checkpoint CP-B.
+**PH-02 — brand foundation.** `/` demonstrates tokens, logo, UI primitives, and the image pipeline fixture. It is **not** the public homepage (PH-03 / CP-C).

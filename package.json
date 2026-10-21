@@ -9,9 +9,14 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
-    "test": "vitest run"
+    "test": "vitest run",
+    "images:fixture": "node scripts/generate-pipeline-fixture.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "images:pipeline": "pnpm images:fixture && pnpm images:optimize"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "lucide-react": "^1.61.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.1"
@@ -23,6 +28,7 @@
     "@vitejs/plugin-react-swc": "^3.7.2",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.7.3",
     "vite": "^6.0.11",

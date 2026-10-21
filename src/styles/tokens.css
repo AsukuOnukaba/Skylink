@@ -1,0 +1,65 @@
+/**
+ * Skylink brand tokens — Branding & Design Brief §4–§6.
+ * Single source for colour, type, radius, and elevation.
+ * Do not redefine these per page.
+ */
+:root {
+  /* Core palette */
+  --sky-700: #00537d;
+  --sky-700-hover: #004365;
+  --sky-500: #159fd0;
+  --sky-300: #79c9e8;
+  --navy-950: #071a2b;
+  --navy-800: #12344b;
+  --slate-700: #344b5b;
+  --slate-500: #637786;
+  --slate-200: #dce5eb;
+  --slate-100: #f3f7f9;
+  --white: #ffffff;
+  --success: #18794e;
+  --warning: #9a5b00;
+  --danger: #b42318;
+
+  /* Semantic aliases */
+  --color-bg: var(--white);
+  --color-bg-subtle: var(--slate-100);
+  --color-bg-inverse: var(--navy-950);
+  --color-text: var(--slate-700);
+  --color-text-muted: var(--slate-500);
+  --color-heading: var(--navy-950);
+  --color-border: var(--slate-200);
+  --color-primary: var(--sky-700);
+  --color-primary-hover: var(--sky-700-hover);
+  --color-link: var(--sky-700);
+  --color-link-inverse: var(--sky-300);
+  --color-focus: var(--sky-500);
+
+  /* Typography */
+  --font-sans: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Shape */
+  --radius-sm: 0.5rem; /* 8px — inputs, buttons */
+  --radius-md: 0.625rem; /* 10px */
+  --radius-lg: 0.875rem; /* 14px — cards */
+  --radius-xl: 1.25rem; /* 20px — large panels */
+
+  /* Layout */
+  --container-max: 75rem; /* 1200px */
+  --space-section: clamp(3rem, 6vw, 5rem);
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(7 26 43 / 0.06);
+  --shadow-md: 0 4px 16px rgb(7 26 43 / 0.08);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgb(21 159 208 / 0.45);
+}
