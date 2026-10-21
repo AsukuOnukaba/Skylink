@@ -44,4 +44,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**PH-03 — homepage prototype.** `/` is the marketing homepage under review (CP-D). Brand component lab: `/dev/brand`. Stub routes: `/services`, `/about`. Contact shell: `/contact` (forms later).
+**PH-04 — shared shell + static pages.** Routes: `/`, `/services`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. Enquiry forms and live NAP arrive later.

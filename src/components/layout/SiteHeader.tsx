@@ -6,14 +6,9 @@ import { Icon } from "@/components/icons/Icon";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
+import { primaryNavRoutes } from "@/config/routes";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
-
-const navItems = [
-  { to: "/services", label: "Services" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-] as const;
 
 function navClassName({ isActive }: { isActive: boolean }) {
   return cn(
@@ -40,12 +35,12 @@ export function SiteHeader() {
         </TextLink>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={navClassName}>
+          {primaryNavRoutes.map((item) => (
+            <NavLink key={item.path} to={item.path} className={navClassName}>
               {item.label}
             </NavLink>
           ))}
-          <ButtonLink to="/contact?intent=quote">Get a quote</ButtonLink>
+          <ButtonLink to="/contact?intent=quote">Go to contact</ButtonLink>
         </nav>
 
         <button
@@ -66,10 +61,10 @@ export function SiteHeader() {
           className="border-t border-slate-200 bg-white md:hidden"
         >
           <Container className="flex flex-col gap-1 py-3">
-            {navItems.map((item) => (
+            {primaryNavRoutes.map((item) => (
               <NavLink
-                key={item.to}
-                to={item.to}
+                key={item.path}
+                to={item.path}
                 className={({ isActive }) =>
                   cn(navClassName({ isActive }), "min-h-11 px-3 py-3")
                 }
@@ -83,7 +78,7 @@ export function SiteHeader() {
               className="mt-2 w-full"
               onClick={() => setOpen(false)}
             >
-              Get a quote
+              Go to contact
             </ButtonLink>
           </Container>
         </div>

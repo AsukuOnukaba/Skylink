@@ -21,6 +21,14 @@ const internalPlanningPatterns = [
   /awaiting/i,
 ] as const;
 
+/** Copy that implies a live intake channel before forms/NAP exist. */
+const falseCapabilityPatterns = [
+  /share a few details/i,
+  /follow up using the details you share/i,
+  /we will use that to guide the next step/i,
+  /tell us about your site when you are ready to talk/i,
+] as const;
+
 function renderHomeHtml(): string {
   return renderToStaticMarkup(
     <MemoryRouter>
@@ -57,5 +65,13 @@ describe("Home customer-facing copy", () => {
         pattern,
       );
     }
+  });
+
+  it("does not promise a working enquiry submission or follow-up", () => {
+    const html = renderHomeHtml();
+    for (const pattern of falseCapabilityPatterns) {
+      expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
+    }
+    expect(html).toMatch(/when they are available|when live/i);
   });
 });

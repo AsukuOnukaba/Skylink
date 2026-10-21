@@ -8,12 +8,14 @@ import {
   Zap,
 } from "lucide-react";
 import { CtaBand } from "@/components/home/CtaBand";
+import { HeroVisual } from "@/components/home/HeroVisual";
 import { Icon } from "@/components/icons/Icon";
 import { AppShell } from "@/components/layout/AppShell";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
+import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
 import { publishedServices } from "@/data/services";
 import type { LucideIcon } from "lucide-react";
@@ -46,6 +48,10 @@ export function Home() {
 
   return (
     <AppShell>
+      <PageMeta
+        title={`${site.brandName} — Starlink installation and connectivity`}
+        description={`${site.brandName} helps homes and businesses with Starlink installation and connectivity support in Nigeria. Clear guidance and a path to get in touch when contact options are listed.`}
+      />
       <main id="main">
         <section
           aria-labelledby="home-hero-heading"
@@ -73,55 +79,39 @@ export function Home() {
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200/90">
                 {site.brandName} helps you get satellite connectivity in place
-                with clear advice and careful installation support. Tell us about
-                your site when you are ready to talk through the next step.
+                with clear advice and careful installation support. Explore the
+                site, then use Contact when live ways to reach us are listed.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink to="/contact?intent=quote" variant="primaryOnDark">
-                  Request a quote
+                  Go to contact
                 </ButtonLink>
-                <ButtonLink to="/about" variant="secondaryOnDark">
-                  About {site.brandName}
+                <ButtonLink to="/services" variant="secondaryOnDark">
+                  View services
                 </ButtonLink>
               </div>
             </div>
 
             <div className="relative">
-              <div className="rounded-xl border border-white/10 bg-navy-800/60 p-8 shadow-md backdrop-blur-sm">
-                <div className="flex h-48 items-center justify-center rounded-lg bg-navy-950/80 sm:h-56">
-                  <div className="text-center">
-                    <Icon
-                      icon={Cable}
-                      size="feature"
-                      className="mx-auto text-sky-300"
-                    />
-                    <p className="mt-4 text-sm font-medium text-sky-300">
-                      Installation and connectivity support
-                    </p>
-                    <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-400">
-                      Practical help getting Starlink working at your location.
-                    </p>
-                  </div>
+              <HeroVisual />
+              <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    Focus
+                  </dt>
+                  <dd className="mt-1 text-sm text-white">
+                    Installation and connectivity support
+                  </dd>
                 </div>
-                <dl className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                      Focus
-                    </dt>
-                    <dd className="mt-1 text-sm text-white">
-                      Installation and connectivity support
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                      Approach
-                    </dt>
-                    <dd className="mt-1 text-sm text-white">
-                      Independent installation business
-                    </dd>
-                  </div>
-                </dl>
-              </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    Approach
+                  </dt>
+                  <dd className="mt-1 text-sm text-white">
+                    Independent installation business
+                  </dd>
+                </div>
+              </dl>
             </div>
           </Container>
         </section>
@@ -192,8 +182,8 @@ export function Home() {
                 Why {site.brandName}
               </h2>
               <p className="mt-3 text-base text-slate-700">
-                A clear path from understanding the work to asking for help—without
-                inflated claims or invented credentials.
+                Clear guidance, careful field work, and an honest account of
+                what we can help with.
               </p>
             </div>
             <ul className="mt-10 grid gap-5 md:grid-cols-3">
