@@ -16,7 +16,7 @@ type LogoProps = {
  * Approved Skylink primary logo only.
  * Do not substitute DataGram marks or CSS-drawn wordmarks.
  */
-export function Logo({ className, width = 160, onDark = false }: LogoProps) {
+export function Logo({ className, width = 188, onDark = false }: LogoProps) {
   const height = Math.round(
     (width * LOGO_INTRINSIC.height) / LOGO_INTRINSIC.width,
   );

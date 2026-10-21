@@ -1,8 +1,7 @@
 import { Satellite } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Icon } from "@/components/icons/Icon";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { AppShell } from "@/components/layout/AppShell";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -14,18 +13,11 @@ import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 
 /**
- * PH-02 brand foundation demo — not the public homepage (PH-03).
+ * PH-02 brand foundation demo — moved to /dev/brand after homepage launch (PH-03).
  */
 export function BrandFoundation() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-white focus:px-3 focus:py-2 focus:text-sky-700"
-      >
-        Skip to content
-      </a>
-      <SiteHeader />
+    <AppShell>
       <main id="main" className="flex-1 bg-slate-100 py-[var(--space-section)]">
         <Container className="flex flex-col gap-10">
           <div>
@@ -134,7 +126,6 @@ export function BrandFoundation() {
           </section>
         </Container>
       </main>
-      <SiteFooter />
-    </div>
+    </AppShell>
   );
 }

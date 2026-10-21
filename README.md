@@ -44,4 +44,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**PH-02 — brand foundation.** `/` demonstrates tokens, logo, UI primitives, and the image pipeline fixture. It is **not** the public homepage (PH-03 / CP-C).
+**PH-03 — homepage prototype.** `/` is the marketing homepage under review (CP-D). Brand component lab: `/dev/brand`. Stub routes: `/services`, `/about`. Contact shell: `/contact` (forms later).
