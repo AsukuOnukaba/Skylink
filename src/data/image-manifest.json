@@ -21,6 +21,62 @@
       }
     ]
   },
+  "/images/hero-starlink-pole-solar.jpeg": {
+    "src": "/images/hero-starlink-pole-solar.jpeg",
+    "width": 960,
+    "height": 1280,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/hero-starlink-pole-solar.w480.avif",
+        "webp": "/images/hero-starlink-pole-solar.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/hero-starlink-pole-solar.w768.avif",
+        "webp": "/images/hero-starlink-pole-solar.w768.webp"
+      }
+    ]
+  },
+  "/images/hero-starlink-rooftop-hp.jpeg": {
+    "src": "/images/hero-starlink-rooftop-hp.jpeg",
+    "width": 1913,
+    "height": 2550,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/hero-starlink-rooftop-hp.w480.avif",
+        "webp": "/images/hero-starlink-rooftop-hp.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/hero-starlink-rooftop-hp.w768.avif",
+        "webp": "/images/hero-starlink-rooftop-hp.w768.webp"
+      },
+      {
+        "w": 1280,
+        "avif": "/images/hero-starlink-rooftop-hp.w1280.avif",
+        "webp": "/images/hero-starlink-rooftop-hp.w1280.webp"
+      }
+    ]
+  },
+  "/images/hero-starlink-tile-roof.jpeg": {
+    "src": "/images/hero-starlink-tile-roof.jpeg",
+    "width": 810,
+    "height": 1080,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/hero-starlink-tile-roof.w480.avif",
+        "webp": "/images/hero-starlink-tile-roof.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/hero-starlink-tile-roof.w768.avif",
+        "webp": "/images/hero-starlink-tile-roof.w768.webp"
+      }
+    ]
+  },
   "/images/pipeline-fixture.png": {
     "src": "/images/pipeline-fixture.png",
     "width": 960,

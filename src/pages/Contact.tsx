@@ -31,6 +31,8 @@ function parseIntent(value: string | null): IntentId {
 export function Contact() {
   const [params] = useSearchParams();
   const intent = useMemo(() => parseIntent(params.get("intent")), [params]);
+  const serviceSlug = params.get("service")?.trim() || "";
+  const productSlug = params.get("product")?.trim() || "";
   const active = intents.find((item) => item.id === intent) ?? intents[0];
   const hasPhone = Boolean(site.phoneDisplay && site.phoneE164);
   const hasEmail = Boolean(site.email);
@@ -91,6 +93,23 @@ export function Contact() {
               {active.label}
             </h2>
             <p className="mt-2 text-sm text-slate-700">{active.description}</p>
+            {serviceSlug || productSlug ? (
+              <p className="mt-3 text-sm text-slate-600">
+                Context from your link
+                {serviceSlug ? (
+                  <>
+                    : service <span className="font-medium">{serviceSlug}</span>
+                  </>
+                ) : null}
+                {productSlug ? (
+                  <>
+                    {serviceSlug ? ";" : ":"} product{" "}
+                    <span className="font-medium">{productSlug}</span>
+                  </>
+                ) : null}
+                . This helps you keep the topic clear when live channels open.
+              </p>
+            ) : null}
 
             <Alert
               tone="info"

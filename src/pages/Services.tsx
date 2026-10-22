@@ -11,8 +11,7 @@ import { site } from "@/config/site";
 import { publishedServices } from "@/data/services";
 
 /**
- * Services hub for PH-04. Individual service-detail templates belong to PH-05.
- * Unpublished catalogue entries are never shown as public offerings.
+ * Services hub. Detail links appear only for published catalogue entries.
  */
 export function Services() {
   const live = publishedServices();
@@ -37,8 +36,8 @@ export function Services() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
               {site.relationshipPhrase} This page explains the kinds of work we
-              focus on. Detailed service pages are published only when each
-              offering is confirmed for public listing.
+              focus on—installation support, clear expectations, and a practical
+              next step when you are ready to talk.
             </p>
           </Container>
         </section>
@@ -57,7 +56,7 @@ export function Services() {
               </h2>
               <p className="mt-3 text-base text-slate-700">
                 Clear guidance around satellite connectivity for homes and
-                businesses—without inventing a catalogue of unpublished offers.
+                businesses, with attention to mounting, cabling, and handover.
               </p>
             </div>
             <ul className="mt-8 grid gap-5 md:grid-cols-2">
@@ -105,7 +104,7 @@ export function Services() {
                 id="services-list-heading"
                 className="text-2xl font-bold text-navy-950"
               >
-                Published services
+                Service details
               </h2>
               <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {live.map((service) => (

@@ -1,6 +1,8 @@
+import { hasPublishedProducts } from "@/data/products";
+
 /**
- * Public route registry (PH-04). Catalogue detail routes arrive in later phases.
- * Conditionally published items (products, locations, work) stay omitted until data exists.
+ * Public route registry. Catalogue index/detail routes exist in App;
+ * Products appears in nav/footer only when at least one product is published.
  */
 export type AppRoute = {
   path: string;
@@ -11,7 +13,7 @@ export type AppRoute = {
   footer?: "explore" | "legal";
 };
 
-export const appRoutes: AppRoute[] = [
+const staticRoutes: AppRoute[] = [
   { path: "/", label: "Home" },
   { path: "/services", label: "Services", primaryNav: true, footer: "explore" },
   { path: "/about", label: "About", primaryNav: true, footer: "explore" },
@@ -21,6 +23,37 @@ export const appRoutes: AppRoute[] = [
   { path: "/terms", label: "Terms", footer: "legal" },
 ];
 
-export const primaryNavRoutes = appRoutes.filter((r) => r.primaryNav);
-export const footerExploreRoutes = appRoutes.filter((r) => r.footer === "explore");
-export const footerLegalRoutes = appRoutes.filter((r) => r.footer === "legal");
+function catalogueNavRoutes(): AppRoute[] {
+  if (!hasPublishedProducts()) {
+    return [];
+  }
+  return [
+    {
+      path: "/products",
+      label: "Products",
+      primaryNav: true,
+      footer: "explore",
+    },
+  ];
+}
+
+/** Full registry including conditionally visible catalogue links. */
+export function getAppRoutes(): AppRoute[] {
+  const catalogue = catalogueNavRoutes();
+  // Keep Products after Services in explore/nav order when present.
+  if (catalogue.length === 0) {
+    return staticRoutes;
+  }
+  const servicesIndex = staticRoutes.findIndex((r) => r.path === "/services");
+  const next = [...staticRoutes];
+  next.splice(servicesIndex + 1, 0, ...catalogue);
+  return next;
+}
+
+export const appRoutes = getAppRoutes();
+
+export const primaryNavRoutes = getAppRoutes().filter((r) => r.primaryNav);
+export const footerExploreRoutes = getAppRoutes().filter(
+  (r) => r.footer === "explore",
+);
+export const footerLegalRoutes = getAppRoutes().filter((r) => r.footer === "legal");

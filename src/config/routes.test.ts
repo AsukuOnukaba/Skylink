@@ -3,6 +3,7 @@ import {
   appRoutes,
   footerExploreRoutes,
   footerLegalRoutes,
+  getAppRoutes,
   primaryNavRoutes,
 } from "./routes";
 
@@ -12,6 +13,7 @@ describe("route registry", () => {
     expect(paths).toEqual(["/services", "/about", "/contact"]);
     expect(paths).not.toContain("/products");
     expect(paths).not.toContain("/locations");
+    expect(getAppRoutes().map((r) => r.path)).not.toContain("/products");
   });
 
   it("registers static utility pages for footer legal links", () => {

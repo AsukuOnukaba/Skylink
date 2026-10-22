@@ -30,4 +30,14 @@ describe("Contact customer-facing copy", () => {
     expect(html).toMatch(/Online enquiry is not open yet/i);
     expect(html).toMatch(/Not listed yet/i);
   });
+
+  it("surfaces service and product query context without opening a form", () => {
+    const html = renderContact(
+      "/contact?intent=product&product=sample-terminal&service=residential-installation",
+    );
+    expect(html).toMatch(/sample-terminal/);
+    expect(html).toMatch(/residential-installation/);
+    expect(html).toMatch(/Online enquiry is not open yet/i);
+    expect(html).not.toMatch(/we will follow up/i);
+  });
 });
