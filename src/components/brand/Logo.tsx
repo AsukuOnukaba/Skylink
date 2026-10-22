@@ -31,7 +31,9 @@ export function Logo({ className, width = 200, onDark = false }: LogoProps) {
       width={width}
       height={height}
       className={cn(
-        "inline-block h-auto max-w-full object-contain",
+        "inline-block max-w-full object-contain",
+        // Prefer CSS sizing from className (e.g. h-8) over the intrinsic height attribute.
+        className?.includes("h-") ? null : "h-auto",
         onDark ? "bg-transparent" : "bg-transparent",
         className,
       )}

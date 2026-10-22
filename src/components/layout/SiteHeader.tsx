@@ -24,28 +24,33 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
-      <Container className="flex items-center justify-between gap-4 py-2">
+      <Container className="flex h-14 items-center justify-between gap-4">
         <TextLink
           to="/"
-          className="no-underline hover:no-underline"
+          className="inline-flex items-center no-underline hover:no-underline"
           aria-label={`${site.brandName} home`}
           onClick={() => setOpen(false)}
         >
-          <Logo width={112} className="max-h-10 w-auto" />
+          <Logo width={48} className="h-8 w-auto" />
         </TextLink>
 
-        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 md:flex">
           {primaryNavRoutes.map((item) => (
             <NavLink key={item.path} to={item.path} className={navClassName}>
               {item.label}
             </NavLink>
           ))}
-          <ButtonLink to="/contact?intent=quote">Go to contact</ButtonLink>
+          <ButtonLink
+            to="/contact?intent=quote"
+            className="min-h-9 px-3.5 py-1.5"
+          >
+            Go to contact
+          </ButtonLink>
         </nav>
 
         <button
           type="button"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-slate-200 text-navy-800 md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-slate-200 text-navy-800 md:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Close menu" : "Open menu"}
