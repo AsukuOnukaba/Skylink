@@ -24,14 +24,14 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
-      <Container className="flex h-12 items-center justify-between gap-3">
+      <Container className="flex h-16 items-center justify-between gap-4 py-2">
         <TextLink
           to="/"
-          className="inline-flex h-7 items-center no-underline hover:no-underline"
+          className="inline-flex h-10 items-center no-underline hover:no-underline"
           aria-label={`${site.brandName} home`}
           onClick={() => setOpen(false)}
         >
-          <Logo width={36} className="!h-7 !w-auto max-h-7" />
+          <Logo width={56} className="!h-10 !w-auto max-h-10" />
         </TextLink>
 
         <nav aria-label="Primary" className="hidden items-center gap-5 md:flex">
@@ -42,7 +42,7 @@ export function SiteHeader() {
           ))}
           <ButtonLink
             to="/contact?intent=quote"
-            className="min-h-9 px-3.5 py-1.5"
+            className="min-h-10 px-4 py-2"
           >
             Go to contact
           </ButtonLink>
@@ -50,7 +50,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-slate-200 text-navy-800 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-slate-200 text-navy-800 md:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Close menu" : "Open menu"}
