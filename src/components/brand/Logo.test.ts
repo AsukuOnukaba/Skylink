@@ -5,8 +5,8 @@ import { LOGO_INTRINSIC } from "./Logo";
 
 describe("Skylink primary logo asset", () => {
   it("exposes the web-serving intrinsic dimensions", () => {
-    expect(LOGO_INTRINSIC.width).toBe(396);
-    expect(LOGO_INTRINSIC.height).toBe(287);
+    expect(LOGO_INTRINSIC.width).toBe(990);
+    expect(LOGO_INTRINSIC.height).toBe(682);
   });
 
   it("keeps the cleared original and a display-cropped web copy", () => {

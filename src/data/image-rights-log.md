@@ -10,8 +10,8 @@ Status values: `cleared` | `pending` | `denied` | `n/a (skylink-owned)`.
 
 | Source | Intended page(s) | Permission | Stock/licence | People / sites / sensitivity | Accurate representation | Status | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `brand-assets/originals/skylink-logo-primary.png` (owner-supplied) | Master brand mark | Owner-supplied primary logo | n/a | n/a | Yes — brand mark only | **cleared** | 1024×682 RGBA; transparent field verified by pixel inspection |
-| `public/brand/skylink-logo-primary.png` (display crop of cleared master) | Header, footer, brand foundation demo | Same clearance as master | n/a | n/a | Yes — brand mark only | **cleared** | 396×287 crop; excess transparent padding removed for readable UI size — not a redesign |
+| `brand-assets/originals/skylink-logo-primary.png` (owner-supplied) | Master brand mark | Owner-supplied primary logo | n/a | n/a | Yes — brand mark only | **cleared** | 1024×682 RGBA; transparent field verified by pixel inspection (updated 22 Oct 2026) |
+| `public/brand/skylink-logo-primary.png` (display crop of cleared master) | Header, footer, brand foundation demo | Same clearance as master | n/a | n/a | Yes — brand mark only | **cleared** | 990×682 light crop of updated primary mark |
 | `media-originals/images/pipeline-fixture.png` (generated locally) | Brand foundation demo only | Skylink-generated test asset | n/a | None | Labeled as test fixture, not photography | **n/a (skylink-owned)** | Not for marketing claims |
 | `media-originals/images/hero-starlink-installation.jpeg` (from DataGram `starlinkInstallation.jpeg`) | Home hero | **Owner-directed reuse** for Skylink marketing (21 Oct 2026) | Shared library / Class A–B inventory | No identifiable person in frame | Generic install context — **not** claimed as a Skylink portfolio project | **cleared** | Copied from `CompanyWeb/media-originals/`; optimized to `public/images/hero-starlink-installation.*` |
 
