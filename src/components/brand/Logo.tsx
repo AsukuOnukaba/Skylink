@@ -5,7 +5,7 @@ const LOGO_SRC = "/brand/skylink-logo-primary.png";
  * Intrinsic pixel size of the web-serving primary logo
  * (`public/brand/skylink-logo-primary.png`, display-cropped from the cleared original).
  */
-export const LOGO_INTRINSIC = { width: 990, height: 682 } as const;
+export const LOGO_INTRINSIC = { width: 950, height: 669 } as const;
 
 type LogoProps = {
   className?: string;
