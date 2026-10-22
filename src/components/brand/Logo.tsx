@@ -1,6 +1,7 @@
 import { cn } from "@/lib/cn";
 
-const LOGO_SRC = "/brand/skylink-logo-primary.png";
+/** Cache-busted so browsers pick up logo asset replacements. */
+const LOGO_SRC = "/brand/skylink-logo-primary.png?v=20261022";
 /**
  * Intrinsic pixel size of the web-serving primary logo
  * (`public/brand/skylink-logo-primary.png`, display-cropped from the cleared original).
