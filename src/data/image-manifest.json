@@ -1,8 +1,8 @@
 {
   "/images/hero-starlink-installation.jpeg": {
     "src": "/images/hero-starlink-installation.jpeg",
-    "width": 960,
-    "height": 1280,
+    "width": 1500,
+    "height": 2000,
     "variants": [
       {
         "w": 480,
@@ -13,6 +13,11 @@
         "w": 768,
         "avif": "/images/hero-starlink-installation.w768.avif",
         "webp": "/images/hero-starlink-installation.w768.webp"
+      },
+      {
+        "w": 1280,
+        "avif": "/images/hero-starlink-installation.w1280.avif",
+        "webp": "/images/hero-starlink-installation.w1280.webp"
       }
     ]
   },

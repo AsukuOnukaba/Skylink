@@ -16,6 +16,8 @@ type PictureProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src: string;
   alt: string;
   priority?: boolean;
+  /** Responsive sizes hint for srcset selection. */
+  sizes?: string;
 };
 
 /**
@@ -28,6 +30,7 @@ export function Picture({
   priority = false,
   width,
   height,
+  sizes = "(max-width: 768px) 100vw, 768px",
   ...rest
 }: PictureProps) {
   const entry = manifest[src];
@@ -56,13 +59,14 @@ export function Picture({
 
   return (
     <picture>
-      <source type="image/avif" srcSet={avifSrcSet} sizes="(max-width: 768px) 100vw, 768px" />
-      <source type="image/webp" srcSet={webpSrcSet} sizes="(max-width: 768px) 100vw, 768px" />
+      <source type="image/avif" srcSet={avifSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
       <img
         src={entry.src}
         alt={alt}
         width={w}
         height={h}
+        sizes={sizes}
         className={cn("h-auto max-w-full", className)}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
