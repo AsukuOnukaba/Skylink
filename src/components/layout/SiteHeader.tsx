@@ -24,14 +24,14 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
-      <Container className="flex items-center justify-between gap-4 py-3 sm:py-4">
+      <Container className="flex items-center justify-between gap-4 py-2">
         <TextLink
           to="/"
           className="no-underline hover:no-underline"
           aria-label={`${site.brandName} home`}
           onClick={() => setOpen(false)}
         >
-          <Logo width={200} />
+          <Logo width={112} className="max-h-10 w-auto" />
         </TextLink>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">

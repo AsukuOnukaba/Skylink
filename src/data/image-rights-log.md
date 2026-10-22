@@ -13,17 +13,18 @@ Status values: `cleared` | `pending` | `denied` | `n/a (skylink-owned)`.
 | `brand-assets/originals/skylink-logo-primary.png` (owner-supplied) | Master brand mark | Owner-supplied primary logo | n/a | n/a | Yes — brand mark only | **cleared** | 1024×682 RGBA; transparent field verified by pixel inspection |
 | `public/brand/skylink-logo-primary.png` (display crop of cleared master) | Header, footer, brand foundation demo | Same clearance as master | n/a | n/a | Yes — brand mark only | **cleared** | 396×287 crop; excess transparent padding removed for readable UI size — not a redesign |
 | `media-originals/images/pipeline-fixture.png` (generated locally) | Brand foundation demo only | Skylink-generated test asset | n/a | None | Labeled as test fixture, not photography | **n/a (skylink-owned)** | Not for marketing claims |
+| `media-originals/images/hero-starlink-installation.jpeg` (from DataGram `starlinkInstallation.jpeg`) | Home hero | **Owner-directed reuse** for Skylink marketing (21 Oct 2026) | Shared library / Class A–B inventory | No identifiable person in frame | Generic install context — **not** claimed as a Skylink portfolio project | **cleared** | Copied from `CompanyWeb/media-originals/`; optimized to `public/images/hero-starlink-installation.*` |
 
 ---
 
-## DataGram library shortlist (candidates — rights **not** cleared)
+## DataGram library shortlist (remaining candidates)
 
-Inventory reference: `planning/skylink/image-asset-inventory.md` §3.1. **No files from this table were copied into Skylink production paths in PH-02.**
+Inventory reference: `planning/skylink/image-asset-inventory.md` §3.1.
 
 | Source (under CompanyWeb) | Intended use (proposed) | Permission | Stock/licence | People / sites | Accurate as Skylink? | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | `…/StarlinkRoofMount.jpeg` | Home hero / residential | **Unresolved** — repo presence ≠ licence | Unknown | Identifiable person | Only with OD-06 / release | **pending** |
-| `…/starlinkInstallation.jpeg` | Residential / services | Unresolved | Unknown | Possibly | Not as Skylink portfolio without OD-06 | **pending** |
+| `…/starlinkInstallation.jpeg` | Residential / services | See cleared hero row above | Shared library | None in selected frame | Hero reuse cleared; still not portfolio proof | **cleared (hero only)** |
 | `…/residentalSetup.jpeg` | Home / residential | Unresolved | Unknown | Check | Same | **pending** |
 | `…/StarlinkCompanyInstallation.jpeg` | Business service | Unresolved | Unknown | Client site risk | Not portfolio without OD-06 | **pending** |
 | `…/datagram-starlink-unboxing-*.jpg` | Products / how-it-works | Unresolved | Unknown | None likely | Equipment OK if cleared; not authorisation proof | **pending** |
