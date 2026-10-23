@@ -26,13 +26,26 @@ pnpm install
 pnpm dev          # local development server
 pnpm typecheck    # strict TypeScript project build
 pnpm test         # Vitest
-pnpm build        # typecheck + production build → dist/spa
-pnpm preview      # preview the production build
+pnpm build        # typecheck + Vite build + SEO prerender/check → dist/spa
+pnpm seo:generate # prerender published routes, robots, conditional sitemap, 404.html
+pnpm seo:check    # assert prerender artefacts (also runs inside pnpm build)
+pnpm preview      # preview the production build (local HTTP status ≠ Vercel)
 ```
 
 ## Environment
 
 Copy `.env.example` to `.env` and fill Skylink-owned values only. Server enquiry secrets (later phase) must not use the `VITE_` prefix.
+
+### SEO / indexing (PH-10, OD-10)
+
+| Variable | Role |
+| --- | --- |
+| `VITE_SITE_URL` | Approved HTTPS origin only (no path, no localhost, no `*.vercel.app`). Empty until OD-10. |
+| `VITE_ALLOW_INDEXING` | Must be `true` for production indexing. Preview stays noindex even if set. |
+| `VERCEL_ENV` | Set by Vercel (`production` / `preview`). |
+| `SKYLINK_FORCE_PRODUCTION_SEO` | Test-only local override — never use on preview. |
+
+Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `sitemap.xml`. Production indexing requires OD-10 + the flags above; misconfiguration fails the build.
 
 ## Image pipeline
 
@@ -44,4 +57,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Through PH-09 forms (public UI gated).** Public routes include `/`, `/services`, `/services/:slug`, `/products`, `/products/:slug`, `/locations`, `/starlink-installation-:place`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. `POST /api/enquiry` validates and delivers when configured (PH-08). Contact quote/survey/product forms exist but stay hidden unless `VITE_ENQUIRY_FORMS_ENABLED=true` after OD-07/OD-15 delivery is verified. NAP stays empty until OD-01.
+**Through PH-10 technical SEO.** Public routes are prerendered into `dist/spa` with page-specific HTML. Brand lab `/dev/brand` is development-only. Default builds stay non-indexable until OD-10 + `VITE_ALLOW_INDEXING`. `vercel.json` serves `404.html` with HTTP 404 for unknown paths (no SPA 200 fallback) and keeps `POST /api/enquiry`. Contact forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED`. NAP stays empty until OD-01.

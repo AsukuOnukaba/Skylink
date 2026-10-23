@@ -19,10 +19,7 @@ export function Services() {
 
   return (
     <AppShell>
-      <PageMeta
-        title={`Starlink installation services — ${site.brandName}`}
-        description={`${site.brandName} helps with Starlink installation and connectivity support. See how we approach the work and where to go next.`}
-      />
+      <PageMeta path="/services" />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

@@ -30,7 +30,7 @@ export function ServiceDetail() {
 
   return (
     <AppShell>
-      <PageMeta title={service.seoTitle} description={service.seoDescription} />
+      <PageMeta path={`/services/${service.slug}`} />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

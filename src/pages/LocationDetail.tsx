@@ -34,7 +34,7 @@ export function LocationDetail() {
 
   return (
     <AppShell>
-      <PageMeta title={place.seoTitle} description={place.seoDescription} />
+      <PageMeta path={`/starlink-installation-${place.placeKey}`} />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

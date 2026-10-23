@@ -8,10 +8,7 @@ import { site } from "@/config/site";
 export function Terms() {
   return (
     <AppShell>
-      <PageMeta
-        title={`Terms of use — ${site.brandName}`}
-        description={`Website terms for ${site.brandName}. Installation work is confirmed separately from browsing this site.`}
-      />
+      <PageMeta path="/terms" />
       <main id="main" className="bg-white py-[var(--space-section)]">
         <Container className="max-w-3xl">
           <Breadcrumbs

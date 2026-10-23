@@ -8,10 +8,7 @@ import { site } from "@/config/site";
 export function Privacy() {
   return (
     <AppShell>
-      <PageMeta
-        title={`Privacy — ${site.brandName}`}
-        description={`How ${site.brandName} handles information on this website, including contact channels and analytics when they are active.`}
-      />
+      <PageMeta path="/privacy" />
       <main id="main" className="bg-white py-[var(--space-section)]">
         <Container className="prose-skylink max-w-3xl">
           <Breadcrumbs

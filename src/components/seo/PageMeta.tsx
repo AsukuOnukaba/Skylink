@@ -1,25 +1,53 @@
 import { useEffect } from "react";
+import { applyDocumentMeta } from "@/seo/applyDocumentMeta";
+import {
+  getPageByPath,
+  type PageSeoRecord,
+} from "@/seo/pageRegistry";
 
 type PageMetaProps = {
-  title: string;
-  description: string;
+  /** Canonical path without query string, e.g. `/contact`. */
+  path: string;
+  /** Optional overrides when a page is not in the registry (e.g. 404). */
+  title?: string;
+  description?: string;
+  indexable?: boolean;
+  jsonLd?: Record<string, unknown>[];
 };
 
 /**
- * Lightweight document title + meta description for PH-04.
- * Full SEO (canonical, OG, robots per route) remains PH-10.
+ * Document title, description, robots, canonical, OG, and JSON-LD.
+ * Uses the page registry when available so prerender and client stay aligned.
  */
-export function PageMeta({ title, description }: PageMetaProps) {
+export function PageMeta({
+  path,
+  title,
+  description,
+  indexable = false,
+  jsonLd = [],
+}: PageMetaProps) {
   useEffect(() => {
-    document.title = title;
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
+    const registered = getPageByPath(path);
+    const page: PageSeoRecord =
+      registered ??
+      ({
+        path,
+        title: title ?? "Skylink",
+        description: description ?? "",
+        prerender: false,
+        indexable,
+        jsonLd,
+      } satisfies PageSeoRecord);
+
+    if (!registered && title && description) {
+      page.title = title;
+      page.description = description;
+      page.indexable = indexable;
+      page.jsonLd = jsonLd;
     }
-    meta.setAttribute("content", description);
-  }, [title, description]);
+
+    applyDocumentMeta(page);
+  }, [path, title, description, indexable, jsonLd]);
 
   return null;
 }

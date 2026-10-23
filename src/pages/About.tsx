@@ -10,10 +10,7 @@ import { site } from "@/config/site";
 export function About() {
   return (
     <AppShell>
-      <PageMeta
-        title={`About ${site.brandName} — Starlink installation business`}
-        description={`${site.relationshipPhrase} Learn how ${site.brandName} approaches installation support for homes and businesses in Nigeria.`}
-      />
+      <PageMeta path="/about" />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

@@ -9,8 +9,10 @@ export function NotFound() {
   return (
     <AppShell>
       <PageMeta
+        path="/404"
         title={`Page not found — ${site.brandName}`}
         description={`The page you requested is not available. Return home or contact ${site.brandName} for Starlink installation help.`}
+        indexable={false}
       />
       <main id="main" className="bg-slate-100 py-[var(--space-section)]">
         <Container className="max-w-xl">

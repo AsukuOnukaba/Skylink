@@ -52,10 +52,7 @@ export function Home() {
 
   return (
     <AppShell>
-      <PageMeta
-        title={`${site.brandName} — Starlink installation and connectivity`}
-        description={`${site.brandName} helps homes and businesses with Starlink installation and connectivity support in Nigeria. Clear guidance and a path to get in touch when contact options are listed.`}
-      />
+      <PageMeta path="/" />
       <main id="main">
         <section
           aria-labelledby="home-hero-heading"

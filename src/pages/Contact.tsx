@@ -130,10 +130,7 @@ export function Contact() {
 
   return (
     <AppShell>
-      <PageMeta
-        title={`Contact ${site.brandName} — Starlink installation enquiries`}
-        description={`Learn how to reach ${site.brandName} about Starlink installation and connectivity for homes and businesses.`}
-      />
+      <PageMeta path="/contact" />
       <main id="main" className="bg-slate-100 py-[var(--space-section)]">
         <Container className="max-w-3xl">
           <Breadcrumbs

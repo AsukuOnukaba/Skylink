@@ -46,7 +46,8 @@ export function Picture({
         height={h}
         className={cn("h-auto max-w-full", className)}
         loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : undefined}
+        // DOM attribute is lowercase; React 18 warns on fetchPriority in SSR.
+        {...(priority ? { fetchpriority: "high" as const } : {})}
         decoding="async"
         {...rest}
       />
@@ -69,7 +70,7 @@ export function Picture({
         sizes={sizes}
         className={cn("h-auto max-w-full", className)}
         loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : undefined}
+        {...(priority ? { fetchpriority: "high" as const } : {})}
         decoding="async"
         {...rest}
       />

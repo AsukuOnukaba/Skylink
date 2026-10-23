@@ -42,7 +42,7 @@ export function ProductDetail() {
 
   return (
     <AppShell>
-      <PageMeta title={product.seoTitle} description={product.seoDescription} />
+      <PageMeta path={`/products/${product.slug}`} />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

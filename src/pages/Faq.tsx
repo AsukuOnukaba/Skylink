@@ -10,10 +10,7 @@ import { faqItems } from "@/data/faq";
 export function Faq() {
   return (
     <AppShell>
-      <PageMeta
-        title={`FAQ — ${site.brandName} Starlink installation`}
-        description={`Answers about ${site.brandName}, Starlink installation support, and how to get in touch. Only verified questions are listed.`}
-      />
+      <PageMeta path="/faq" />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

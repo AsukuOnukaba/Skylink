@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap omitted: production indexing is not enabled (OD-10 / VITE_ALLOW_INDEXING).

@@ -6,11 +6,13 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && pnpm seo:generate && pnpm seo:check",
     "vercel-build": "pnpm build",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
+    "seo:generate": "node scripts/seo-generate.mjs",
+    "seo:check": "node scripts/check-prerender.mjs",
     "images:fixture": "node scripts/generate-pipeline-fixture.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
     "images:pipeline": "pnpm images:fixture && pnpm images:optimize"

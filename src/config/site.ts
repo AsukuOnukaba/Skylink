@@ -1,3 +1,5 @@
+import { parseSiteOrigin } from "@/config/seo";
+
 /**
  * Central site identity (FR-01 / TRD site module).
  * NAP fields stay empty until OD-01 formally approves Skylink-owned channels.
@@ -5,8 +7,11 @@
  */
 export const site = {
   brandName: "Skylink",
-  /** Canonical public URL once OD-10 is decided. No trailing slash. */
-  siteUrl: import.meta.env.VITE_SITE_URL ?? "",
+  /**
+   * Canonical public origin once OD-10 is decided (https, no trailing slash).
+   * Empty until a valid VITE_SITE_URL is configured — never invent a domain.
+   */
+  siteUrl: parseSiteOrigin(import.meta.env.VITE_SITE_URL ?? "") ?? "",
   /** E.164 once OD-01 is approved. Empty until then. */
   phoneE164: "",
   phoneDisplay: "",

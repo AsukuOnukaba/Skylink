@@ -16,10 +16,7 @@ export function Locations() {
 
   return (
     <AppShell>
-      <PageMeta
-        title={`Starlink installation areas — ${site.brandName}`}
-        description={`${site.brandName} lists installation areas when local service details are confirmed. Browse places here, or use Contact for the next available step.`}
-      />
+      <PageMeta path="/locations" />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">

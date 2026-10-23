@@ -17,10 +17,7 @@ export function Products() {
 
   return (
     <AppShell>
-      <PageMeta
-        title={`Starlink hardware and accessories — ${site.brandName}`}
-        description={`${site.brandName} helps you understand Starlink-related hardware. Browse listed products when available, or use Contact for the next available step.`}
-      />
+      <PageMeta path="/products" />
       <main id="main">
         <section className="bg-white py-[var(--space-section)]">
           <Container className="max-w-3xl">
