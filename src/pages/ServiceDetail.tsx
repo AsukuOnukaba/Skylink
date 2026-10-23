@@ -244,7 +244,7 @@ export function ServiceDetail() {
 
         <CtaBand
           title={`Talk through ${service.title.toLowerCase()}`}
-          description={`Open Contact to see how to reach ${site.brandName} about this service. Live enquiry channels appear there when they are available.`}
+          description={`Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for this service. The online form will appear there when it is available.`}
         />
       </main>
     </AppShell>

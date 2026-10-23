@@ -23,12 +23,15 @@ function renderContact(path = "/contact?intent=quote"): string {
 }
 
 describe("Contact customer-facing copy", () => {
-  it("does not claim follow-up from details the visitor cannot submit", () => {
+  it("shows live phone and WhatsApp without claiming form submission", () => {
     const html = renderContact();
     expect(html).not.toMatch(/follow up using the details you share/i);
     expect(html).not.toMatch(/\bOD-\d+\b/i);
     expect(html).toMatch(/Online enquiry is not open yet/i);
-    expect(html).toMatch(/Not listed yet/i);
+    expect(html).toMatch(/\+234 906 097 6424/);
+    expect(html).toMatch(/tel:\+2349060976424/);
+    expect(html).toMatch(/wa\.me\/2349060976424/);
+    expect(html).toMatch(/Not listed yet/i); // email still empty
   });
 
   it("surfaces service and product query context without opening a form", () => {

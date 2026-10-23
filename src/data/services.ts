@@ -66,7 +66,7 @@ export const services: ServiceRecord[] = [
       {
         question: "Do I need a site survey first?",
         answer:
-          "Many homes benefit from a quick review of roof or wall options before work starts. Use Contact when live channels are listed and ask for a survey conversation.",
+          "Many homes benefit from a quick review of roof or wall options before work starts. Call or WhatsApp us from Contact and ask for a survey conversation.",
       },
       {
         question: "Can you install if I already have the kit?",

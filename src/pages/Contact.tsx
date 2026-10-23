@@ -6,6 +6,7 @@ import { Alert } from "@/components/ui/Alert";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
@@ -25,8 +26,20 @@ function parseIntent(value: string | null): IntentId {
   return "quote";
 }
 
+function whatsappHref(intent: IntentId, serviceSlug: string, productSlug: string): string {
+  const base = site.social.whatsapp;
+  if (!base) return "";
+  const parts = [
+    `Hello ${site.brandName}, I'd like to talk about a Starlink ${intent}.`,
+  ];
+  if (serviceSlug) parts.push(`Service: ${serviceSlug}.`);
+  if (productSlug) parts.push(`Product: ${productSlug}.`);
+  const sep = base.includes("?") ? "&" : "?";
+  return `${base}${sep}text=${encodeURIComponent(parts.join(" "))}`;
+}
+
 /**
- * Contact structure for PH-04. Forms and live channels arrive in later phases.
+ * Contact page. Phone and WhatsApp are live; online form arrives in PH-09.
  */
 export function Contact() {
   const [params] = useSearchParams();
@@ -37,12 +50,15 @@ export function Contact() {
   const hasPhone = Boolean(site.phoneDisplay && site.phoneE164);
   const hasEmail = Boolean(site.email);
   const hasWhatsapp = Boolean(site.social.whatsapp);
+  const waHref = hasWhatsapp
+    ? whatsappHref(intent, serviceSlug, productSlug)
+    : "";
 
   return (
     <AppShell>
       <PageMeta
         title={`Contact ${site.brandName} — Starlink installation enquiries`}
-        description={`Reach ${site.brandName} about Starlink installation and connectivity. See current contact options and enquiry paths for homes and businesses.`}
+        description={`Call or WhatsApp ${site.brandName} on ${site.phoneDisplay} about Starlink installation and connectivity in Nigeria.`}
       />
       <main id="main" className="bg-slate-100 py-[var(--space-section)]">
         <Container className="max-w-3xl">
@@ -57,8 +73,8 @@ export function Contact() {
           </h1>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
             Use this page when you want to talk about Starlink installation or
-            connectivity support. Live phone, WhatsApp, email, and the online
-            enquiry form appear here as soon as they are available.
+            connectivity support. Call or WhatsApp us on the numbers below. The
+            online enquiry form will appear here when it is available.
           </p>
 
           <div
@@ -107,7 +123,7 @@ export function Contact() {
                     <span className="font-medium">{productSlug}</span>
                   </>
                 ) : null}
-                . This helps you keep the topic clear when live channels open.
+                . Mention this when you call or message so we can help faster.
               </p>
             ) : null}
 
@@ -116,36 +132,80 @@ export function Contact() {
               className="mt-5"
               title="Online enquiry is not open yet"
             >
-              You can bookmark this page and return when the form and live
-              contact details are listed. Until then, no message is submitted
-              from this site.
+              Until the form is available, use phone or WhatsApp below. No
+              message is submitted from this website.
             </Alert>
 
             <dl className="mt-6 space-y-4 text-sm">
               <div>
                 <dt className="font-semibold text-navy-800">Phone</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasPhone ? site.phoneDisplay : "Not listed yet."}
+                  {hasPhone ? (
+                    <TextLink
+                      external
+                      href={`tel:${site.phoneE164}`}
+                      className="text-sky-700"
+                    >
+                      {site.phoneDisplay}
+                    </TextLink>
+                  ) : (
+                    "Not listed yet."
+                  )}
                 </dd>
               </div>
               <div>
                 <dt className="font-semibold text-navy-800">WhatsApp</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasWhatsapp ? "Available when listed." : "Not listed yet."}
+                  {hasWhatsapp ? (
+                    <TextLink
+                      external
+                      href={waHref}
+                      target="_blank"
+                      className="text-sky-700"
+                    >
+                      Message on WhatsApp
+                    </TextLink>
+                  ) : (
+                    "Not listed yet."
+                  )}
                 </dd>
               </div>
               <div>
                 <dt className="font-semibold text-navy-800">Email</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasEmail ? site.email : "Not listed yet."}
+                  {hasEmail ? (
+                    <TextLink
+                      external
+                      href={`mailto:${site.email}`}
+                      className="text-sky-700"
+                    >
+                      {site.email}
+                    </TextLink>
+                  ) : (
+                    "Not listed yet."
+                  )}
                 </dd>
               </div>
             </dl>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink to="/about">About {site.brandName}</ButtonLink>
-              <ButtonLink to="/services" variant="secondary">
-                View services overview
+              {hasPhone ? (
+                <ButtonLink external href={`tel:${site.phoneE164}`}>
+                  Call us
+                </ButtonLink>
+              ) : null}
+              {hasWhatsapp ? (
+                <ButtonLink
+                  external
+                  href={waHref}
+                  target="_blank"
+                  variant="secondary"
+                >
+                  WhatsApp
+                </ButtonLink>
+              ) : null}
+              <ButtonLink to="/about" variant="secondary">
+                About {site.brandName}
               </ButtonLink>
             </div>
           </Card>

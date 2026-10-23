@@ -9,7 +9,7 @@ type CtaBandProps = {
 
 export function CtaBand({
   title = "Want to talk about an installation?",
-  description = "Open the contact page to see how to reach Skylink. Online enquiry and live phone or WhatsApp details will appear there when they are available.",
+  description = `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details. The online enquiry form will appear there when it is available.`,
 }: CtaBandProps) {
   return (
     <section

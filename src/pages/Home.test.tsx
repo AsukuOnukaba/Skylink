@@ -72,6 +72,6 @@ describe("Home customer-facing copy", () => {
     for (const pattern of falseCapabilityPatterns) {
       expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
     }
-    expect(html).toMatch(/when they are available|when live/i);
+    expect(html).toMatch(/call or WhatsApp|Contact/i);
   });
 });

@@ -55,9 +55,26 @@ export function SiteFooter() {
                 </TextLink>
               </li>
             </ul>
-            <p className="mt-4 text-sm text-slate-400">
-              Phone, WhatsApp, and email appear on Contact when they are listed.
-            </p>
+            {site.phoneDisplay ? (
+              <p className="mt-4 text-sm text-slate-400">
+                Call or WhatsApp{" "}
+                <TextLink
+                  external
+                  href={`tel:${site.phoneE164}`}
+                  className="text-sky-300 hover:text-white"
+                >
+                  {site.phoneDisplay}
+                </TextLink>
+                . More options on{" "}
+                <TextLink
+                  to="/contact"
+                  className="text-sky-300 hover:text-white"
+                >
+                  Contact
+                </TextLink>
+                .
+              </p>
+            ) : null}
           </div>
         </div>
       </Container>

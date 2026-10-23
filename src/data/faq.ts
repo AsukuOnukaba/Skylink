@@ -24,11 +24,11 @@ export const faqItems: FaqItem[] = [
   {
     id: "how-to-contact",
     question: "How can I contact Skylink?",
-    answer: `Use the Contact page to see the current ways to reach ${site.brandName}. Online enquiry forms and live phone or WhatsApp details appear there when they are available.`,
+    answer: `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open the Contact page for the same details. An online enquiry form will be added there when it is available.`,
   },
   {
     id: "next-step",
     question: "What should I do if I need an installation?",
-    answer: `Start on the Services or About pages to understand how we work, then open Contact when you are ready. A clear next step will be available there once live enquiry channels are listed.`,
+    answer: `Start on the Services or About pages to understand how we work, then call or WhatsApp us on ${site.phoneDisplay}, or open Contact when you are ready.`,
   },
 ];

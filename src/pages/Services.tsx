@@ -85,8 +85,8 @@ export function Services() {
                   <p className="mt-2 text-sm leading-relaxed text-slate-700">
                     We explain whether a conversation, quote, or site survey is
                     the sensible path—then point you to{" "}
-                    <TextLink to="/contact">Contact</TextLink> when live channels
-                    are listed.
+                    <TextLink to="/contact">Contact</TextLink> to call or
+                    WhatsApp.
                   </p>
                 </Card>
               </li>

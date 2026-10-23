@@ -80,7 +80,7 @@ export function Home() {
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200/90">
                 {site.brandName} helps you get satellite connectivity in place
                 with clear advice and careful installation support. Explore the
-                site, then use Contact when live ways to reach us are listed.
+                site, then call or WhatsApp us from Contact when you are ready.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink to="/contact?intent=quote" variant="primaryOnDark">
