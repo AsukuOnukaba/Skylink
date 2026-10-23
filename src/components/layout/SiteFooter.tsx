@@ -53,7 +53,7 @@ export function SiteFooter() {
               ))}
               <li>
                 <TextLink
-                  to="/contact?intent=quote"
+                  to="/contact"
                   className="text-sky-300 hover:text-white"
                 >
                   Contact
@@ -82,14 +82,28 @@ export function SiteFooter() {
                 </>
               ) : (
                 <>
-                  Phone, WhatsApp, and email appear on{" "}
+                  Read{" "}
+                  <TextLink
+                    to="/services"
+                    className="text-sky-300 hover:text-white"
+                  >
+                    Services
+                  </TextLink>{" "}
+                  and{" "}
+                  <TextLink
+                    to="/about"
+                    className="text-sky-300 hover:text-white"
+                  >
+                    About
+                  </TextLink>
+                  , or open{" "}
                   <TextLink
                     to="/contact"
                     className="text-sky-300 hover:text-white"
                   >
                     Contact
                   </TextLink>{" "}
-                  when they are listed.
+                  for current reach options.
                 </>
               )}
             </p>

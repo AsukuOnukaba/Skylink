@@ -85,8 +85,9 @@ export function Privacy() {
             Questions
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            For privacy questions, use the options listed on{" "}
-            <TextLink to="/contact">Contact</TextLink> when they are available.
+            For privacy questions, open{" "}
+            <TextLink to="/contact">Contact</TextLink> for the reach options
+            published on this site.
           </p>
         </Container>
       </main>

@@ -149,7 +149,7 @@ export function LocationDetail() {
 
         <CtaBand
           title={`Talk about ${place.placeName}`}
-          description={`Open Contact with ${place.placeName} noted so you can keep the conversation local. Live channels appear there when they are listed.`}
+          description={`Open Contact with ${place.placeName} noted, or read Services and About for how the work is approached.`}
         />
       </main>
     </AppShell>

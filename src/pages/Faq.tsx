@@ -28,8 +28,8 @@ export function Faq() {
             </h1>
             <p className="mt-4 text-base leading-relaxed text-slate-700">
               Short answers about {site.brandName} and how we help with Starlink
-              connectivity. Questions about price, coverage maps, or special
-              authorisations are omitted until those answers are confirmed.
+              connectivity. Detailed price, coverage-map, and authorisation
+              questions are not covered here.
             </p>
 
             <div className="mt-10 space-y-4">

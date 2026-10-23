@@ -197,7 +197,7 @@ export function ProductDetail() {
 
         <CtaBand
           title={`Ask about ${product.name}`}
-          description={`Open Contact to see how to reach ${site.brandName} about this product. Online enquiry opens there when it is available—this site does not take checkout orders.`}
+          description={`This site does not take checkout orders. Open Contact about this product for current reach options with ${site.brandName}.`}
         />
       </main>
     </AppShell>

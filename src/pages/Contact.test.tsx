@@ -23,12 +23,13 @@ function renderContact(path = "/contact?intent=quote"): string {
 }
 
 describe("Contact customer-facing copy", () => {
-  it("does not claim follow-up or publish unverified phone numbers", () => {
+  it("stays honest without unpublished NAP or form submission", () => {
     const html = renderContact();
     expect(html).not.toMatch(/follow up using the details you share/i);
     expect(html).not.toMatch(/\bOD-\d+\b/i);
-    expect(html).toMatch(/Online enquiry is not open yet/i);
-    expect(html).toMatch(/Not listed yet/i);
+    expect(html).toMatch(/Online enquiry form is not available/i);
+    expect(html).toMatch(/does not submit messages yet/i);
+    expect(html).not.toMatch(/Not listed yet/i);
     expect(html).not.toMatch(/9060976424|906 097 6424/);
     expect(html).not.toMatch(/tel:\+234/);
     expect(html).not.toMatch(/wa\.me\//);
@@ -41,7 +42,7 @@ describe("Contact customer-facing copy", () => {
     expect(html).toMatch(/sample-terminal/);
     expect(html).toMatch(/residential-installation/);
     expect(html).toMatch(/Lagos/);
-    expect(html).toMatch(/Online enquiry is not open yet/i);
+    expect(html).toMatch(/Online enquiry form is not available/i);
     expect(html).not.toMatch(/we will follow up/i);
   });
 });

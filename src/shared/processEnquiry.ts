@@ -8,17 +8,26 @@ import {
 export type EnquiryHttpResult =
   | { status: 202; body: { ok: true } }
   | { status: 400; body: { ok: false; error: string; issues?: string[] } }
-  | { status: 502; body: { ok: false; error: string } };
+  | { status: 502; body: { ok: false; error: string } }
+  | { status: 503; body: { ok: false; error: string } };
 
 /**
  * Pure enquiry processor for unit tests and the serverless handler.
- * Does not log PII. Rate limiting is Vercel Firewall (FR-32), not in-memory.
+ * 202 is returned only after delivery.deliver() reports ok: true
+ * (authorized acceptance). Does not log PII.
  */
 export async function processEnquiry(
   raw: unknown,
   delivery: EnquiryDelivery,
   log: (line: string) => void = () => {},
 ): Promise<EnquiryHttpResult> {
+  if (raw === undefined || raw === null || typeof raw !== "object") {
+    return {
+      status: 400,
+      body: { ok: false, error: "Validation failed", issues: ["body: Required"] },
+    };
+  }
+
   const parsed = parseEnquiryBody(raw);
   if (!parsed.success) {
     const issues = parsed.error.issues.map(
@@ -44,15 +53,15 @@ export async function processEnquiry(
   }
 
   if (!result.ok) {
+    if (result.reason === "not_configured") {
+      return {
+        status: 503,
+        body: { ok: false, error: "Enquiry delivery is not configured" },
+      };
+    }
     return {
       status: 502,
-      body: {
-        ok: false,
-        error:
-          result.reason === "not_configured"
-            ? "Enquiry delivery is not configured"
-            : "Delivery failed",
-      },
+      body: { ok: false, error: "Delivery failed" },
     };
   }
 

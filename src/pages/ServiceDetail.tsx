@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
-import { site } from "@/config/site";
 import { getPublishedService } from "@/data/services";
 import { getPublishedProduct } from "@/data/products";
 import { NotFound } from "@/pages/NotFound";
@@ -244,7 +243,7 @@ export function ServiceDetail() {
 
         <CtaBand
           title={`Talk through ${service.title.toLowerCase()}`}
-          description={`Open Contact to see how to reach ${site.brandName} about this service. Live enquiry channels appear there when they are available.`}
+          description={`Read more on Services or About, then open Contact about this service for current reach options.`}
         />
       </main>
     </AppShell>

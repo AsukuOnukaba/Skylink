@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import {
+  hasAnyPublicContactChannel,
   hasPublicEmail,
   hasPublicPhone,
   hasPublicWhatsapp,
@@ -62,6 +63,7 @@ export function Contact() {
   const phoneOk = hasPublicPhone();
   const emailOk = hasPublicEmail();
   const whatsappOk = hasPublicWhatsapp();
+  const anyChannel = hasAnyPublicContactChannel();
   const waHref = whatsappOk
     ? whatsappHref(intent, serviceSlug, productSlug, locationLabel)
     : "";
@@ -70,7 +72,7 @@ export function Contact() {
     <AppShell>
       <PageMeta
         title={`Contact ${site.brandName} — Starlink installation enquiries`}
-        description={`Reach ${site.brandName} about Starlink installation and connectivity. See current contact options for homes and businesses.`}
+        description={`Learn how to reach ${site.brandName} about Starlink installation and connectivity for homes and businesses.`}
       />
       <main id="main" className="bg-slate-100 py-[var(--space-section)]">
         <Container className="max-w-3xl">
@@ -83,11 +85,11 @@ export function Contact() {
           <h1 className="mt-4 text-3xl font-bold text-navy-950 sm:text-4xl">
             Contact
           </h1>
-          <p className="mt-3 text-base leading-relaxed text-slate-700">
-            Use this page when you want to talk about Starlink installation or
-            connectivity support. Phone, WhatsApp, email, and the online enquiry
-            form appear here as soon as they are available for {site.brandName}.
-          </p>
+            <p className="mt-3 text-base leading-relaxed text-slate-700">
+              {anyChannel
+                ? `Use the details below to talk with ${site.brandName} about Starlink installation or connectivity support.`
+                : `For now, use this site to understand how ${site.brandName} approaches Starlink installation and connectivity. Direct phone, WhatsApp, and email are not published here, and this website does not send online enquiries.`}
+            </p>
 
           <div
             className="mt-8 flex flex-wrap gap-2"
@@ -123,7 +125,7 @@ export function Contact() {
             <p className="mt-2 text-sm text-slate-700">{active.description}</p>
             {serviceSlug || productSlug || locationLabel ? (
               <p className="mt-3 text-sm text-slate-600">
-                Context from your link
+                Topic from your link
                 {serviceSlug ? (
                   <>
                     : service <span className="font-medium">{serviceSlug}</span>
@@ -141,71 +143,72 @@ export function Contact() {
                     <span className="font-medium">{locationLabel}</span>
                   </>
                 ) : null}
-                . This helps you keep the topic clear when live channels open.
+                .
               </p>
             ) : null}
 
             <Alert
               tone="info"
               className="mt-5"
-              title="Online enquiry is not open yet"
+              title="Online enquiry form is not available"
             >
-              You can bookmark this page and return when the form and live
-              contact details are listed. Until then, no message is submitted
-              from this site.
+              This website does not submit messages yet. No enquiry is sent from
+              this page.
             </Alert>
 
-            <dl className="mt-6 space-y-4 text-sm">
-              <div>
-                <dt className="font-semibold text-navy-800">Phone</dt>
-                <dd className="mt-1 text-slate-600">
-                  {phoneOk ? (
-                    <TextLink
-                      external
-                      href={`tel:${site.phoneE164}`}
-                      className="text-sky-700"
-                    >
-                      {site.phoneDisplay}
-                    </TextLink>
-                  ) : (
-                    "Not listed yet."
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-navy-800">WhatsApp</dt>
-                <dd className="mt-1 text-slate-600">
-                  {whatsappOk ? (
-                    <TextLink
-                      external
-                      href={waHref}
-                      target="_blank"
-                      className="text-sky-700"
-                    >
-                      Message on WhatsApp
-                    </TextLink>
-                  ) : (
-                    "Not listed yet."
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-navy-800">Email</dt>
-                <dd className="mt-1 text-slate-600">
-                  {emailOk ? (
-                    <TextLink
-                      external
-                      href={`mailto:${site.email}`}
-                      className="text-sky-700"
-                    >
-                      {site.email}
-                    </TextLink>
-                  ) : (
-                    "Not listed yet."
-                  )}
-                </dd>
-              </div>
-            </dl>
+            {anyChannel ? (
+              <dl className="mt-6 space-y-4 text-sm">
+                {phoneOk ? (
+                  <div>
+                    <dt className="font-semibold text-navy-800">Phone</dt>
+                    <dd className="mt-1 text-slate-600">
+                      <TextLink
+                        external
+                        href={`tel:${site.phoneE164}`}
+                        className="text-sky-700"
+                      >
+                        {site.phoneDisplay}
+                      </TextLink>
+                    </dd>
+                  </div>
+                ) : null}
+                {whatsappOk ? (
+                  <div>
+                    <dt className="font-semibold text-navy-800">WhatsApp</dt>
+                    <dd className="mt-1 text-slate-600">
+                      <TextLink
+                        external
+                        href={waHref}
+                        target="_blank"
+                        className="text-sky-700"
+                      >
+                        Message on WhatsApp
+                      </TextLink>
+                    </dd>
+                  </div>
+                ) : null}
+                {emailOk ? (
+                  <div>
+                    <dt className="font-semibold text-navy-800">Email</dt>
+                    <dd className="mt-1 text-slate-600">
+                      <TextLink
+                        external
+                        href={`mailto:${site.email}`}
+                        className="text-sky-700"
+                      >
+                        {site.email}
+                      </TextLink>
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            ) : (
+              <p className="mt-6 text-sm leading-relaxed text-slate-700">
+                You can still read how we approach the work on{" "}
+                <TextLink to="/services">Services</TextLink> and{" "}
+                <TextLink to="/about">About</TextLink>.
+              </p>
+            )}
 
             <div className="mt-6 flex flex-wrap gap-3">
               {phoneOk ? (

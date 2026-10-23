@@ -70,7 +70,7 @@ describe("Home customer-facing copy", () => {
     for (const pattern of falseCapabilityPatterns) {
       expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
     }
-    expect(html).toMatch(/when they are available|when live/i);
+    expect(html).toMatch(/Contact for current reach options/i);
     expect(html).not.toMatch(/9060976424|906 097 6424/);
   });
 });

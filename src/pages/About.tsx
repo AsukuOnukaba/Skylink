@@ -46,15 +46,10 @@ export function About() {
               Who we are
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {site.brandName} is building a clear digital presence so people
-              searching for Starlink installation and connectivity support can
-              understand the work, judge whether we are a fit, and reach us when
-              live contact options are listed.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-slate-700">
-              We stay independent in how we describe the relationship to
-              Starlink. If a more specific partnership or authorisation statement
-              is approved later, it will replace this wording—not inflate it.
+              {site.brandName} helps people evaluating Starlink installation and
+              connectivity support understand the work clearly and decide whether
+              we are a fit. We describe our relationship to Starlink carefully
+              and do not claim to be Starlink itself.
             </p>
           </Container>
         </section>
@@ -108,7 +103,7 @@ export function About() {
 
         <CtaBand
           title={`Learn more or get in touch with ${site.brandName}`}
-          description="Browse the site for clear installation guidance, then use Contact when live enquiry options are listed."
+          description={`Browse Services for how ${site.brandName} approaches installation, then open Contact for current reach options.`}
         />
       </main>
     </AppShell>

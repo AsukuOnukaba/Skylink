@@ -33,9 +33,8 @@ export function Locations() {
               Service areas
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.brandName} works where a crew can attend in person. Place
-              pages appear here only when we have clear local notes for that
-              area—not a nationwide list invented for search engines.
+              {site.brandName} works where a crew can attend in person. Local
+              area pages appear here once we have clear notes for that place.
             </p>
           </Container>
         </section>
@@ -95,7 +94,7 @@ export function Locations() {
 
         <CtaBand
           title={`Ask about installation in your area`}
-          description={`Open Contact to see how to reach ${site.brandName}. We do not invent a nationwide coverage map on this page.`}
+          description={`Read Services or About for how we work, then open Contact for current reach options about an installation in your area.`}
         />
       </main>
     </AppShell>

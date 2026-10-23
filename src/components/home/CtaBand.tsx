@@ -10,8 +10,8 @@ type CtaBandProps = {
 export function CtaBand({
   title = "Want to talk about an installation?",
   description = hasPublicPhone()
-    ? `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details. The online enquiry form will appear there when it is available.`
-    : `Open the contact page to see how to reach ${site.brandName}. Online enquiry and live phone or WhatsApp details will appear there when they are available.`,
+    ? `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details.`
+    : `Start with Services or About to understand how ${site.brandName} works, then open Contact for the current ways to get in touch.`,
 }: CtaBandProps) {
   return (
     <section
@@ -29,8 +29,8 @@ export function CtaBand({
           <p className="mt-3 text-base text-slate-200/90">{description}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <ButtonLink to="/contact?intent=quote" variant="primaryOnDark">
-            Go to contact
+          <ButtonLink to="/services" variant="primaryOnDark">
+            View services
           </ButtonLink>
           <ButtonLink to="/about" variant="secondaryOnDark">
             About {site.brandName}

@@ -35,8 +35,8 @@ export function Products() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
               This catalogue is for understanding hardware that may support a
-              Starlink installation—not for online checkout. Pricing appears only
-              when it is listed for a product.
+              Starlink installation—not for online checkout. Product pages and
+              prices appear here only after they are ready for visitors.
             </p>
           </Container>
         </section>
@@ -101,9 +101,10 @@ export function Products() {
               </h2>
               <p className="mt-3 text-base leading-relaxed text-slate-700">
                 Prefer to start with installation support? See{" "}
-                <TextLink to="/services">Services</TextLink>, or open{" "}
-                <TextLink to="/contact?intent=product">Contact</TextLink> when
-                live channels are listed.
+                <TextLink to="/services">Services</TextLink> or{" "}
+                <TextLink to="/about">About</TextLink>, then open{" "}
+                <TextLink to="/contact?intent=product">Contact</TextLink> for
+                current reach options.
               </p>
             </Container>
           </section>
@@ -111,7 +112,7 @@ export function Products() {
 
         <CtaBand
           title={`Need help choosing hardware with ${site.brandName}?`}
-          description="This site does not run a shopping cart. Open Contact to see how to reach us when enquiry options are available."
+          description={`This site does not run a shopping cart. Read Services or About, then open Contact for current ways to reach ${site.brandName}.`}
         />
       </main>
     </AppShell>
