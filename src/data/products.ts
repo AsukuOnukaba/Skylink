@@ -1,7 +1,7 @@
 /**
  * Product catalogue. No cart, checkout, or Offer/price claims until pricePublished is explicitly true.
  * Specs below are manufacturer-oriented facts; confirm current figures on enquiry.
- * imageSrc is omitted until product photography rights are cleared.
+ * imageSrc is set only when a rights-cleared, model-accurate photo exists.
  */
 
 export type ProductSpec = {
@@ -80,6 +80,9 @@ export const products: ProductRecord[] = [
       "15 m Starlink cable",
       "1.5 m AC power cable",
     ],
+    imageSrc: "/images/products/starlink-gen3-standard.jpeg",
+    imageAlt:
+      "Starlink Gen 3 Standard dish on a kickstand beside a portable power station",
     pricePublished: false,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: [
@@ -134,6 +137,9 @@ export const products: ProductRecord[] = [
       "5 m Ethernet cable",
       "1.8 m AC cable",
     ],
+    imageSrc: "/images/products/starlink-flat-high-performance.jpeg",
+    imageAlt:
+      "Unboxed Starlink Flat High Performance kit with rectangular dish, router, power supply, and cables on a wood floor",
     pricePublished: false,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: [
@@ -226,6 +232,9 @@ export const products: ProductRecord[] = [
       "Mounting hardware kit",
       "Fasteners for common roof types",
     ],
+    imageSrc: "/images/products/starlink-pivot-mount.jpg",
+    imageAlt:
+      "Starlink Pivot Mount accessory in its open retail box with moulded insert and cables",
     pricePublished: false,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["residential-installation", "relocation"],
@@ -324,6 +333,9 @@ export const products: ProductRecord[] = [
       "Mounting hardware",
       "PoE injectors",
     ],
+    imageSrc: "/images/products/wireless-long-range-wifi.jpeg",
+    imageAlt:
+      "Pair of outdoor directional radio antennas on a pole for a wireless long-range link",
     pricePublished: false,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["long-range-wifi", "wifi-networking", "wisp-setup"],

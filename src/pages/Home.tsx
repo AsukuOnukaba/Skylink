@@ -14,6 +14,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
@@ -145,25 +146,38 @@ export function Home() {
                   const Glyph = serviceIcons[service.slug] ?? Cable;
                   return (
                     <li key={service.slug}>
-                      <Card className="flex h-full flex-col transition-shadow hover:shadow-sm">
-                        <Icon
-                          icon={Glyph}
-                          size="feature"
-                          className="text-sky-700"
-                        />
-                        <h3 className="mt-4 text-lg font-semibold text-navy-800">
-                          {service.title}
-                        </h3>
-                        <p className="mt-2 flex-1 text-sm text-slate-700">
-                          {service.shortDescription}
-                        </p>
-                        <TextLink
-                          to={`/services/${service.slug}`}
-                          className="mt-4 inline-flex text-sm"
-                        >
-                          Learn more
-                        </TextLink>
-                      </Card>
+                      <div className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-sm">
+                        {service.imageSrc ? (
+                          <Picture
+                            src={service.imageSrc}
+                            alt={service.imageAlt || ""}
+                            className="aspect-[16/10] w-full object-cover object-center"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="flex aspect-[16/10] items-center justify-center bg-slate-50">
+                            <Icon
+                              icon={Glyph}
+                              size="feature"
+                              className="text-sky-700"
+                            />
+                          </div>
+                        )}
+                        <div className="flex flex-1 flex-col p-6">
+                          <h3 className="text-lg font-semibold text-navy-800">
+                            {service.title}
+                          </h3>
+                          <p className="mt-2 flex-1 text-sm text-slate-700">
+                            {service.shortDescription}
+                          </p>
+                          <TextLink
+                            to={`/services/${service.slug}`}
+                            className="mt-4 inline-flex text-sm"
+                          >
+                            Learn more
+                          </TextLink>
+                        </div>
+                      </div>
                     </li>
                   );
                 })}

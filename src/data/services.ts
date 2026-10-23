@@ -22,6 +22,9 @@ export type ServiceRecord = {
   processSteps: string[];
   faqs: ServiceFaq[];
   relatedProductSlugs: string[];
+  /** Public path in image manifest, when a cleared service photo exists. */
+  imageSrc?: string;
+  imageAlt?: string;
   seoTitle: string;
   seoDescription: string;
   primaryCta: "quote" | "survey";
@@ -93,6 +96,9 @@ export const services: ServiceRecord[] = [
       "starlink-pivot-mount",
       "starlink-mesh-router",
     ],
+    imageSrc: "/images/service-residential-installation.jpeg",
+    imageAlt:
+      "Starlink dish and outdoor antenna on wall brackets during a residential mounting job, with a ladder against the building",
     seoTitle: "Home Starlink installation in Nigeria | Skylink",
     seoDescription:
       "Starlink installation for Nigerian homes: sky-view checks, roof or wall mounting, tidy cable routes, and a clear handover. Ask for a survey.",
@@ -160,6 +166,9 @@ export const services: ServiceRecord[] = [
       "starlink-flat-high-performance",
       "starlink-gen3-standard",
     ],
+    imageSrc: "/images/service-business-connectivity.jpeg",
+    imageAlt:
+      "Starlink dish clamped to a commercial balcony railing overlooking an urban construction site",
     seoTitle: "Starlink for offices and businesses | Skylink Nigeria",
     seoDescription:
       "Starlink installation for Nigerian offices, shops, and small commercial sites. Plan mounting, cabling, and network layout, then request a quote.",
@@ -217,6 +226,9 @@ export const services: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["starlink-pivot-mount", "starlink-gen3-45m-cable"],
+    imageSrc: "/images/service-relocation.jpeg",
+    imageAlt:
+      "Starlink dish on an outdoor pole mount with conduit and solar panels nearby, illustrating remounting at a new position",
     seoTitle: "Starlink relocation and remounting in Nigeria | Skylink",
     seoDescription:
       "Moving house or office? Skylink can take down, relocate, and remount your Starlink kit with a fresh sky-view check at the new site.",
@@ -280,6 +292,9 @@ export const services: ServiceRecord[] = [
       "wireless-long-range-wifi",
       "wired-long-range-wifi",
     ],
+    imageSrc: "/images/service-wifi-networking.jpeg",
+    imageAlt:
+      "Illustration of whole-home mesh Wi-Fi coverage across floors of a house",
     seoTitle: "Whole-premises Wi-Fi and mesh set-up | Skylink Nigeria",
     seoDescription:
       "Extend a working Starlink connection across every room or building. Mesh, access points, and wired backhaul planned around your premises.",
@@ -338,6 +353,9 @@ export const services: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["wireless-long-range-wifi", "wired-long-range-wifi"],
+    imageSrc: "/images/service-long-range-wifi.jpeg",
+    imageAlt:
+      "Two outdoor point-to-point radio antennas mounted on a galvanised pole against a clear sky",
     seoTitle: "Long-range Wi-Fi links between buildings | Skylink",
     seoDescription:
       "Connect separate buildings to your Starlink link with planned wireless or wired long-range Wi-Fi. Line-of-sight checks come first.",
@@ -396,6 +414,9 @@ export const services: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["starlink-gen3-standard", "starlink-mesh-router"],
+    imageSrc: "/images/service-backup-power.jpeg",
+    imageAlt:
+      "Starlink Gen 3 dish beside a portable power station on a vehicle bed, illustrating backup power for the kit",
     seoTitle: "Backup power for Starlink in Nigeria | Skylink",
     seoDescription:
       "Keep Starlink online through power cuts. Plan UPS, inverter, or generator arrangements around your dish and router with Skylink.",
@@ -458,6 +479,9 @@ export const services: ServiceRecord[] = [
       "wireless-long-range-wifi",
       "wired-long-range-wifi",
     ],
+    imageSrc: "/images/service-wisp-setup.jpeg",
+    imageAlt:
+      "Diagram of a community Wi-Fi service using a Starlink antenna, controller, and outdoor access point",
     seoTitle: "WISP set-up technical guidance | Skylink Nigeria",
     seoDescription:
       "Technical guidance for planning a small WISP on Starlink or fibre backhaul. Network design pointers, not legal advice. Commercial terms case by case.",
@@ -516,6 +540,9 @@ export const services: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["starlink-flat-high-performance"],
+    imageSrc: "/images/service-maritime-offshore.jpeg",
+    imageAlt:
+      "Starlink terminal mounted on a vessel railing with open sea and overcast sky behind it",
     seoTitle: "Maritime and offshore Starlink support | Skylink Nigeria",
     seoDescription:
       "Starlink connectivity planning for vessels and offshore sites in Nigeria. Scope is agreed per job after a conversation about constraints.",

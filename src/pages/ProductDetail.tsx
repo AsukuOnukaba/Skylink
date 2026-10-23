@@ -89,7 +89,8 @@ export function ProductDetail() {
               <Picture
                 src={product.imageSrc}
                 alt={product.imageAlt || product.name}
-                className="w-full rounded-lg object-cover"
+                className="aspect-[4/3] w-full rounded-lg object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 768px"
               />
             </Container>
           </section>

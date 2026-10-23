@@ -1,8 +1,8 @@
 import { CtaBand } from "@/components/home/CtaBand";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
@@ -61,32 +61,42 @@ export function Products() {
                     product.priceNgn > 0;
                   return (
                     <li key={product.slug}>
-                      <Card className="flex h-full flex-col">
-                        <h3 className="text-lg font-semibold text-navy-800">
-                          {product.name}
-                        </h3>
-                        <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
-                          {product.manufacturer}
-                        </p>
-                        <p className="mt-2 flex-1 text-sm text-slate-700">
-                          {product.shortDescription}
-                        </p>
-                        <p className="mt-3 text-sm font-semibold text-navy-800">
-                          {showPrice
-                            ? new Intl.NumberFormat("en-NG", {
-                                style: "currency",
-                                currency: "NGN",
-                                maximumFractionDigits: 0,
-                              }).format(product.priceNgn as number)
-                            : "Request pricing"}
-                        </p>
-                        <TextLink
-                          to={`/products/${product.slug}`}
-                          className="mt-4 inline-flex text-sm"
-                        >
-                          View details
-                        </TextLink>
-                      </Card>
+                      <div className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
+                        {product.imageSrc ? (
+                          <Picture
+                            src={product.imageSrc}
+                            alt={product.imageAlt || product.name}
+                            className="aspect-[16/10] w-full object-cover object-center"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        ) : null}
+                        <div className="flex flex-1 flex-col p-6">
+                          <h3 className="text-lg font-semibold text-navy-800">
+                            {product.name}
+                          </h3>
+                          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
+                            {product.manufacturer}
+                          </p>
+                          <p className="mt-2 flex-1 text-sm text-slate-700">
+                            {product.shortDescription}
+                          </p>
+                          <p className="mt-3 text-sm font-semibold text-navy-800">
+                            {showPrice
+                              ? new Intl.NumberFormat("en-NG", {
+                                  style: "currency",
+                                  currency: "NGN",
+                                  maximumFractionDigits: 0,
+                                }).format(product.priceNgn as number)
+                              : "Request pricing"}
+                          </p>
+                          <TextLink
+                            to={`/products/${product.slug}`}
+                            className="mt-4 inline-flex text-sm"
+                          >
+                            View details
+                          </TextLink>
+                        </div>
+                      </div>
                     </li>
                   );
                 })}

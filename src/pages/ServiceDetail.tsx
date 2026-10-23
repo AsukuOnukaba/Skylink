@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
@@ -58,9 +59,26 @@ export function ServiceDetail() {
           </Container>
         </section>
 
+        {service.imageSrc ? (
+          <section className="bg-slate-100 py-[var(--space-section)]">
+            <Container className="max-w-3xl">
+              <Picture
+                src={service.imageSrc}
+                alt={service.imageAlt || ""}
+                className="aspect-[4/3] w-full rounded-lg object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </Container>
+          </section>
+        ) : null}
+
         <section
           aria-labelledby="service-overview-heading"
-          className="bg-slate-100 py-[var(--space-section)]"
+          className={
+            service.imageSrc
+              ? "bg-white py-[var(--space-section)]"
+              : "bg-slate-100 py-[var(--space-section)]"
+          }
         >
           <Container className="max-w-3xl">
             <h2
@@ -78,7 +96,7 @@ export function ServiceDetail() {
         {service.suitableFor.length > 0 ? (
           <section
             aria-labelledby="service-suitable-heading"
-            className="bg-white py-[var(--space-section)]"
+            className="bg-slate-100 py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2
@@ -99,7 +117,7 @@ export function ServiceDetail() {
         {service.inclusions.length > 0 ? (
           <section
             aria-labelledby="service-included-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
+            className="bg-white py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2
@@ -121,7 +139,7 @@ export function ServiceDetail() {
         service.limitations.length > 0 ? (
           <section
             aria-labelledby="service-limits-heading"
-            className="bg-white py-[var(--space-section)]"
+            className="bg-slate-100 py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2
@@ -161,7 +179,7 @@ export function ServiceDetail() {
         {service.processSteps.length > 0 ? (
           <section
             aria-labelledby="service-process-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
+            className="bg-white py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2
@@ -189,7 +207,7 @@ export function ServiceDetail() {
         {relatedProducts.length > 0 ? (
           <section
             aria-labelledby="service-products-heading"
-            className="bg-white py-[var(--space-section)]"
+            className="bg-slate-100 py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2
@@ -214,7 +232,7 @@ export function ServiceDetail() {
         {service.faqs.length > 0 ? (
           <section
             aria-labelledby="service-faq-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
+            className="bg-white py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2

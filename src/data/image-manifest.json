@@ -93,5 +93,189 @@
         "webp": "/images/pipeline-fixture.w768.webp"
       }
     ]
+  },
+  "/images/products/starlink-flat-high-performance.jpeg": {
+    "src": "/images/products/starlink-flat-high-performance.jpeg",
+    "width": 1280,
+    "height": 842,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/starlink-flat-high-performance.w480.avif",
+        "webp": "/images/products/starlink-flat-high-performance.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/products/starlink-flat-high-performance.w768.avif",
+        "webp": "/images/products/starlink-flat-high-performance.w768.webp"
+      },
+      {
+        "w": 1280,
+        "avif": "/images/products/starlink-flat-high-performance.w1280.avif",
+        "webp": "/images/products/starlink-flat-high-performance.w1280.webp"
+      }
+    ]
+  },
+  "/images/products/starlink-gen3-standard.jpeg": {
+    "src": "/images/products/starlink-gen3-standard.jpeg",
+    "width": 960,
+    "height": 1280,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/starlink-gen3-standard.w480.avif",
+        "webp": "/images/products/starlink-gen3-standard.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/products/starlink-gen3-standard.w768.avif",
+        "webp": "/images/products/starlink-gen3-standard.w768.webp"
+      }
+    ]
+  },
+  "/images/products/starlink-pivot-mount.jpg": {
+    "src": "/images/products/starlink-pivot-mount.jpg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/starlink-pivot-mount.w480.avif",
+        "webp": "/images/products/starlink-pivot-mount.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/products/starlink-pivot-mount.w768.avif",
+        "webp": "/images/products/starlink-pivot-mount.w768.webp"
+      }
+    ]
+  },
+  "/images/products/wireless-long-range-wifi.jpeg": {
+    "src": "/images/products/wireless-long-range-wifi.jpeg",
+    "width": 476,
+    "height": 500,
+    "variants": [
+      {
+        "w": 476,
+        "avif": "/images/products/wireless-long-range-wifi.w476.avif",
+        "webp": "/images/products/wireless-long-range-wifi.w476.webp"
+      }
+    ]
+  },
+  "/images/service-backup-power.jpeg": {
+    "src": "/images/service-backup-power.jpeg",
+    "width": 960,
+    "height": 1280,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-backup-power.w480.avif",
+        "webp": "/images/service-backup-power.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-backup-power.w768.avif",
+        "webp": "/images/service-backup-power.w768.webp"
+      }
+    ]
+  },
+  "/images/service-business-connectivity.jpeg": {
+    "src": "/images/service-business-connectivity.jpeg",
+    "width": 471,
+    "height": 1020,
+    "variants": [
+      {
+        "w": 471,
+        "avif": "/images/service-business-connectivity.w471.avif",
+        "webp": "/images/service-business-connectivity.w471.webp"
+      }
+    ]
+  },
+  "/images/service-long-range-wifi.jpeg": {
+    "src": "/images/service-long-range-wifi.jpeg",
+    "width": 476,
+    "height": 500,
+    "variants": [
+      {
+        "w": 476,
+        "avif": "/images/service-long-range-wifi.w476.avif",
+        "webp": "/images/service-long-range-wifi.w476.webp"
+      }
+    ]
+  },
+  "/images/service-maritime-offshore.jpeg": {
+    "src": "/images/service-maritime-offshore.jpeg",
+    "width": 471,
+    "height": 1020,
+    "variants": [
+      {
+        "w": 471,
+        "avif": "/images/service-maritime-offshore.w471.avif",
+        "webp": "/images/service-maritime-offshore.w471.webp"
+      }
+    ]
+  },
+  "/images/service-relocation.jpeg": {
+    "src": "/images/service-relocation.jpeg",
+    "width": 960,
+    "height": 1280,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-relocation.w480.avif",
+        "webp": "/images/service-relocation.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-relocation.w768.avif",
+        "webp": "/images/service-relocation.w768.webp"
+      }
+    ]
+  },
+  "/images/service-residential-installation.jpeg": {
+    "src": "/images/service-residential-installation.jpeg",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-residential-installation.w480.avif",
+        "webp": "/images/service-residential-installation.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-residential-installation.w768.avif",
+        "webp": "/images/service-residential-installation.w768.webp"
+      },
+      {
+        "w": 1280,
+        "avif": "/images/service-residential-installation.w1280.avif",
+        "webp": "/images/service-residential-installation.w1280.webp"
+      }
+    ]
+  },
+  "/images/service-wifi-networking.jpeg": {
+    "src": "/images/service-wifi-networking.jpeg",
+    "width": 706,
+    "height": 435,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-wifi-networking.w480.avif",
+        "webp": "/images/service-wifi-networking.w480.webp"
+      }
+    ]
+  },
+  "/images/service-wisp-setup.jpeg": {
+    "src": "/images/service-wisp-setup.jpeg",
+    "width": 480,
+    "height": 339,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-wisp-setup.w480.avif",
+        "webp": "/images/service-wisp-setup.w480.webp"
+      }
+    ]
   }
 }

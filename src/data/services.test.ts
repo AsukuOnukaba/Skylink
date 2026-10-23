@@ -49,4 +49,14 @@ describe("services catalogue", () => {
       expect(text.includes(banned)).toBe(false);
     }
   });
+
+  it("gives every published service a cleared illustrative image", () => {
+    for (const s of publishedServices()) {
+      expect(s.imageSrc, s.slug).toMatch(/^\/images\/service-/);
+      expect(s.imageAlt?.length, s.slug).toBeGreaterThan(20);
+      expect(s.imageAlt?.toLowerCase() ?? "").not.toMatch(
+        /skylink (completed|installed|project|customer)/i,
+      );
+    }
+  });
 });
