@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { products } from "./products";
 import {
   getPublishedService,
   getServiceDraft,
@@ -8,25 +9,44 @@ import {
 } from "./services";
 
 describe("services catalogue", () => {
-  it("keeps all draft services unpublished until OD-03", () => {
-    expect(services.length).toBeGreaterThanOrEqual(5);
-    expect(publishedServices()).toEqual([]);
-    expect(services.every((s) => s.published === false)).toBe(true);
-    expect(publicServicePaths()).toEqual([]);
+  it("publishes the eight confirmed services", () => {
+    expect(services).toHaveLength(8);
+    expect(publishedServices()).toHaveLength(8);
+    expect(services.every((s) => s.published && s.indexable)).toBe(true);
+    expect(publicServicePaths()).toContain("/services/long-range-wifi");
+    expect(publicServicePaths()).toContain("/services/wisp-setup");
   });
 
-  it("does not resolve unpublished or unknown slugs as public services", () => {
-    expect(getPublishedService("residential-installation")).toBeUndefined();
+  it("does not resolve unknown slugs as public services", () => {
     expect(getPublishedService("not-a-real-service")).toBeUndefined();
+    expect(getPublishedService("residential-installation")?.title).toBe(
+      "Residential installation",
+    );
     expect(getServiceDraft("residential-installation")?.title).toBe(
       "Residential installation",
     );
   });
 
-  it("gives each draft a distinct SEO title and description", () => {
+  it("gives each service a distinct SEO title and description", () => {
     const titles = services.map((s) => s.seoTitle);
     const descriptions = services.map((s) => s.seoDescription);
     expect(new Set(titles).size).toBe(titles.length);
     expect(new Set(descriptions).size).toBe(descriptions.length);
+  });
+
+  it("links only to existing product slugs", () => {
+    const productSlugs = new Set(products.map((p) => p.slug));
+    for (const s of services) {
+      for (const slug of s.relatedProductSlugs) {
+        expect(productSlugs.has(slug)).toBe(true);
+      }
+    }
+  });
+
+  it("avoids prohibited claims", () => {
+    const text = JSON.stringify(services).toLowerCase();
+    for (const banned of ["datagram", "₦", "certified", "1000+"]) {
+      expect(text.includes(banned)).toBe(false);
+    }
   });
 });

@@ -8,19 +8,25 @@ import {
 } from "./routes";
 
 describe("route registry", () => {
-  it("exposes primary nav without products or locations until published", () => {
+  it("exposes products and locations in nav when catalogues are published", () => {
     const paths = primaryNavRoutes.map((r) => r.path);
-    expect(paths).toEqual(["/services", "/about", "/contact"]);
-    expect(paths).not.toContain("/products");
-    expect(paths).not.toContain("/locations");
-    expect(getAppRoutes().map((r) => r.path)).not.toContain("/products");
-    expect(getAppRoutes().map((r) => r.path)).not.toContain("/locations");
+    expect(paths).toEqual([
+      "/services",
+      "/products",
+      "/locations",
+      "/about",
+      "/contact",
+    ]);
+    expect(getAppRoutes().map((r) => r.path)).toContain("/products");
+    expect(getAppRoutes().map((r) => r.path)).toContain("/locations");
   });
 
   it("registers static utility pages for footer legal links", () => {
     const legal = footerLegalRoutes.map((r) => r.path);
     expect(legal).toEqual(["/faq", "/privacy", "/terms"]);
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/services");
+    expect(footerExploreRoutes.map((r) => r.path)).toContain("/products");
+    expect(footerExploreRoutes.map((r) => r.path)).toContain("/locations");
     expect(appRoutes.some((r) => r.path === "/")).toBe(true);
   });
 });

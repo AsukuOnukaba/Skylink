@@ -33,8 +33,9 @@ export function Locations() {
               Service areas
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.brandName} works where a crew can attend in person. Local
-              area pages appear here once we have clear notes for that place.
+              {site.brandName} works where a crew can attend in person. Each
+              place page explains local building and site conditions that affect
+              a Starlink install in that area.
             </p>
           </Container>
         </section>

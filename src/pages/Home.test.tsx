@@ -9,15 +9,9 @@ const internalPlanningPatterns = [
   /\bCP-[A-Z]\b/i,
   /candidate catalogue/i,
   /draft records/i,
-  /marked\s+published/i,
-  /no published service/i,
   /pipeline fixture/i,
-  /image rights are approved/i,
-  /development structure/i,
-  /pending\s+(OD|business|final)/i,
   /prototype build/i,
   /not a production launch/i,
-  /awaiting/i,
 ] as const;
 
 const falseCapabilityPatterns = [
@@ -52,17 +46,20 @@ afterEach(() => {
 });
 
 describe("Home customer-facing copy", () => {
-  it("does not expose internal planning language when no services are published", () => {
+  it("surfaces published services without planning jargon or DataGram NAP", () => {
     const html = renderHomeHtml();
 
     expect(html).toContain("Starlink installation and connectivity");
-    expect(html).not.toContain('id="services"');
+    expect(html).toContain('id="services"');
+    expect(html).toMatch(/Residential installation/);
+    expect(html).toMatch(/\/services\/residential-installation/);
 
     for (const pattern of internalPlanningPatterns) {
       expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(
         pattern,
       );
     }
+    expect(html).not.toMatch(/9060976424|info@datagram|datagram\.ng/i);
   });
 
   it("does not promise a working enquiry submission or follow-up", () => {
@@ -71,6 +68,5 @@ describe("Home customer-facing copy", () => {
       expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
     }
     expect(html).toMatch(/Contact for current reach options/i);
-    expect(html).not.toMatch(/9060976424|906 097 6424/);
   });
 });

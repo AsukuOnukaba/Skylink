@@ -34,9 +34,9 @@ export function Products() {
               Products
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              This catalogue is for understanding hardware that may support a
-              Starlink installation—not for online checkout. Product pages and
-              prices appear here only after they are ready for visitors.
+              Browse Starlink kits and related networking hardware that may
+              support an installation. This is an informational catalogue—not an
+              online shop. Pricing and supply are confirmed when you enquire.
             </p>
           </Container>
         </section>

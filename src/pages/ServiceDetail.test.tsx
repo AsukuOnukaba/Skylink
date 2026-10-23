@@ -1,7 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getServiceDraft } from "@/data/services";
 import { ServiceDetail } from "./ServiceDetail";
 
 const internalPlanningPatterns = [
@@ -9,6 +8,7 @@ const internalPlanningPatterns = [
   /\bPH-\d+\b/i,
   /candidate catalogue/i,
   /content pending/i,
+  /datagram\.ng/i,
 ] as const;
 
 beforeEach(() => {
@@ -31,36 +31,26 @@ function renderAt(path: string): string {
 }
 
 describe("ServiceDetail publication guards", () => {
-  it("shows NotFound for unpublished and unknown slugs", () => {
-    const unpublished = renderAt("/services/residential-installation");
-    expect(unpublished).toMatch(/Page not found/i);
-    expect(unpublished).not.toMatch(/Residential installation/);
-
+  it("shows NotFound for unknown service slugs", () => {
     const unknown = renderAt("/services/not-a-real-service");
     expect(unknown).toMatch(/Page not found/i);
+    expect(unknown).not.toMatch(/Residential installation/);
   });
 
-  it("renders published service detail with SEO fields and honest CTA", () => {
-    const draft = getServiceDraft("residential-installation");
-    expect(draft).toBeDefined();
-    const previous = draft!.published;
-    draft!.published = true;
-
-    try {
-      const html = renderAt("/services/residential-installation");
-      expect(html).toMatch(/<h1[^>]*>Residential installation<\/h1>/);
-      expect(html).toMatch(/Overview/);
-      expect(html).toMatch(
-        /contact\?intent=survey&amp;service=residential-installation/,
+  it("renders published residential installation with SEO fields and honest CTA", () => {
+    const html = renderAt("/services/residential-installation");
+    expect(html).toMatch(/<h1[^>]*>Residential installation<\/h1>/);
+    expect(html).toMatch(/Overview/);
+    expect(html).toMatch(
+      /contact\?intent=survey&amp;service=residential-installation/,
+    );
+    expect(html).toMatch(/sky view|mounting|cable/i);
+    expect(html).not.toMatch(/shopping cart|checkout|add to cart/i);
+    expect(html).not.toMatch(/9060976424|info@datagram/i);
+    for (const pattern of internalPlanningPatterns) {
+      expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(
+        pattern,
       );
-      expect(html).not.toMatch(/shopping cart|checkout|add to cart/i);
-      for (const pattern of internalPlanningPatterns) {
-        expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(
-          pattern,
-        );
-      }
-    } finally {
-      draft!.published = previous;
     }
   });
 });

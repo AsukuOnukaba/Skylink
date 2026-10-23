@@ -48,8 +48,10 @@ export function About() {
             <p className="mt-3 text-base leading-relaxed text-slate-700">
               {site.brandName} helps people evaluating Starlink installation and
               connectivity support understand the work clearly and decide whether
-              we are a fit. We describe our relationship to Starlink carefully
-              and do not claim to be Starlink itself.
+              we are a fit. That includes home and business installs, remounts,
+              Wi-Fi coverage around a working link, backup power planning, and
+              related hardware guidance. We describe our relationship to Starlink
+              carefully and do not claim to be Starlink itself.
             </p>
           </Container>
         </section>
@@ -93,8 +95,10 @@ export function About() {
               ))}
             </ul>
             <p className="mt-8 text-sm text-slate-700">
-              Looking for service detail pages? See the{" "}
-              <TextLink to="/services">services overview</TextLink>, or open{" "}
+              See the{" "}
+              <TextLink to="/services">services overview</TextLink>,{" "}
+              <TextLink to="/products">products</TextLink>, and{" "}
+              <TextLink to="/locations">service areas</TextLink>, or open{" "}
               <TextLink to="/contact">Contact</TextLink> for current ways to
               reach us.
             </p>

@@ -25,7 +25,10 @@ const serviceIcons: Record<string, LucideIcon> = {
   "business-connectivity": Building2,
   relocation: MoveRight,
   "wifi-networking": Wifi,
+  "long-range-wifi": Wifi,
   "backup-power": Zap,
+  "wisp-setup": Cable,
+  "maritime-offshore": Building2,
 };
 
 const whyPoints = [
@@ -78,10 +81,10 @@ export function Home() {
                 Starlink installation and connectivity for homes and businesses.
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200/90">
-                {site.brandName} helps you get satellite connectivity in place
-                with clear advice and careful installation support. Explore
-                Services and About to understand how we work, then open Contact
-                for current reach options.
+                {site.brandName} helps homes and businesses plan mounting,
+                cabling, Wi-Fi coverage, and related Starlink work across
+                Nigeria. Browse Services, Products, and Service areas, then open
+                Contact for current reach options.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink to="/contact?intent=quote" variant="primaryOnDark">

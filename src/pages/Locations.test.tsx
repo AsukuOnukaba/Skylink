@@ -6,13 +6,16 @@ import { LocationOrNotFound } from "./LocationOrNotFound";
 import { Locations } from "./Locations";
 import { placeKeyFromPath } from "./LocationDetail";
 
+const catalogueSnapshot: LocationRecord[] = [...locations];
+
 beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
   vi.spyOn(console, "warn").mockImplementation(() => {});
+  locations.splice(0, locations.length, ...catalogueSnapshot);
 });
 
 afterEach(() => {
-  locations.length = 0;
+  locations.splice(0, locations.length, ...catalogueSnapshot);
   vi.restoreAllMocks();
 });
 
@@ -22,18 +25,42 @@ describe("Locations pages", () => {
     expect(placeKeyFromPath("/locations/lagos")).toBeUndefined();
   });
 
-  it("renders empty index without fabricating cities or dual detail URLs", () => {
+  it("lists published places on the index with canonical detail URLs only", () => {
     const html = renderToStaticMarkup(
       <MemoryRouter>
         <Locations />
       </MemoryRouter>,
     );
     expect(html).toMatch(/<h1[^>]*>Service areas<\/h1>/);
+    expect(html).toMatch(/Lagos/);
+    expect(html).toMatch(/\/starlink-installation-lagos/);
     expect(html).not.toMatch(/\/locations\/lagos/);
-    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b/i);
+    expect(html).not.toMatch(/Owerri|\/starlink-installation-owerri/);
+    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|datagram/i);
   });
 
-  it("shows NotFound for unpublished or unknown place keys", () => {
+  it("shows NotFound for unknown and unpublished place keys", () => {
+    const unknown = renderToStaticMarkup(
+      <MemoryRouter initialEntries={["/starlink-installation-kano"]}>
+        <Routes>
+          <Route path="*" element={<LocationOrNotFound />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    expect(unknown).toMatch(/Page not found/i);
+
+    const draft = renderToStaticMarkup(
+      <MemoryRouter initialEntries={["/starlink-installation-owerri"]}>
+        <Routes>
+          <Route path="*" element={<LocationOrNotFound />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    expect(draft).toMatch(/Page not found/i);
+    expect(draft).not.toMatch(/Imo State/);
+  });
+
+  it("renders a published place with localContext and contact prefill", () => {
     const html = renderToStaticMarkup(
       <MemoryRouter initialEntries={["/starlink-installation-lagos"]}>
         <Routes>
@@ -41,37 +68,10 @@ describe("Locations pages", () => {
         </Routes>
       </MemoryRouter>,
     );
-    expect(html).toMatch(/Page not found/i);
-  });
-
-  it("renders a published place only with real localContext", () => {
-    const record: LocationRecord = {
-      placeKey: "sample-town",
-      placeName: "Sample Town",
-      regionLabel: "Test region",
-      headline: "Starlink installation in Sample Town",
-      intro: "Clear local support when crews can attend.",
-      localContext:
-        "Sample Town estates often need roof access permission before mounting.",
-      relatedServiceSlugs: [],
-      faqs: [],
-      seoTitle: "Starlink installation in Sample Town — Skylink",
-      seoDescription: "Local Starlink installation notes for Sample Town.",
-      published: true,
-      indexable: true,
-    };
-    locations.push(record);
-
-    const html = renderToStaticMarkup(
-      <MemoryRouter initialEntries={["/starlink-installation-sample-town"]}>
-        <Routes>
-          <Route path="*" element={<LocationOrNotFound />} />
-        </Routes>
-      </MemoryRouter>,
-    );
-    expect(html).toMatch(/Sample Town/);
-    expect(html).toMatch(/roof access permission/);
-    expect(html).toMatch(/contact\?intent=quote&amp;location=Sample%20Town/);
-    expect(html).not.toMatch(/\/locations\/sample-town/);
+    expect(html).toMatch(/Lagos/);
+    expect(html).toMatch(/Victoria Island|Lekki|Ikoyi|mainland/i);
+    expect(html).toMatch(/contact\?intent=quote&amp;location=Lagos/);
+    expect(html).not.toMatch(/\/locations\/lagos/);
+    expect(html).not.toMatch(/datagram|9060976424/i);
   });
 });

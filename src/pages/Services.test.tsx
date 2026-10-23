@@ -13,15 +13,17 @@ afterEach(() => {
 });
 
 describe("Services hub", () => {
-  it("does not list unpublished draft offerings or internal planning language", () => {
+  it("lists published services with detail links and keeps planning jargon out", () => {
     const html = renderToStaticMarkup(
       <MemoryRouter>
         <Services />
       </MemoryRouter>,
     );
     expect(html).toMatch(/<h1[^>]*>Services<\/h1>/);
-    expect(html).not.toMatch(/Residential installation/);
-    expect(html).not.toMatch(/\/services\/residential-installation/);
-    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue/i);
+    expect(html).toMatch(/Residential installation/);
+    expect(html).toMatch(/\/services\/residential-installation/);
+    expect(html).toMatch(/Long-range Wi-Fi/);
+    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue|datagram/i);
+    expect(html).not.toMatch(/9060976424|info@datagram/i);
   });
 });
