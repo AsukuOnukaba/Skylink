@@ -41,9 +41,10 @@ export function Privacy() {
             What this site collects today
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            The public pages do not currently include a working enquiry form.
-            Until a form is enabled, this website does not collect quote, survey,
-            or product enquiry submissions from visitors.
+            Online enquiry forms are only shown when the site operator has
+            enabled them and delivery is configured. When forms are not enabled,
+            this website does not collect quote, survey, or product enquiry
+            submissions from visitors through the Contact page.
           </p>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
             Standard web logs on the hosting platform may record technical
@@ -63,13 +64,16 @@ export function Privacy() {
           </p>
 
           <h2 className="mt-10 text-xl font-semibold text-navy-800">
-            Future enquiry forms
+            Enquiry forms
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            When online forms open, they will ask only for details needed to
-            respond to an enquiry—typically name, phone, location, and a short
-            note about your site or need. This notice will be updated to name
-            the delivery method and retention approach at that time.
+            When forms are enabled, they ask only for details needed to respond:
+            name, phone, location, preferred contact method, the relevant service
+            or product, and an optional message. Submissions go to the configured
+            delivery destination for {site.brandName}. Retention and provider
+            details will be named here once a production destination is approved.
+            Do not send sensitive information you would not want handled for a
+            routine installation conversation.
           </p>
 
           <h2 className="mt-10 text-xl font-semibold text-navy-800">

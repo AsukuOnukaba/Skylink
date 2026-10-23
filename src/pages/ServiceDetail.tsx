@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
+import { enquiryContactCtaLabel } from "@/config/enquiryCta";
 import { getPublishedService } from "@/data/services";
 import { getPublishedProduct } from "@/data/products";
 import { NotFound } from "@/pages/NotFound";
@@ -48,7 +49,7 @@ export function ServiceDetail() {
             <p className="mt-2 text-sm text-slate-500">{service.audience}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink to={contactTo}>
-                {intent === "survey" ? "Ask about a survey" : "Go to contact"}
+                {enquiryContactCtaLabel(intent)}
               </ButtonLink>
               <ButtonLink to="/services" variant="secondary">
                 All services

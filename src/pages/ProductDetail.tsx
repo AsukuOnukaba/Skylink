@@ -9,6 +9,7 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
+import { enquiryContactCtaLabel } from "@/config/enquiryCta";
 import { getPublishedProduct } from "@/data/products";
 import { getPublishedService } from "@/data/services";
 import { NotFound } from "@/pages/NotFound";
@@ -72,7 +73,9 @@ export function ProductDetail() {
               </p>
             ) : null}
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink to={contactTo}>Go to contact</ButtonLink>
+              <ButtonLink to={contactTo}>
+                {enquiryContactCtaLabel("product")}
+              </ButtonLink>
               <ButtonLink to="/products" variant="secondary">
                 All products
               </ButtonLink>

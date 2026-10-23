@@ -44,4 +44,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Through PH-08 templates.** Public routes include `/`, `/services`, `/services/:slug`, `/products`, `/products/:slug`, `/locations`, `/starlink-installation-:place`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. Catalogue detail pages publish only when OD-03/04/05 approve content. `POST /api/enquiry` validates payloads (PH-08); Contact forms remain PH-09. NAP stays empty until OD-01.
+**Through PH-09 forms (public UI gated).** Public routes include `/`, `/services`, `/services/:slug`, `/products`, `/products/:slug`, `/locations`, `/starlink-installation-:place`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. `POST /api/enquiry` validates and delivers when configured (PH-08). Contact quote/survey/product forms exist but stay hidden unless `VITE_ENQUIRY_FORMS_ENABLED=true` after OD-07/OD-15 delivery is verified. NAP stays empty until OD-01.

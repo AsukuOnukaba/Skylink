@@ -11,6 +11,9 @@ const MAX = {
   companyWebsite: 200,
 } as const;
 
+/** Field length limits shared by client forms and the API schema. */
+export const enquiryFieldLimits = MAX;
+
 export const enquiryKinds = ["quote", "survey", "product"] as const;
 export type EnquiryKind = (typeof enquiryKinds)[number];
 

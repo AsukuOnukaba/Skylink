@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { EnquiryForm } from "@/components/enquiry/EnquiryForm";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Alert } from "@/components/ui/Alert";
@@ -8,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
+import { areEnquiryFormsEnabled } from "@/config/enquiryForms";
 import {
   hasAnyPublicContactChannel,
   hasPublicEmail,
@@ -15,25 +17,43 @@ import {
   hasPublicWhatsapp,
   site,
 } from "@/config/site";
+import { publishedProducts } from "@/data/products";
+import { publishedServices } from "@/data/services";
 import { cn } from "@/lib/cn";
+import type { EnquiryKind } from "@/shared/enquirySchema";
 
 const intents = [
-  { id: "quote", label: "Quote", description: "Installation or connectivity pricing conversation" },
-  { id: "survey", label: "Site survey", description: "Talk through the site before work begins" },
-  { id: "product", label: "Product", description: "Hardware or kit questions" },
-] as const;
+  {
+    id: "quote" as const,
+    label: "Quote",
+    description: "Installation or connectivity pricing conversation",
+  },
+  {
+    id: "survey" as const,
+    label: "Site survey",
+    description: "Talk through the site before work begins",
+  },
+  {
+    id: "product" as const,
+    label: "Product",
+    description: "Hardware or kit questions",
+  },
+];
 
-type IntentId = (typeof intents)[number]["id"];
+function resolveServiceSlug(raw: string): string {
+  const slug = raw.trim();
+  if (!slug) return "";
+  return publishedServices().some((s) => s.slug === slug) ? slug : "";
+}
 
-function parseIntent(value: string | null): IntentId {
-  if (value === "survey" || value === "product" || value === "quote") {
-    return value;
-  }
-  return "quote";
+function resolveProductSlug(raw: string): string {
+  const slug = raw.trim();
+  if (!slug) return "";
+  return publishedProducts().some((p) => p.slug === slug) ? slug : "";
 }
 
 function whatsappHref(
-  intent: IntentId,
+  intent: EnquiryKind,
   serviceSlug: string,
   productSlug: string,
   locationLabel: string,
@@ -49,16 +69,51 @@ function whatsappHref(
   return `${base}${sep}text=${encodeURIComponent(parts.join("\n"))}`;
 }
 
+function tabHref(
+  intent: EnquiryKind,
+  serviceSlug: string,
+  productSlug: string,
+  locationLabel: string,
+): string {
+  const params = new URLSearchParams();
+  params.set("intent", intent);
+  if (serviceSlug) params.set("service", serviceSlug);
+  if (productSlug) params.set("product", productSlug);
+  if (locationLabel) params.set("location", locationLabel);
+  return `/contact?${params.toString()}`;
+}
+
 /**
- * Contact structure. Live phone/WhatsApp/email render only when OD-01 values exist.
- * Online enquiry forms remain PH-09.
+ * Contact + enquiry journeys (PH-09).
+ * Forms render only when VITE_ENQUIRY_FORMS_ENABLED is true.
+ * Live phone/WhatsApp/email render only when OD-01 values exist.
  */
 export function Contact() {
   const [params] = useSearchParams();
-  const intent = useMemo(() => parseIntent(params.get("intent")), [params]);
-  const serviceSlug = params.get("service")?.trim() || "";
-  const productSlug = params.get("product")?.trim() || "";
+  const formsEnabled = areEnquiryFormsEnabled();
+
+  const rawService = params.get("service") ?? "";
+  const rawProduct = params.get("product") ?? "";
   const locationLabel = params.get("location")?.trim() || "";
+
+  const serviceSlug = useMemo(
+    () => resolveServiceSlug(rawService),
+    [rawService],
+  );
+  const productSlug = useMemo(
+    () => resolveProductSlug(rawProduct),
+    [rawProduct],
+  );
+
+  const intent = useMemo((): EnquiryKind => {
+    const raw = params.get("intent");
+    if (raw === "quote" || raw === "survey" || raw === "product") {
+      return raw;
+    }
+    if (productSlug) return "product";
+    return "quote";
+  }, [params, productSlug]);
+
   const active = intents.find((item) => item.id === intent) ?? intents[0];
   const phoneOk = hasPublicPhone();
   const emailOk = hasPublicEmail();
@@ -67,6 +122,11 @@ export function Contact() {
   const waHref = whatsappOk
     ? whatsappHref(intent, serviceSlug, productSlug, locationLabel)
     : "";
+
+  const serviceTitle =
+    publishedServices().find((s) => s.slug === serviceSlug)?.title ?? "";
+  const productName =
+    publishedProducts().find((p) => p.slug === productSlug)?.name ?? "";
 
   return (
     <AppShell>
@@ -85,11 +145,17 @@ export function Contact() {
           <h1 className="mt-4 text-3xl font-bold text-navy-950 sm:text-4xl">
             Contact
           </h1>
-            <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {anyChannel
+          <p className="mt-3 text-base leading-relaxed text-slate-700">
+            {formsEnabled
+              ? `Choose an enquiry type below${
+                  anyChannel
+                    ? `, or use the published contact details when you prefer to talk directly`
+                    : ""
+                }.`
+              : anyChannel
                 ? `Use the details below to talk with ${site.brandName} about Starlink installation or connectivity support.`
-                : `For now, use this site to understand how ${site.brandName} approaches Starlink installation and connectivity. Direct phone, WhatsApp, and email are not published here, and this website does not send online enquiries.`}
-            </p>
+                : `For now, use this site to understand how ${site.brandName} approaches Starlink installation and connectivity. Direct phone, WhatsApp, and email are not published here, and online enquiry submission is not available on this site yet.`}
+          </p>
 
           <div
             className="mt-8 flex flex-wrap gap-2"
@@ -101,7 +167,12 @@ export function Contact() {
               return (
                 <Link
                   key={item.id}
-                  to={`/contact?intent=${item.id}`}
+                  to={tabHref(
+                    item.id,
+                    serviceSlug,
+                    productSlug,
+                    locationLabel,
+                  )}
                   role="tab"
                   aria-selected={selected}
                   className={cn(
@@ -123,23 +194,23 @@ export function Contact() {
               {active.label}
             </h2>
             <p className="mt-2 text-sm text-slate-700">{active.description}</p>
-            {serviceSlug || productSlug || locationLabel ? (
+            {serviceTitle || productName || locationLabel ? (
               <p className="mt-3 text-sm text-slate-600">
                 Topic from your link
-                {serviceSlug ? (
+                {serviceTitle ? (
                   <>
-                    : service <span className="font-medium">{serviceSlug}</span>
+                    : service <span className="font-medium">{serviceTitle}</span>
                   </>
                 ) : null}
-                {productSlug ? (
+                {productName ? (
                   <>
-                    {serviceSlug || locationLabel ? ";" : ":"} product{" "}
-                    <span className="font-medium">{productSlug}</span>
+                    {serviceTitle || locationLabel ? ";" : ":"} product{" "}
+                    <span className="font-medium">{productName}</span>
                   </>
                 ) : null}
                 {locationLabel ? (
                   <>
-                    {serviceSlug || productSlug ? ";" : ":"} location{" "}
+                    {serviceTitle || productName ? ";" : ":"} location{" "}
                     <span className="font-medium">{locationLabel}</span>
                   </>
                 ) : null}
@@ -147,14 +218,29 @@ export function Contact() {
               </p>
             ) : null}
 
-            <Alert
-              tone="info"
-              className="mt-5"
-              title="Online enquiry form is not available"
-            >
-              This website does not submit messages yet. No enquiry is sent from
-              this page.
-            </Alert>
+            {formsEnabled ? (
+              <EnquiryForm
+                key={`${intent}-${serviceSlug}-${productSlug}-${locationLabel}`}
+                kind={intent}
+                prefill={{
+                  serviceSlug,
+                  productSlug,
+                  locationLabel,
+                }}
+              />
+            ) : (
+              <Alert
+                tone="info"
+                className="mt-5"
+                title="Online enquiry form is not available"
+              >
+                Online enquiry submission is not open on this website yet. No
+                enquiry is sent from this page. You can still read how we work
+                on <TextLink to="/services">Services</TextLink>,{" "}
+                <TextLink to="/products">Products</TextLink>, and{" "}
+                <TextLink to="/about">About</TextLink>.
+              </Alert>
+            )}
 
             {anyChannel ? (
               <dl className="mt-6 space-y-4 text-sm">
@@ -202,7 +288,7 @@ export function Contact() {
                   </div>
                 ) : null}
               </dl>
-            ) : (
+            ) : formsEnabled ? null : (
               <p className="mt-6 text-sm leading-relaxed text-slate-700">
                 You can still read how we approach the work on{" "}
                 <TextLink to="/services">Services</TextLink> and{" "}
