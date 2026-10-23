@@ -14,6 +14,7 @@ describe("route registry", () => {
     expect(paths).not.toContain("/products");
     expect(paths).not.toContain("/locations");
     expect(getAppRoutes().map((r) => r.path)).not.toContain("/products");
+    expect(getAppRoutes().map((r) => r.path)).not.toContain("/locations");
   });
 
   it("registers static utility pages for footer legal links", () => {

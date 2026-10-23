@@ -8,7 +8,12 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
-import { site } from "@/config/site";
+import {
+  hasPublicEmail,
+  hasPublicPhone,
+  hasPublicWhatsapp,
+  site,
+} from "@/config/site";
 import { cn } from "@/lib/cn";
 
 const intents = [
@@ -26,39 +31,46 @@ function parseIntent(value: string | null): IntentId {
   return "quote";
 }
 
-function whatsappHref(intent: IntentId, serviceSlug: string, productSlug: string): string {
+function whatsappHref(
+  intent: IntentId,
+  serviceSlug: string,
+  productSlug: string,
+  locationLabel: string,
+): string {
   const base = site.social.whatsapp;
   if (!base) return "";
-  const parts = [
-    `Hello ${site.brandName}, I'd like to talk about a Starlink ${intent}.`,
-  ];
-  if (serviceSlug) parts.push(`Service: ${serviceSlug}.`);
-  if (productSlug) parts.push(`Product: ${productSlug}.`);
+  const parts = [`Hello ${site.brandName}, I would like to enquire.`];
+  parts.push(`Type: ${intent}`);
+  if (serviceSlug) parts.push(`Service: ${serviceSlug}`);
+  if (productSlug) parts.push(`Product: ${productSlug}`);
+  if (locationLabel) parts.push(`Location: ${locationLabel}`);
   const sep = base.includes("?") ? "&" : "?";
-  return `${base}${sep}text=${encodeURIComponent(parts.join(" "))}`;
+  return `${base}${sep}text=${encodeURIComponent(parts.join("\n"))}`;
 }
 
 /**
- * Contact page. Phone and WhatsApp are live; online form arrives in PH-09.
+ * Contact structure. Live phone/WhatsApp/email render only when OD-01 values exist.
+ * Online enquiry forms remain PH-09.
  */
 export function Contact() {
   const [params] = useSearchParams();
   const intent = useMemo(() => parseIntent(params.get("intent")), [params]);
   const serviceSlug = params.get("service")?.trim() || "";
   const productSlug = params.get("product")?.trim() || "";
+  const locationLabel = params.get("location")?.trim() || "";
   const active = intents.find((item) => item.id === intent) ?? intents[0];
-  const hasPhone = Boolean(site.phoneDisplay && site.phoneE164);
-  const hasEmail = Boolean(site.email);
-  const hasWhatsapp = Boolean(site.social.whatsapp);
-  const waHref = hasWhatsapp
-    ? whatsappHref(intent, serviceSlug, productSlug)
+  const phoneOk = hasPublicPhone();
+  const emailOk = hasPublicEmail();
+  const whatsappOk = hasPublicWhatsapp();
+  const waHref = whatsappOk
+    ? whatsappHref(intent, serviceSlug, productSlug, locationLabel)
     : "";
 
   return (
     <AppShell>
       <PageMeta
         title={`Contact ${site.brandName} — Starlink installation enquiries`}
-        description={`Call or WhatsApp ${site.brandName} on ${site.phoneDisplay} about Starlink installation and connectivity in Nigeria.`}
+        description={`Reach ${site.brandName} about Starlink installation and connectivity. See current contact options for homes and businesses.`}
       />
       <main id="main" className="bg-slate-100 py-[var(--space-section)]">
         <Container className="max-w-3xl">
@@ -73,8 +85,8 @@ export function Contact() {
           </h1>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
             Use this page when you want to talk about Starlink installation or
-            connectivity support. Call or WhatsApp us on the numbers below. The
-            online enquiry form will appear here when it is available.
+            connectivity support. Phone, WhatsApp, email, and the online enquiry
+            form appear here as soon as they are available for {site.brandName}.
           </p>
 
           <div
@@ -109,7 +121,7 @@ export function Contact() {
               {active.label}
             </h2>
             <p className="mt-2 text-sm text-slate-700">{active.description}</p>
-            {serviceSlug || productSlug ? (
+            {serviceSlug || productSlug || locationLabel ? (
               <p className="mt-3 text-sm text-slate-600">
                 Context from your link
                 {serviceSlug ? (
@@ -119,11 +131,17 @@ export function Contact() {
                 ) : null}
                 {productSlug ? (
                   <>
-                    {serviceSlug ? ";" : ":"} product{" "}
+                    {serviceSlug || locationLabel ? ";" : ":"} product{" "}
                     <span className="font-medium">{productSlug}</span>
                   </>
                 ) : null}
-                . Mention this when you call or message so we can help faster.
+                {locationLabel ? (
+                  <>
+                    {serviceSlug || productSlug ? ";" : ":"} location{" "}
+                    <span className="font-medium">{locationLabel}</span>
+                  </>
+                ) : null}
+                . This helps you keep the topic clear when live channels open.
               </p>
             ) : null}
 
@@ -132,15 +150,16 @@ export function Contact() {
               className="mt-5"
               title="Online enquiry is not open yet"
             >
-              Until the form is available, use phone or WhatsApp below. No
-              message is submitted from this website.
+              You can bookmark this page and return when the form and live
+              contact details are listed. Until then, no message is submitted
+              from this site.
             </Alert>
 
             <dl className="mt-6 space-y-4 text-sm">
               <div>
                 <dt className="font-semibold text-navy-800">Phone</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasPhone ? (
+                  {phoneOk ? (
                     <TextLink
                       external
                       href={`tel:${site.phoneE164}`}
@@ -156,7 +175,7 @@ export function Contact() {
               <div>
                 <dt className="font-semibold text-navy-800">WhatsApp</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasWhatsapp ? (
+                  {whatsappOk ? (
                     <TextLink
                       external
                       href={waHref}
@@ -173,7 +192,7 @@ export function Contact() {
               <div>
                 <dt className="font-semibold text-navy-800">Email</dt>
                 <dd className="mt-1 text-slate-600">
-                  {hasEmail ? (
+                  {emailOk ? (
                     <TextLink
                       external
                       href={`mailto:${site.email}`}
@@ -189,12 +208,12 @@ export function Contact() {
             </dl>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              {hasPhone ? (
+              {phoneOk ? (
                 <ButtonLink external href={`tel:${site.phoneE164}`}>
                   Call us
                 </ButtonLink>
               ) : null}
-              {hasWhatsapp ? (
+              {whatsappOk ? (
                 <ButtonLink
                   external
                   href={waHref}
@@ -206,6 +225,9 @@ export function Contact() {
               ) : null}
               <ButtonLink to="/about" variant="secondary">
                 About {site.brandName}
+              </ButtonLink>
+              <ButtonLink to="/services" variant="secondary">
+                View services overview
               </ButtonLink>
             </div>
           </Card>

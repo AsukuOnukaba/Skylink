@@ -5,9 +5,14 @@ import {
   footerExploreRoutes,
   footerLegalRoutes,
 } from "@/config/routes";
-import { site } from "@/config/site";
+import {
+  hasPublicPhone,
+  site,
+} from "@/config/site";
 
 export function SiteFooter() {
+  const phoneOk = hasPublicPhone();
+
   return (
     <footer className="mt-auto border-t border-white/10 bg-navy-950 text-white">
       <Container className="grid gap-10 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
@@ -55,26 +60,39 @@ export function SiteFooter() {
                 </TextLink>
               </li>
             </ul>
-            {site.phoneDisplay ? (
-              <p className="mt-4 text-sm text-slate-400">
-                Call or WhatsApp{" "}
-                <TextLink
-                  external
-                  href={`tel:${site.phoneE164}`}
-                  className="text-sky-300 hover:text-white"
-                >
-                  {site.phoneDisplay}
-                </TextLink>
-                . More options on{" "}
-                <TextLink
-                  to="/contact"
-                  className="text-sky-300 hover:text-white"
-                >
-                  Contact
-                </TextLink>
-                .
-              </p>
-            ) : null}
+            <p className="mt-4 text-sm text-slate-400">
+              {phoneOk ? (
+                <>
+                  Call{" "}
+                  <TextLink
+                    external
+                    href={`tel:${site.phoneE164}`}
+                    className="text-sky-300 hover:text-white"
+                  >
+                    {site.phoneDisplay}
+                  </TextLink>
+                  . More options on{" "}
+                  <TextLink
+                    to="/contact"
+                    className="text-sky-300 hover:text-white"
+                  >
+                    Contact
+                  </TextLink>
+                  .
+                </>
+              ) : (
+                <>
+                  Phone, WhatsApp, and email appear on{" "}
+                  <TextLink
+                    to="/contact"
+                    className="text-sky-300 hover:text-white"
+                  >
+                    Contact
+                  </TextLink>{" "}
+                  when they are listed.
+                </>
+              )}
+            </p>
           </div>
         </div>
       </Container>

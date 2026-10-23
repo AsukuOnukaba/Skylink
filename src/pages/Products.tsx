@@ -102,8 +102,8 @@ export function Products() {
               <p className="mt-3 text-base leading-relaxed text-slate-700">
                 Prefer to start with installation support? See{" "}
                 <TextLink to="/services">Services</TextLink>, or open{" "}
-                <TextLink to="/contact?intent=product">Contact</TextLink> to call
-                or WhatsApp.
+                <TextLink to="/contact?intent=product">Contact</TextLink> when
+                live channels are listed.
               </p>
             </Container>
           </section>
@@ -111,7 +111,7 @@ export function Products() {
 
         <CtaBand
           title={`Need help choosing hardware with ${site.brandName}?`}
-          description={`This site does not run a shopping cart. Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for details.`}
+          description="This site does not run a shopping cart. Open Contact to see how to reach us when enquiry options are available."
         />
       </main>
     </AppShell>

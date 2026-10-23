@@ -23,23 +23,24 @@ function renderContact(path = "/contact?intent=quote"): string {
 }
 
 describe("Contact customer-facing copy", () => {
-  it("shows live phone and WhatsApp without claiming form submission", () => {
+  it("does not claim follow-up or publish unverified phone numbers", () => {
     const html = renderContact();
     expect(html).not.toMatch(/follow up using the details you share/i);
     expect(html).not.toMatch(/\bOD-\d+\b/i);
     expect(html).toMatch(/Online enquiry is not open yet/i);
-    expect(html).toMatch(/\+234 906 097 6424/);
-    expect(html).toMatch(/tel:\+2349060976424/);
-    expect(html).toMatch(/wa\.me\/2349060976424/);
-    expect(html).toMatch(/Not listed yet/i); // email still empty
+    expect(html).toMatch(/Not listed yet/i);
+    expect(html).not.toMatch(/9060976424|906 097 6424/);
+    expect(html).not.toMatch(/tel:\+234/);
+    expect(html).not.toMatch(/wa\.me\//);
   });
 
-  it("surfaces service and product query context without opening a form", () => {
+  it("surfaces service, product, and location query context without opening a form", () => {
     const html = renderContact(
-      "/contact?intent=product&product=sample-terminal&service=residential-installation",
+      "/contact?intent=product&product=sample-terminal&service=residential-installation&location=Lagos",
     );
     expect(html).toMatch(/sample-terminal/);
     expect(html).toMatch(/residential-installation/);
+    expect(html).toMatch(/Lagos/);
     expect(html).toMatch(/Online enquiry is not open yet/i);
     expect(html).not.toMatch(/we will follow up/i);
   });

@@ -56,10 +56,10 @@ export function Privacy() {
             Phone, WhatsApp, and email
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            Phone and WhatsApp details on the{" "}
-            <TextLink to="/contact">Contact</TextLink> page are handled outside
-            this website. WhatsApp and phone providers apply their own privacy
-            terms. Email is listed there only when a Skylink address is published.
+            When phone, WhatsApp, or email details are published on the{" "}
+            <TextLink to="/contact">Contact</TextLink> page, messages you send
+            through those channels are handled outside this website. WhatsApp and
+            phone providers apply their own privacy terms.
           </p>
 
           <h2 className="mt-10 text-xl font-semibold text-navy-800">

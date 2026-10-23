@@ -35,9 +35,9 @@ export function Services() {
               Services
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.relationshipPhrase} This page explains the kinds of work we
-              focus on—installation support, clear expectations, and a practical
-              next step when you are ready to talk.
+              {site.relationshipPhrase} This page explains how we approach
+              mounting, cabling, and handover, and where to go when you are ready
+              to talk about an installation.
             </p>
           </Container>
         </section>
@@ -85,8 +85,8 @@ export function Services() {
                   <p className="mt-2 text-sm leading-relaxed text-slate-700">
                     We explain whether a conversation, quote, or site survey is
                     the sensible path—then point you to{" "}
-                    <TextLink to="/contact">Contact</TextLink> to call or
-                    WhatsApp.
+                    <TextLink to="/contact">Contact</TextLink> when live channels
+                    are listed.
                   </p>
                 </Card>
               </li>

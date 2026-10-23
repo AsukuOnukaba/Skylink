@@ -44,4 +44,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**PH-04 — shared shell + static pages.** Routes: `/`, `/services`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. Enquiry forms and live NAP arrive later.
+**Through PH-08 templates.** Public routes include `/`, `/services`, `/services/:slug`, `/products`, `/products/:slug`, `/locations`, `/starlink-installation-:place`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms`, in-app 404. Brand lab: `/dev/brand`. Catalogue detail pages publish only when OD-03/04/05 approve content. `POST /api/enquiry` validates payloads (PH-08); Contact forms remain PH-09. NAP stays empty until OD-01.

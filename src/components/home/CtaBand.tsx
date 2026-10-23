@@ -1,6 +1,6 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { site } from "@/config/site";
+import { hasPublicPhone, site } from "@/config/site";
 
 type CtaBandProps = {
   title?: string;
@@ -9,7 +9,9 @@ type CtaBandProps = {
 
 export function CtaBand({
   title = "Want to talk about an installation?",
-  description = `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details. The online enquiry form will appear there when it is available.`,
+  description = hasPublicPhone()
+    ? `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details. The online enquiry form will appear there when it is available.`
+    : `Open the contact page to see how to reach ${site.brandName}. Online enquiry and live phone or WhatsApp details will appear there when they are available.`,
 }: CtaBandProps) {
   return (
     <section

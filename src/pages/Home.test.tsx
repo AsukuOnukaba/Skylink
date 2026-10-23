@@ -3,7 +3,6 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Home } from "./Home";
 
-/** Patterns that belong in planning docs, not visitor-facing homepage copy. */
 const internalPlanningPatterns = [
   /\bOD-\d+\b/i,
   /\bPH-\d+\b/i,
@@ -21,7 +20,6 @@ const internalPlanningPatterns = [
   /awaiting/i,
 ] as const;
 
-/** Copy that implies a live intake channel before forms/NAP exist. */
 const falseCapabilityPatterns = [
   /share a few details/i,
   /follow up using the details you share/i,
@@ -72,6 +70,7 @@ describe("Home customer-facing copy", () => {
     for (const pattern of falseCapabilityPatterns) {
       expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
     }
-    expect(html).toMatch(/call or WhatsApp|Contact/i);
+    expect(html).toMatch(/when they are available|when live/i);
+    expect(html).not.toMatch(/9060976424|906 097 6424/);
   });
 });

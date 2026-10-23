@@ -1,15 +1,14 @@
+import { hasPublishedLocations } from "@/data/locations";
 import { hasPublishedProducts } from "@/data/products";
 
 /**
- * Public route registry. Catalogue index/detail routes exist in App;
- * Products appears in nav/footer only when at least one product is published.
+ * Public route registry. Catalogue routes exist in App; nav/footer items
+ * appear only when at least one record is published.
  */
 export type AppRoute = {
   path: string;
   label: string;
-  /** Show in primary header navigation. */
   primaryNav?: boolean;
-  /** Show in footer explore / legal clusters. */
   footer?: "explore" | "legal";
 };
 
@@ -24,23 +23,28 @@ const staticRoutes: AppRoute[] = [
 ];
 
 function catalogueNavRoutes(): AppRoute[] {
-  if (!hasPublishedProducts()) {
-    return [];
-  }
-  return [
-    {
+  const extra: AppRoute[] = [];
+  if (hasPublishedProducts()) {
+    extra.push({
       path: "/products",
       label: "Products",
       primaryNav: true,
       footer: "explore",
-    },
-  ];
+    });
+  }
+  if (hasPublishedLocations()) {
+    extra.push({
+      path: "/locations",
+      label: "Service areas",
+      primaryNav: true,
+      footer: "explore",
+    });
+  }
+  return extra;
 }
 
-/** Full registry including conditionally visible catalogue links. */
 export function getAppRoutes(): AppRoute[] {
   const catalogue = catalogueNavRoutes();
-  // Keep Products after Services in explore/nav order when present.
   if (catalogue.length === 0) {
     return staticRoutes;
   }
@@ -51,9 +55,10 @@ export function getAppRoutes(): AppRoute[] {
 }
 
 export const appRoutes = getAppRoutes();
-
 export const primaryNavRoutes = getAppRoutes().filter((r) => r.primaryNav);
 export const footerExploreRoutes = getAppRoutes().filter(
   (r) => r.footer === "explore",
 );
-export const footerLegalRoutes = getAppRoutes().filter((r) => r.footer === "legal");
+export const footerLegalRoutes = getAppRoutes().filter(
+  (r) => r.footer === "legal",
+);

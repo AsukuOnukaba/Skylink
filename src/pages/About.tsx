@@ -108,7 +108,7 @@ export function About() {
 
         <CtaBand
           title={`Learn more or get in touch with ${site.brandName}`}
-          description={`Browse the site for clear installation guidance, then call or WhatsApp ${site.brandName} on Contact.`}
+          description="Browse the site for clear installation guidance, then use Contact when live enquiry options are listed."
         />
       </main>
     </AppShell>

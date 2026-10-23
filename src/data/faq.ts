@@ -1,4 +1,4 @@
-import { site } from "@/config/site";
+import { hasPublicPhone, site } from "@/config/site";
 
 /**
  * Only visitor Q&As answered from confirmed business wording.
@@ -24,11 +24,15 @@ export const faqItems: FaqItem[] = [
   {
     id: "how-to-contact",
     question: "How can I contact Skylink?",
-    answer: `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open the Contact page for the same details. An online enquiry form will be added there when it is available.`,
+    answer: hasPublicPhone()
+      ? `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open the Contact page for the same details. An online enquiry form will be added there when it is available.`
+      : `Use the Contact page to see the current ways to reach ${site.brandName}. Online enquiry forms and live phone or WhatsApp details appear there when they are available.`,
   },
   {
     id: "next-step",
     question: "What should I do if I need an installation?",
-    answer: `Start on the Services or About pages to understand how we work, then call or WhatsApp us on ${site.phoneDisplay}, or open Contact when you are ready.`,
+    answer: hasPublicPhone()
+      ? `Start on the Services or About pages to understand how we work, then call or WhatsApp us on ${site.phoneDisplay}, or open Contact when you are ready.`
+      : `Start on the Services or About pages to understand how we work, then open Contact when you are ready. A clear next step will be available there once live enquiry channels are listed.`,
   },
 ];
