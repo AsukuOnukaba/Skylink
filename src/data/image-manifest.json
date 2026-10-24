@@ -1,4 +1,16 @@
 {
+  "/images/hero-maritime-vessel.jpeg": {
+    "src": "/images/hero-maritime-vessel.jpeg",
+    "width": 480,
+    "height": 480,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/hero-maritime-vessel.w480.avif",
+        "webp": "/images/hero-maritime-vessel.w480.webp"
+      }
+    ]
+  },
   "/images/hero-starlink-installation.jpeg": {
     "src": "/images/hero-starlink-installation.jpeg",
     "width": 1500,
@@ -369,18 +381,13 @@
   },
   "/images/service-fleet-management.jpeg": {
     "src": "/images/service-fleet-management.jpeg",
-    "width": 768,
-    "height": 1024,
+    "width": 480,
+    "height": 1067,
     "variants": [
       {
         "w": 480,
         "avif": "/images/service-fleet-management.w480.avif",
         "webp": "/images/service-fleet-management.w480.webp"
-      },
-      {
-        "w": 768,
-        "avif": "/images/service-fleet-management.w768.avif",
-        "webp": "/images/service-fleet-management.w768.webp"
       }
     ]
   },
@@ -422,13 +429,13 @@
   },
   "/images/service-maritime-offshore.jpeg": {
     "src": "/images/service-maritime-offshore.jpeg",
-    "width": 471,
-    "height": 1020,
+    "width": 480,
+    "height": 853,
     "variants": [
       {
-        "w": 471,
-        "avif": "/images/service-maritime-offshore.w471.avif",
-        "webp": "/images/service-maritime-offshore.w471.webp"
+        "w": 480,
+        "avif": "/images/service-maritime-offshore.w480.avif",
+        "webp": "/images/service-maritime-offshore.w480.webp"
       }
     ]
   },

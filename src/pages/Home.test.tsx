@@ -49,10 +49,19 @@ describe("Home customer-facing copy", () => {
   it("surfaces published services without planning jargon or DataGram NAP", () => {
     const html = renderHomeHtml();
 
-    expect(html).toContain("Starlink installation and connectivity");
+    expect(html).toContain(
+      "Starlink connectivity for vessels, offshore platforms and marine operations.",
+    );
+    expect(html).toContain('id="offshore"');
     expect(html).toContain('id="services"');
+    expect(html).toMatch(/Explore Offshore &amp; Maritime/);
+    expect(html).toMatch(/\/services\/maritime-offshore/);
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/\/services\/residential-installation/);
+    const maritimeAt = html.indexOf("/services/maritime-offshore");
+    const residentialAt = html.indexOf("/services/residential-installation");
+    expect(maritimeAt).toBeGreaterThan(-1);
+    expect(maritimeAt).toBeLessThan(residentialAt);
 
     for (const pattern of internalPlanningPatterns) {
       expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(

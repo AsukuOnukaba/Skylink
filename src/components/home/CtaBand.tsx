@@ -2,9 +2,16 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
 import { hasPublicPhone, site } from "@/config/site";
 
+type CtaLink = {
+  to: string;
+  label: string;
+};
+
 type CtaBandProps = {
   title?: string;
   description?: string;
+  primary?: CtaLink;
+  secondary?: CtaLink;
 };
 
 export function CtaBand({
@@ -12,6 +19,8 @@ export function CtaBand({
   description = hasPublicPhone()
     ? `Call or WhatsApp ${site.brandName} on ${site.phoneDisplay}, or open Contact for the full details.`
     : `Start with Services or About to understand how ${site.brandName} works, then open Contact for the current ways to get in touch.`,
+  primary = { to: "/services", label: "View services" },
+  secondary = { to: "/about", label: `About ${site.brandName}` },
 }: CtaBandProps) {
   return (
     <section
@@ -29,11 +38,11 @@ export function CtaBand({
           <p className="mt-3 text-base text-slate-200/90">{description}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <ButtonLink to="/services" variant="primaryOnDark">
-            View services
+          <ButtonLink to={primary.to} variant="primaryOnDark">
+            {primary.label}
           </ButtonLink>
-          <ButtonLink to="/about" variant="secondaryOnDark">
-            About {site.brandName}
+          <ButtonLink to={secondary.to} variant="secondaryOnDark">
+            {secondary.label}
           </ButtonLink>
         </div>
       </Container>

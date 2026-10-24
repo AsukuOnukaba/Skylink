@@ -80,10 +80,10 @@ export function listPublicPages(): PageSeoRecord[] {
   pages.push(
     staticPage(
       "/",
-      `${site.brandName} — Starlink installation and connectivity`,
-      `${site.brandName} helps homes and businesses with Starlink installation and connectivity support in Nigeria. Clear guidance and a path to get in touch when contact options are listed.`,
+      `${site.brandName} — Starlink for vessels and offshore sites`,
+      `${site.brandName} plans Starlink connectivity for boats, work vessels, and offshore sites in Nigeria, and still installs for offices and homes. Contact for current reach options.`,
       {
-        ogImagePath: "/images/hero-starlink-installation.jpeg",
+        ogImagePath: "/images/hero-maritime-vessel.jpeg",
         jsonLd: [organizationJsonLd(siteOrigin), webSiteJsonLd(siteOrigin)],
       },
     ),
@@ -93,7 +93,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/services",
       `Starlink installation services — ${site.brandName}`,
-      `${site.brandName} helps with Starlink installation and connectivity support. See how we approach the work and where to go next.`,
+      `Offshore and maritime Starlink work comes first, followed by offices, homes, and the rest of the ${site.brandName} service list.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),
@@ -147,7 +147,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/about",
       `About ${site.brandName} — Starlink installation business`,
-      `${site.relationshipPhrase} Learn how ${site.brandName} approaches installation support for homes and businesses in Nigeria.`,
+      `${site.relationshipPhrase} ${site.brandName} leads with Starlink connectivity for vessels and offshore sites, and still installs for offices and homes in Nigeria.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),
@@ -161,7 +161,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/contact",
       `Contact ${site.brandName} — Starlink installation enquiries`,
-      `Learn how to reach ${site.brandName} about Starlink installation and connectivity for homes and businesses.`,
+      `Reach ${site.brandName} about Starlink connectivity for vessels, offshore sites, offices, and homes. Contact for current reach options.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),

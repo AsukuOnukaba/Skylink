@@ -9,7 +9,11 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
-import { getPublishedService } from "@/data/services";
+import {
+  getPublishedService,
+  maritimeServiceSlugs,
+  relatedPublishedServices,
+} from "@/data/services";
 import { getPublishedProduct } from "@/data/products";
 import { NotFound } from "@/pages/NotFound";
 
@@ -24,6 +28,10 @@ export function ServiceDetail() {
   const relatedProducts = service.relatedProductSlugs
     .map((productSlug) => getPublishedProduct(productSlug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const relatedServices = relatedPublishedServices(service.slug);
+  const maritimePage = (maritimeServiceSlugs as readonly string[]).includes(
+    service.slug,
+  );
 
   const intent = service.primaryCta;
   const contactTo = `/contact?intent=${intent}&service=${encodeURIComponent(service.slug)}`;
@@ -204,6 +212,29 @@ export function ServiceDetail() {
           </section>
         ) : null}
 
+        {relatedServices.length > 0 ? (
+          <section
+            aria-labelledby="service-related-heading"
+            className="bg-white py-[var(--space-section)]"
+          >
+            <Container className="max-w-3xl">
+              <h2
+                id="service-related-heading"
+                className="text-2xl font-bold text-navy-950"
+              >
+                Related services
+              </h2>
+              <ul className="mt-4 space-y-2 text-base">
+                {relatedServices.map((item) => (
+                  <li key={item.slug}>
+                    <TextLink to={`/services/${item.slug}`}>{item.title}</TextLink>
+                  </li>
+                ))}
+              </ul>
+            </Container>
+          </section>
+        ) : null}
+
         {relatedProducts.length > 0 ? (
           <section
             aria-labelledby="service-products-heading"
@@ -261,8 +292,32 @@ export function ServiceDetail() {
         ) : null}
 
         <CtaBand
-          title={`Talk through ${service.title.toLowerCase()}`}
-          description={`Read more on Services or About, then open Contact about this service for current reach options.`}
+          title={
+            maritimePage
+              ? "Contact Skylink about a marine project"
+              : `Talk through ${service.title.toLowerCase()}`
+          }
+          description={`Open Contact about this service for current reach options. The online enquiry form is not available.`}
+          primary={{
+            to: contactTo,
+            label: maritimePage
+              ? "Contact Skylink About a Marine Project"
+              : enquiryContactCtaLabel(intent),
+          }}
+          secondary={{
+            to:
+              service.slug === "boat-installation"
+                ? "/services/maritime-offshore"
+                : maritimePage
+                  ? "/services/boat-installation"
+                  : "/services",
+            label:
+              service.slug === "boat-installation"
+                ? "Explore Offshore & Maritime"
+                : maritimePage
+                  ? "View Vessel Installation Solutions"
+                  : "All services",
+          }}
         />
       </main>
     </AppShell>

@@ -22,6 +22,9 @@ describe("Services hub", () => {
     expect(html).toMatch(/<h1[^>]*>Services<\/h1>/);
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/\/services\/residential-installation/);
+    expect(html.indexOf("/services/maritime-offshore")).toBeLessThan(
+      html.indexOf("/services/residential-installation"),
+    );
     expect(html).toMatch(/Long-range Wi-Fi/);
     expect(html).toMatch(/Sales, delivery, and professional installation/);
     expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue/i);

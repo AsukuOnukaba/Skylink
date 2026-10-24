@@ -543,7 +543,7 @@ export const services: ServiceRecord[] = [
     relatedProductSlugs: ["starlink-flat-high-performance"],
     imageSrc: "/images/service-maritime-offshore.jpeg",
     imageAlt:
-      "Starlink terminal mounted on a vessel railing with open sea and overcast sky behind it",
+      "Flat Starlink terminal on a vessel, with other craft and a bridge behind it, from the published installation library",
     seoTitle: "Maritime and offshore Starlink support | Skylink Nigeria",
     seoDescription:
       "Starlink connectivity planning for vessels and offshore sites in Nigeria. Scope is agreed per job after a conversation about constraints.",
@@ -569,4 +569,64 @@ export function getServiceDraft(slug: string): ServiceRecord | undefined {
 /** Public detail paths for published services only. */
 export function publicServicePaths(): string[] {
   return publishedServices().map((s) => `/services/${s.slug}`);
+}
+
+/** Homepage and services index lead with these, in this order. */
+export const maritimeServiceSlugs = [
+  "maritime-offshore",
+  "boat-installation",
+  "offshore-hse",
+  "enterprise-marine-hub",
+  "marine-sdwan",
+  "fleet-management",
+] as const;
+
+const generalLeadSlugs = [
+  "business-connectivity",
+  "enterprise-plans",
+  "priority-plans",
+  "sales-installation",
+  "residential-installation",
+] as const;
+
+function pickPublished(slugs: readonly string[]): ServiceRecord[] {
+  return slugs
+    .map((slug) => getPublishedService(slug))
+    .filter((service): service is ServiceRecord => Boolean(service));
+}
+
+export function maritimeServices(): ServiceRecord[] {
+  return pickPublished(maritimeServiceSlugs);
+}
+
+/** Maritime offerings first, then business, then residential and the rest. */
+export function servicesInCommercialOrder(): ServiceRecord[] {
+  const maritime = maritimeServices();
+  const lead = pickPublished(generalLeadSlugs);
+  const used = new Set<string>([
+    ...maritime.map((service) => service.slug),
+    ...lead.map((service) => service.slug),
+  ]);
+  const rest = publishedServices().filter((service) => !used.has(service.slug));
+  return [...maritime, ...lead, ...rest];
+}
+
+/** Cross-links for maritime pages and for business pages that should point offshore. */
+export function relatedPublishedServices(slug: string): ServiceRecord[] {
+  const maritime = new Set<string>(maritimeServiceSlugs);
+  if (maritime.has(slug)) {
+    return maritimeServices().filter((service) => service.slug !== slug);
+  }
+  if (
+    slug === "business-connectivity" ||
+    slug === "enterprise-plans" ||
+    slug === "priority-plans"
+  ) {
+    return pickPublished([
+      "maritime-offshore",
+      "boat-installation",
+      "enterprise-marine-hub",
+    ]);
+  }
+  return [];
 }

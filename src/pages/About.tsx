@@ -24,9 +24,9 @@ export function About() {
               About {site.brandName}
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.relationshipPhrase} We exist to make satellite connectivity
-              practical on real sites—homes, offices, and other places that need
-              a careful install rather than a vague sales pitch.
+              {site.relationshipPhrase} The work we lead with is connectivity
+              for boats, work vessels, and offshore sites. Homes, offices, and
+              other sites remain part of the same careful installation practice.
             </p>
           </Container>
         </section>
@@ -43,12 +43,12 @@ export function About() {
               Who we are
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {site.brandName} helps people evaluating Starlink installation and
-              connectivity support understand the work clearly and decide whether
-              we are a fit. That includes home and business installs, remounts,
-              Wi-Fi coverage around a working link, backup power planning, and
-              related hardware guidance. We describe our relationship to Starlink
-              carefully and do not claim to be Starlink itself.
+              {site.brandName} helps operators and households decide whether a
+              Starlink installation is a fit. Offshore and maritime jobs are
+              scoped around the vessel, the power, and the operator's access
+              rules. Home and business installs, remounts, Wi-Fi coverage, and
+              backup power planning are still available. We do not claim to be
+              Starlink itself.
             </p>
           </Container>
         </section>
@@ -92,8 +92,11 @@ export function About() {
               ))}
             </ul>
             <p className="mt-8 text-sm text-slate-700">
-              See the{" "}
-              <TextLink to="/services">services overview</TextLink>,{" "}
+              See{" "}
+              <TextLink to="/services/maritime-offshore">
+                Offshore & Maritime
+              </TextLink>
+              , the <TextLink to="/services">services overview</TextLink>,{" "}
               <TextLink to="/products">products</TextLink>,{" "}
               <TextLink to="/locations">service areas</TextLink>, the{" "}
               <TextLink to="/guide/starlink-nigeria">Nigeria guide</TextLink>,

@@ -11,6 +11,7 @@ describe("route registry", () => {
   it("exposes products and locations in nav when catalogues are published", () => {
     const paths = primaryNavRoutes.map((r) => r.path);
     expect(paths).toEqual([
+      "/services/maritime-offshore",
       "/services",
       "/products",
       "/locations",
@@ -24,6 +25,9 @@ describe("route registry", () => {
   it("registers static utility pages for footer legal links", () => {
     const legal = footerLegalRoutes.map((r) => r.path);
     expect(legal).toEqual(["/faq", "/support", "/privacy", "/terms"]);
+    expect(footerExploreRoutes.map((r) => r.path)[0]).toBe(
+      "/services/maritime-offshore",
+    );
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/services");
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/products");
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/locations");

@@ -9,13 +9,13 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
-import { publishedServices } from "@/data/services";
+import { servicesInCommercialOrder } from "@/data/services";
 
 /**
  * Services hub. Detail links appear only for published catalogue entries.
  */
 export function Services() {
-  const live = publishedServices();
+  const live = servicesInCommercialOrder();
 
   return (
     <AppShell>
@@ -33,9 +33,8 @@ export function Services() {
               Services
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.relationshipPhrase} This page explains how we approach
-              mounting, cabling, and handover, and where to go when you are ready
-              to talk about an installation.
+              {site.relationshipPhrase} Offshore and maritime work is listed
+              first. Offices, homes, and the rest of the catalogue follow.
             </p>
           </Container>
         </section>
@@ -53,8 +52,9 @@ export function Services() {
                 What we help with
               </h2>
               <p className="mt-3 text-base text-slate-700">
-                Clear guidance around satellite connectivity for homes and
-                businesses, with attention to mounting, cabling, and handover.
+                Vessel and offshore jobs are planned around motion, power,
+                access, and the operator's own safety rules. Home and office
+                installs stay on this list, further down.
               </p>
             </div>
             <ul className="mt-8 grid gap-5 md:grid-cols-2">
@@ -62,11 +62,15 @@ export function Services() {
                 <Card className="h-full">
                   <Icon icon={Cable} size="feature" className="text-sky-700" />
                   <h3 className="mt-4 text-lg font-semibold text-navy-800">
-                    Installation support
+                    Offshore and maritime
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                    Help getting Starlink connectivity in place, with attention
-                    to mounting, cabling, and a practical handover on your site.
+                    Mounting, cabling, power, and onboard networking for boats,
+                    work vessels, and offshore sites. Scope is agreed per job.{" "}
+                    <TextLink to="/services/maritime-offshore">
+                      Explore Offshore & Maritime
+                    </TextLink>
+                    .
                   </p>
                 </Card>
               </li>

@@ -14,6 +14,12 @@ export type AppRoute = {
 
 const staticRoutes: AppRoute[] = [
   { path: "/", label: "Home" },
+  {
+    path: "/services/maritime-offshore",
+    label: "Offshore & Maritime",
+    primaryNav: true,
+    footer: "explore",
+  },
   { path: "/services", label: "Services", primaryNav: true, footer: "explore" },
   { path: "/about", label: "About", primaryNav: true, footer: "explore" },
   { path: "/contact", label: "Contact", primaryNav: true, footer: "explore" },

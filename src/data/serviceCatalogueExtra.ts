@@ -523,7 +523,7 @@ export const extraServices: ServiceRecord[] = [
     relatedProductSlugs: ["starlink-flat-high-performance", "starlink-mini"],
     imageSrc: "/images/service-fleet-management.jpeg",
     imageAlt:
-      "Starlink high-performance terminal on a coastal vessel, from the published installation library",
+      "Flat Starlink terminal bracketed along a vessel deck beside a river, from the published installation library",
     seoTitle: "Starlink connectivity for a vessel fleet | Skylink",
     seoDescription:
       "Per-vessel Starlink planning for operators with more than one boat or vehicle. No tracking software is implied.",

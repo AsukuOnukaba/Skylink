@@ -14,7 +14,7 @@ export const faqItems: FaqItem[] = [
   {
     id: "what-skylink-does",
     question: "What does Skylink do?",
-    answer: `${site.relationshipPhrase} We help homes and businesses plan mounting, cabling, Wi-Fi coverage, and related connectivity work around Starlink hardware.`,
+    answer: `${site.relationshipPhrase} The primary work is Starlink connectivity for boats, work vessels, and offshore sites. We also help homes and businesses plan mounting, cabling, Wi-Fi coverage, and related work around Starlink hardware.`,
   },
   {
     id: "starlink-relationship",
