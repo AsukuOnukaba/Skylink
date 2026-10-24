@@ -47,6 +47,8 @@ Copy `.env.example` to `.env` and fill Skylink-owned values only. Server enquiry
 
 Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `sitemap.xml`. Production indexing requires OD-10 + the flags above; misconfiguration fails the build.
 
+**Not deployed (24 Oct 2026).** There is no approved public URL, no live host, and no Google Search Console property. Validate SEO from local build artefacts only. Do not treat missing Google results as a failure, and do not invent or submit a local or preview URL as the production site. After the domain and host exist, deployment must set the origin and indexing flags, check live HTTP 200/404, confirm production pages are not left `noindex`, verify Search Console, and submit the production sitemap.
+
 ## Image pipeline
 
 ```bash
@@ -57,4 +59,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Through PH-10 technical SEO.** Public routes are prerendered into `dist/spa` with page-specific HTML. Brand lab `/dev/brand` is development-only. Default builds stay non-indexable until OD-10 + `VITE_ALLOW_INDEXING`. `vercel.json` serves `404.html` with HTTP 404 for unknown paths (no SPA 200 fallback) and keeps `POST /api/enquiry`. Contact forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED`. NAP stays empty until OD-01.
+**Through PH-10 technical SEO, local verification only.** Public routes are prerendered into `dist/spa` with page-specific HTML. Brand lab `/dev/brand` is development-only. Default builds stay non-indexable until OD-10 + `VITE_ALLOW_INDEXING`. `vercel.json` serves `404.html` with HTTP 404 for unknown paths (no SPA 200 fallback) and keeps `POST /api/enquiry`. Contact forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED`. NAP stays empty until OD-01. Production domain, hosting, live HTTP checks, and Google Search Console are still future deployment work (PH-13).
