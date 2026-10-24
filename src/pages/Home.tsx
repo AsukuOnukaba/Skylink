@@ -18,6 +18,7 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
+import { formatNgn, publishedProducts } from "@/data/products";
 import { publishedServices } from "@/data/services";
 import type { LucideIcon } from "lucide-react";
 
@@ -49,6 +50,7 @@ const whyPoints = [
 
 export function Home() {
   const live = publishedServices();
+  const hardware = publishedProducts();
 
   return (
     <AppShell>
@@ -178,6 +180,51 @@ export function Home() {
                     </li>
                   );
                 })}
+              </ul>
+            </Container>
+          </section>
+        ) : null}
+
+        {hardware.length > 0 ? (
+          <section
+            id="hardware"
+            aria-labelledby="home-hardware-heading"
+            className="bg-slate-100 py-[var(--space-section)]"
+          >
+            <Container>
+              <div className="max-w-2xl">
+                <h2
+                  id="home-hardware-heading"
+                  className="text-3xl font-bold text-navy-950"
+                >
+                  Hardware
+                </h2>
+                <p className="mt-3 text-base text-slate-700">
+                  Catalogue prices for the eight listed products. A price is
+                  not a stock promise.
+                </p>
+              </div>
+              <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {hardware.map((product) => (
+                  <li key={product.slug}>
+                    <Card className="h-full">
+                      <h3 className="text-base font-semibold text-navy-800">
+                        {product.name}
+                      </h3>
+                      <p className="mt-2 text-sm font-semibold text-navy-950">
+                        {product.pricePublished && product.priceNgn
+                          ? formatNgn(product.priceNgn)
+                          : "Request pricing"}
+                      </p>
+                      <TextLink
+                        to={`/products/${product.slug}`}
+                        className="mt-3 inline-flex text-sm"
+                      >
+                        View details
+                      </TextLink>
+                    </Card>
+                  </li>
+                ))}
               </ul>
             </Container>
           </section>

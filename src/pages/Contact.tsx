@@ -284,6 +284,12 @@ export function Contact() {
                     </dd>
                   </div>
                 ) : null}
+                {site.hours ? (
+                  <div>
+                    <dt className="font-semibold text-navy-800">Hours</dt>
+                    <dd className="mt-1 text-slate-600">{site.hours}</dd>
+                  </div>
+                ) : null}
               </dl>
             ) : formsEnabled ? null : (
               <p className="mt-6 text-sm leading-relaxed text-slate-700">

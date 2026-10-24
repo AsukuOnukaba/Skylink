@@ -187,6 +187,63 @@ export function listPublicPages(): PageSeoRecord[] {
 
   pages.push(
     staticPage(
+      "/guide/starlink-nigeria",
+      `Starlink in Nigeria — a practical guide | ${site.brandName}`,
+      `Sky view, power, Wi-Fi, failover, and plan class for Starlink in Nigeria. Hardware prices stay on the product pages.`,
+      {
+        ogImagePath: "/images/service-residential-installation.jpeg",
+        breadcrumbs: [
+          crumb("Home", "/", siteOrigin),
+          crumb("Nigeria guide"),
+        ],
+      },
+    ),
+  );
+
+  pages.push(
+    staticPage(
+      "/support",
+      `Support — ${site.brandName}`,
+      `Preparation notes, links to the FAQ and Nigeria guide, and the published phone, WhatsApp, and email channels.`,
+      {
+        breadcrumbs: [
+          crumb("Home", "/", siteOrigin),
+          crumb("Support"),
+        ],
+      },
+    ),
+  );
+
+  pages.push(
+    staticPage(
+      "/our-work",
+      `Installation examples — ${site.brandName}`,
+      `Field photographs from the DataGram installation library, shown with permission and not presented as Skylink case studies.`,
+      {
+        breadcrumbs: [
+          crumb("Home", "/", siteOrigin),
+          crumb("Installation examples"),
+        ],
+      },
+    ),
+  );
+
+  pages.push(
+    staticPage(
+      "/gallery",
+      `Installation gallery — ${site.brandName}`,
+      `Installation photographs with captions limited to what the source actually identifies.`,
+      {
+        breadcrumbs: [
+          crumb("Home", "/", siteOrigin),
+          crumb("Gallery"),
+        ],
+      },
+    ),
+  );
+
+  pages.push(
+    staticPage(
       "/privacy",
       `Privacy — ${site.brandName}`,
       `How ${site.brandName} handles information on this website, including contact channels and analytics when they are active.`,

@@ -26,11 +26,12 @@ describe("Products catalogue pages", () => {
       </MemoryRouter>,
     );
     expect(html).toMatch(/<h1[^>]*>Products<\/h1>/);
-    expect(html).toMatch(/Starlink Gen 3 Standard kit/);
-    expect(html).toMatch(/Request pricing/);
-    expect(html).not.toMatch(/₦750|N750,000|add to cart|shopping cart checkout/i);
+    expect(html).toMatch(/Starlink Gen3 v4 Standard Dish/);
+    expect(html).toMatch(/₦750,000/);
+    expect(html).toMatch(/₦4,000,000/);
+    expect(html).not.toMatch(/add to cart|shopping cart checkout/i);
     expect(html).not.toMatch(/\bProceed to checkout\b/i);
-    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|datagram/i);
+    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b/i);
   });
 
   it("shows NotFound for unknown product slugs", () => {
@@ -52,13 +53,13 @@ describe("Products catalogue pages", () => {
         </Routes>
       </MemoryRouter>,
     );
-    expect(html).toMatch(/<h1[^>]*>Starlink Gen 3 Standard kit<\/h1>/);
-    expect(html).toMatch(/Request pricing/);
+    expect(html).toMatch(/<h1[^>]*>Starlink Gen3 v4 Standard Dish<\/h1>/);
+    expect(html).toMatch(/₦750,000/);
     expect(html).toMatch(
       /contact\?intent=product&amp;product=starlink-gen3-standard/,
     );
-    expect(html).toMatch(/does not show live stock|Pricing and supply/i);
-    expect(html).not.toMatch(/₦|in stock|add to cart/i);
+    expect(html).toMatch(/does not mean the item is in stock/i);
+    expect(html).not.toMatch(/add to cart/i);
   });
 
   it("does not list unpublished products on the index", () => {
@@ -76,7 +77,7 @@ describe("Products catalogue pages", () => {
         <Products />
       </MemoryRouter>,
     );
-    expect(html).toMatch(/Starlink Gen 3 Standard kit/);
+    expect(html).toMatch(/Starlink Gen3 v4 Standard Dish/);
     expect(html).not.toMatch(/Hidden kit/);
     expect(html).not.toMatch(/hidden-kit/);
   });

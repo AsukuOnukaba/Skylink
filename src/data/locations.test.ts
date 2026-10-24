@@ -11,22 +11,26 @@ import {
 import { services } from "./services";
 
 describe("locations catalogue", () => {
-  it("publishes four places and keeps five drafts unpublished", () => {
-    expect(locations).toHaveLength(9);
+  it("publishes the non-blog location catalogue", () => {
     expect(publishedLocations().map((l) => l.placeKey)).toEqual([
       "abuja",
       "lagos",
       "port-harcourt",
       "niger-delta",
+      "owerri",
+      "enugu",
+      "benin-city",
+      "delta",
+      "yenagoa",
+      "abia",
+      "anambra",
+      "ebonyi",
     ]);
     expect(hasPublishedLocations()).toBe(true);
     expect(publicLocationPaths()).toContain("/starlink-installation-abuja");
+    expect(publicLocationPaths()).toContain("/starlink-installation-owerri");
     expect(getPublishedLocation("lagos")?.placeName).toBe("Lagos");
-    expect(getPublishedLocation("owerri")).toBeUndefined();
-    for (const l of locations.filter((l) => !l.published)) {
-      expect(l.indexable).toBe(false);
-      expect(l.localContext.trim().length).toBeGreaterThan(0);
-    }
+    expect(getPublishedLocation("delta")?.placeName).toBe("Delta State");
   });
 
   it("requires non-empty localContext before a place is publishable", () => {

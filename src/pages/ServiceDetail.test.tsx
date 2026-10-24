@@ -8,7 +8,6 @@ const internalPlanningPatterns = [
   /\bPH-\d+\b/i,
   /candidate catalogue/i,
   /content pending/i,
-  /datagram\.ng/i,
 ] as const;
 
 beforeEach(() => {
@@ -46,7 +45,6 @@ describe("ServiceDetail publication guards", () => {
     );
     expect(html).toMatch(/sky view|mounting|cable/i);
     expect(html).not.toMatch(/shopping cart|checkout|add to cart/i);
-    expect(html).not.toMatch(/9060976424|info@datagram/i);
     for (const pattern of internalPlanningPatterns) {
       expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(
         pattern,

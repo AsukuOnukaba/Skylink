@@ -1,7 +1,6 @@
 /**
- * Product catalogue. No cart, checkout, or Offer/price claims until pricePublished is explicitly true.
- * Specs below are manufacturer-oriented facts; confirm current figures on enquiry.
- * imageSrc is set only when a rights-cleared, model-accurate photo exists.
+ * Product catalogue. Listed naira prices follow the public DataGram product
+ * pages (owner instruction, 24 Oct 2026). A price is not stock or a reservation.
  */
 
 export type ProductSpec = {
@@ -32,12 +31,16 @@ export type ProductRecord = {
 };
 
 const AVAILABILITY_NOTE =
-  "Pricing and supply are confirmed when you enquire—this page does not show live stock.";
+  "This is the published catalogue price. It does not mean the item is in stock or reserved for you.";
+
+export function formatNgn(amount: number): string {
+  return `₦${amount.toLocaleString("en-NG")}`;
+}
 
 export const products: ProductRecord[] = [
   {
     slug: "starlink-gen3-standard",
-    name: "Starlink Gen 3 Standard kit",
+    name: "Starlink Gen3 v4 Standard Dish",
     manufacturer: "Starlink",
     shortDescription:
       "The everyday Starlink kit for homes and small sites, with a dish, router, and power supply in one box.",
@@ -83,7 +86,8 @@ export const products: ProductRecord[] = [
     imageSrc: "/images/products/starlink-gen3-standard.jpeg",
     imageAlt:
       "Starlink Gen 3 Standard dish on a kickstand beside a portable power station",
-    pricePublished: false,
+    priceNgn: 750_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: [
       "residential-installation",
@@ -92,7 +96,7 @@ export const products: ProductRecord[] = [
     ],
     seoTitle: "Starlink Gen 3 Standard kit in Nigeria | Skylink",
     seoDescription:
-      "Details of the Starlink Gen 3 Standard kit: dish, Wi-Fi 6 router, IP67 rating, and typical-use notes. Enquire for pricing and supply.",
+      "Starlink Gen3 v4 Standard Dish: Wi-Fi 6 router, IP67 rating, and the published catalogue price. A listed price is not live stock.",
     published: true,
     indexable: true,
   },
@@ -140,7 +144,8 @@ export const products: ProductRecord[] = [
     imageSrc: "/images/products/starlink-flat-high-performance.jpeg",
     imageAlt:
       "Unboxed Starlink Flat High Performance kit with rectangular dish, router, power supply, and cables on a wood floor",
-    pricePublished: false,
+    priceNgn: 4_000_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: [
       "business-connectivity",
@@ -155,7 +160,7 @@ export const products: ProductRecord[] = [
   },
   {
     slug: "starlink-mini",
-    name: "Starlink Mini kit",
+    name: "Starlink Mini",
     manufacturer: "Starlink",
     shortDescription:
       "A compact, lower-power Starlink kit for portable use and tight spaces.",
@@ -184,7 +189,7 @@ export const products: ProductRecord[] = [
       {
         label: "Plan notes",
         value:
-          "Plan eligibility and portability rules are set by Starlink and can change — confirm current terms before buying",
+          "Published specification: Roam plan only, and up to 3 Starlink mesh nodes. Confirm current Starlink terms before buying",
       },
     ],
     whatsInBox: [
@@ -194,7 +199,11 @@ export const products: ProductRecord[] = [
       "Starlink cable (length may vary)",
       "AC power cable",
     ],
-    pricePublished: false,
+    imageSrc: "/images/products/starlink-mini.jpeg",
+    imageAlt:
+      "Compact rectangular Starlink Mini on a vehicle bed, cabled to a portable power station",
+    priceNgn: 450_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["residential-installation", "relocation"],
     seoTitle: "Starlink Mini kit in Nigeria | Skylink",
@@ -205,7 +214,7 @@ export const products: ProductRecord[] = [
   },
   {
     slug: "starlink-pivot-mount",
-    name: "Starlink Pivot Mount",
+    name: "Starlink Pivot Mounting Accessories",
     manufacturer: "Starlink",
     shortDescription:
       "A mounting accessory for fixing a compatible Starlink dish to a pole or wall with an adjustable angle.",
@@ -235,7 +244,8 @@ export const products: ProductRecord[] = [
     imageSrc: "/images/products/starlink-pivot-mount.jpg",
     imageAlt:
       "Starlink Pivot Mount accessory in its open retail box with moulded insert and cables",
-    pricePublished: false,
+    priceNgn: 150_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["residential-installation", "relocation"],
     seoTitle: "Starlink Pivot Mount accessory | Skylink Nigeria",
@@ -268,7 +278,8 @@ export const products: ProductRecord[] = [
       },
     ],
     whatsInBox: ["Starlink Mesh Router", "Power supply", "Quick start guide"],
-    pricePublished: false,
+    priceNgn: 250_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: [
       "wifi-networking",
@@ -283,7 +294,7 @@ export const products: ProductRecord[] = [
   },
   {
     slug: "starlink-gen3-45m-cable",
-    name: "Starlink Gen 3 45 m cable",
+    name: "45-Metre Starlink Gen 3 Cable",
     manufacturer: "Starlink",
     shortDescription:
       "A longer 45 m dish cable for Gen 3 dishes only, for sites where the dish sits far from the router.",
@@ -298,8 +309,12 @@ export const products: ProductRecord[] = [
         value: "Route and seal carefully; avoid sharp bends and standing water",
       },
     ],
-    whatsInBox: ["One 45 m Gen 3 dish cable"],
-    pricePublished: false,
+    whatsInBox: [
+      "45 m Starlink Gen 3 flat cable",
+      "Integrated proprietary Starlink connectors",
+    ],
+    priceNgn: 250_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["residential-installation", "relocation"],
     seoTitle: "Starlink Gen 3 45 m cable (Gen 3 only) | Skylink",
@@ -310,33 +325,33 @@ export const products: ProductRecord[] = [
   },
   {
     slug: "wireless-long-range-wifi",
-    name: "Wireless long-range Wi-Fi kit",
+    name: "Wireless Long-Range WiFi Mesh / Repeater Router",
     manufacturer: "Third-party networking",
     shortDescription:
-      "A paired outdoor radio set for linking separate buildings without trenching cable.",
+      "A wireless repeater that extends Starlink Wi-Fi across a large home or compound without a new Ethernet run.",
     description:
-      "This kit class uses outdoor directional radios to link two points wirelessly, such as a main building and a warehouse or gatehouse. It avoids digging, but it needs a clear line of sight and careful alignment. Distance, speed, and stability depend on obstructions, radio conditions, and mounting height, not only on the equipment model. Datasheet distance figures are best-case, so we assess the path first and confirm which model fits. The kit is third-party networking hardware, and it is not made or supported by Starlink.",
+      "This is a wireless mesh and repeater router for places the Starlink router does not reach. It works in wireless repeater mode, so it does not need a new cable, and the public listing says it can project through the thick concrete walls common in Nigerian buildings. It is compatible with Starlink and with other internet sources. It is not a Starlink-made mesh node, and it is not the outdoor point-to-point radio used for multi-kilometre links. Those radios are a different service.",
     specs: [
-      { label: "Type", value: "Outdoor point-to-point radio pair" },
+      { label: "Mode", value: "Wireless repeater / mesh" },
+      { label: "Compatibility", value: "Starlink and other internet sources" },
       {
-        label: "Link requirement",
-        value: "Line of sight between both ends is needed",
+        label: "Cabling",
+        value: "No Ethernet run required for the extension itself",
       },
       {
-        label: "Range",
-        value: "Varies by model and site; confirmed after a path review",
+        label: "Typical sites",
+        value: "Homes, small offices, schools, and estate common areas",
       },
-      { label: "Power", value: "Typically powered via PoE at each end" },
     ],
     whatsInBox: [
-      "Two outdoor radio units (typical)",
-      "Mounting hardware",
-      "PoE injectors",
+      "Wireless long-range Wi-Fi mesh / repeater router",
+      "Power adapter",
     ],
-    imageSrc: "/images/products/wireless-long-range-wifi.jpeg",
+    imageSrc: "/images/products/wireless-long-range-repeater.jpeg",
     imageAlt:
-      "Pair of outdoor directional radio antennas on a pole for a wireless long-range link",
-    pricePublished: false,
+      "White TP-Link wireless router with four antennas, the photo published with the wireless repeater listing",
+    priceNgn: 150_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["long-range-wifi", "wifi-networking", "wisp-setup"],
     seoTitle: "Wireless long-range Wi-Fi link kit | Skylink Nigeria",
@@ -347,30 +362,34 @@ export const products: ProductRecord[] = [
   },
   {
     slug: "wired-long-range-wifi",
-    name: "Wired long-range Wi-Fi kit",
+    name: "Wired Long-Range WiFi Mesh / Repeater Router",
     manufacturer: "Third-party networking",
     shortDescription:
-      "Cable-backed access points and extenders for carrying a network across long distances or between buildings.",
+      "A wired access point that extends Starlink Wi-Fi over Ethernet when a cable route already exists.",
     description:
-      "This kit class pairs outdoor-rated cabling with access points at the far end. It suits sites where a cable route exists or can be installed, and where a steady link matters more than avoiding trenching. A cabled link is usually less sensitive to trees and weather than a radio hop, but it needs sensible routing, protection from damage, and attention to maximum cable run limits. We choose cable type and protection to suit the route. The hardware is third-party and not produced by Starlink.",
+      "This router works as a wired access point. Ethernet backhaul is what the public listing describes as the steadier way to push Starlink Wi-Fi through a large home, office, or compound, including thick concrete. It suits buildings that are already cabled. It works with Starlink and with other internet sources, and it is third-party hardware rather than an official Starlink mesh node.",
     specs: [
-      { label: "Type", value: "Cable-backed outdoor access point and extender set" },
+      { label: "Mode", value: "Wired access point over Ethernet" },
+      { label: "Compatibility", value: "Starlink and other internet sources" },
       {
-        label: "Link requirement",
-        value: "A safe cable route between the two points",
+        label: "Cabling",
+        value: "Ethernet backhaul for the stronger of the two long-range options",
       },
       {
-        label: "Range",
-        value: "Set by cable type and limits; confirmed after route review",
+        label: "Typical sites",
+        value: "Homes, small offices, schools, and estate common areas",
       },
-      { label: "Power", value: "Often PoE; depends on selected equipment" },
     ],
     whatsInBox: [
-      "Outdoor access point or extender units (typical)",
-      "Mounting hardware",
-      "Power or PoE accessories",
+      "Wired long-range Wi-Fi mesh / repeater router",
+      "Power adapter",
+      "Ethernet cable",
     ],
-    pricePublished: false,
+    imageSrc: "/images/products/wired-long-range-wifi.jpeg",
+    imageAlt:
+      "White TP-Link router mounted under a ceiling, the photo published with the wired repeater listing",
+    priceNgn: 150_000,
+    pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
     relatedServiceSlugs: ["long-range-wifi", "wifi-networking", "wisp-setup"],
     seoTitle: "Wired long-range Wi-Fi extension kit | Skylink",

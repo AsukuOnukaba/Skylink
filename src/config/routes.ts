@@ -18,6 +18,14 @@ const staticRoutes: AppRoute[] = [
   { path: "/about", label: "About", primaryNav: true, footer: "explore" },
   { path: "/contact", label: "Contact", primaryNav: true, footer: "explore" },
   { path: "/faq", label: "FAQ", footer: "legal" },
+  {
+    path: "/guide/starlink-nigeria",
+    label: "Nigeria guide",
+    footer: "explore",
+  },
+  { path: "/support", label: "Support", footer: "legal" },
+  { path: "/our-work", label: "Installation examples", footer: "explore" },
+  { path: "/gallery", label: "Gallery", footer: "explore" },
   { path: "/privacy", label: "Privacy", footer: "legal" },
   { path: "/terms", label: "Terms", footer: "legal" },
 ];

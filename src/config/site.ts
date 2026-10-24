@@ -1,9 +1,10 @@
 import { parseSiteOrigin } from "@/config/seo";
 
 /**
- * Central site identity (FR-01 / TRD site module).
- * NAP fields stay empty until OD-01 formally approves Skylink-owned channels.
- * Do not publish DataGram phone/email as Skylink NAP without that approval.
+ * Central site identity.
+ * Phone, email, WhatsApp, and hours are the channels published on the
+ * DataGram site and reused here by owner instruction (24 Oct 2026).
+ * They are not newly invented Skylink contacts. There is still no street address.
  */
 export const site = {
   brandName: "Skylink",
@@ -12,17 +13,15 @@ export const site = {
    * Empty until a valid VITE_SITE_URL is configured — never invent a domain.
    */
   siteUrl: parseSiteOrigin(import.meta.env.VITE_SITE_URL ?? "") ?? "",
-  /** E.164 once OD-01 is approved. Empty until then. */
-  phoneE164: "",
-  phoneDisplay: "",
-  email: "",
-  hours: "",
+  phoneE164: "+2349060976424",
+  phoneDisplay: "+234 906 097 6424",
+  email: "info@datagram.ng",
+  hours: "Mon–Sat, 08:00–18:00 (WAT)",
   /** Neutral draft only; OD-02 owns the approved phrase. */
   relationshipPhrase:
     "Skylink installs and supports Starlink connectivity.",
   social: {
-    /** Full wa.me URL once an approved WhatsApp number exists. */
-    whatsapp: "" as string,
+    whatsapp: "https://wa.me/2349060976424",
   },
 };
 

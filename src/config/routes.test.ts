@@ -23,7 +23,7 @@ describe("route registry", () => {
 
   it("registers static utility pages for footer legal links", () => {
     const legal = footerLegalRoutes.map((r) => r.path);
-    expect(legal).toEqual(["/faq", "/privacy", "/terms"]);
+    expect(legal).toEqual(["/faq", "/support", "/privacy", "/terms"]);
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/services");
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/products");
     expect(footerExploreRoutes.map((r) => r.path)).toContain("/locations");

@@ -35,8 +35,10 @@ describe("Locations pages", () => {
     expect(html).toMatch(/Lagos/);
     expect(html).toMatch(/\/starlink-installation-lagos/);
     expect(html).not.toMatch(/\/locations\/lagos/);
-    expect(html).not.toMatch(/Owerri|\/starlink-installation-owerri/);
-    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|datagram/i);
+    expect(html).toMatch(/Owerri/);
+    expect(html).toMatch(/\/starlink-installation-owerri/);
+    expect(html).toMatch(/Delta State/);
+    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b/i);
   });
 
   it("shows NotFound for unknown and unpublished place keys", () => {
@@ -50,14 +52,14 @@ describe("Locations pages", () => {
     expect(unknown).toMatch(/Page not found/i);
 
     const draft = renderToStaticMarkup(
-      <MemoryRouter initialEntries={["/starlink-installation-owerri"]}>
+      <MemoryRouter initialEntries={["/starlink-installation-kano"]}>
         <Routes>
           <Route path="*" element={<LocationOrNotFound />} />
         </Routes>
       </MemoryRouter>,
     );
     expect(draft).toMatch(/Page not found/i);
-    expect(draft).not.toMatch(/Imo State/);
+    expect(draft).not.toMatch(/Kano State/);
   });
 
   it("renders a published place with localContext and contact prefill", () => {
@@ -72,6 +74,5 @@ describe("Locations pages", () => {
     expect(html).toMatch(/Victoria Island|Lekki|Ikoyi|mainland/i);
     expect(html).toMatch(/contact\?intent=quote&amp;location=Lagos/);
     expect(html).not.toMatch(/\/locations\/lagos/);
-    expect(html).not.toMatch(/datagram|9060976424/i);
   });
 });

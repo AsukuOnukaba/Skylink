@@ -9,16 +9,26 @@ import {
 import { services } from "./services";
 
 describe("products catalogue", () => {
-  it("publishes eight products without prices", () => {
+  it("publishes eight products at the public catalogue prices", () => {
     expect(products).toHaveLength(8);
     expect(publishedProducts()).toHaveLength(8);
     expect(hasPublishedProducts()).toBe(true);
     expect(publicProductPaths()).toHaveLength(8);
     expect(getPublishedProduct("any-kit")).toBeUndefined();
-    expect(getPublishedProduct("starlink-mini")?.name).toBe("Starlink Mini kit");
+    expect(getPublishedProduct("starlink-mini")?.name).toBe("Starlink Mini");
+    const prices: Record<string, number> = {
+      "starlink-gen3-standard": 750_000,
+      "starlink-flat-high-performance": 4_000_000,
+      "starlink-mini": 450_000,
+      "starlink-pivot-mount": 150_000,
+      "starlink-mesh-router": 250_000,
+      "starlink-gen3-45m-cable": 250_000,
+      "wireless-long-range-wifi": 150_000,
+      "wired-long-range-wifi": 150_000,
+    };
     for (const p of products) {
-      expect(p.pricePublished).toBe(false);
-      expect(p.priceNgn).toBeUndefined();
+      expect(p.pricePublished).toBe(true);
+      expect(p.priceNgn).toBe(prices[p.slug]);
       expect(p.indexable).toBe(true);
     }
   });
@@ -34,13 +44,18 @@ describe("products catalogue", () => {
       "/images/products/starlink-pivot-mount.jpg",
     );
     expect(getPublishedProduct("wireless-long-range-wifi")?.imageSrc).toBe(
-      "/images/products/wireless-long-range-wifi.jpeg",
+      "/images/products/wireless-long-range-repeater.jpeg",
     );
-    // Omitted: no verified Mini, mesh-node, 45 m cable, or wired LR subject photo
-    expect(getPublishedProduct("starlink-mini")?.imageSrc).toBeUndefined();
+    expect(getPublishedProduct("starlink-mini")?.imageSrc).toBe(
+      "/images/products/starlink-mini.jpeg",
+    );
+    expect(getPublishedProduct("wired-long-range-wifi")?.imageSrc).toBe(
+      "/images/products/wired-long-range-wifi.jpeg",
+    );
+    // No honest photo: mesh file is watermarked and shows the wrong router;
+    // the only cable file shows boxed dishes, not a 45 m cable.
     expect(getPublishedProduct("starlink-mesh-router")?.imageSrc).toBeUndefined();
     expect(getPublishedProduct("starlink-gen3-45m-cable")?.imageSrc).toBeUndefined();
-    expect(getPublishedProduct("wired-long-range-wifi")?.imageSrc).toBeUndefined();
   });
 
   it("links only to existing service slugs", () => {

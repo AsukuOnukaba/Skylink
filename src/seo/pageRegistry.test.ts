@@ -27,7 +27,9 @@ describe("pageRegistry", () => {
     expect(paths).toContain("/services/residential-installation");
     expect(paths).toContain("/products/starlink-mini");
     expect(paths).toContain("/starlink-installation-lagos");
-    expect(paths).not.toContain("/starlink-installation-owerri");
+    expect(paths).toContain("/starlink-installation-owerri");
+    expect(paths).toContain("/guide/starlink-nigeria");
+    expect(paths).toContain("/services/sales-installation");
     expect(paths).not.toContain("/dev/brand");
     expect(paths).not.toContain("/contact?intent=quote");
     expect(new Set(paths).size).toBe(paths.length);
@@ -55,7 +57,7 @@ describe("pageRegistry", () => {
     expect(entries).toContain(
       "https://www.example.com/services/residential-installation",
     );
-    expect(entries).not.toContain(
+    expect(entries).toContain(
       "https://www.example.com/starlink-installation-owerri",
     );
     expect(entries.join("\n")).not.toMatch(/localhost|vercel\.app/i);

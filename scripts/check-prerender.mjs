@@ -94,11 +94,11 @@ async function main() {
       throw new Error("404.html missing branded copy");
     }
 
-    // Unpublished draft location must not have a static file.
-    const draft = path.join(outDir, "starlink-installation-owerri/index.html");
+    // Places that are not in the catalogue must not have a static file.
+    const draft = path.join(outDir, "starlink-installation-kano/index.html");
     try {
       await fs.access(draft);
-      throw new Error("Unpublished location owerri must not be prerendered");
+      throw new Error("Unpublished location kano must not be prerendered");
     } catch (err) {
       if (err && err.message?.includes("must not be prerendered")) throw err;
     }

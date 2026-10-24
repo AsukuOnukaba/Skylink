@@ -1,7 +1,8 @@
 /**
- * Service catalogue. Publish a record only when that offering is confirmed.
- * Draft body fields may exist for template readiness; they never render while unpublished.
+ * Service catalogue. Core and specialised offerings are published from the
+ * non-blog source catalogue. Extra records live in serviceCatalogueExtra.ts.
  */
+import { extraServices } from "@/data/serviceCatalogueExtra";
 
 export type ServiceFaq = {
   question: string;
@@ -550,6 +551,7 @@ export const services: ServiceRecord[] = [
     published: true,
     indexable: true,
   },
+  ...extraServices,
 ];
 
 export function publishedServices(): ServiceRecord[] {

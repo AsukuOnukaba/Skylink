@@ -10,17 +10,9 @@ import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
-import { getPublishedProduct } from "@/data/products";
+import { formatNgn, getPublishedProduct } from "@/data/products";
 import { getPublishedService } from "@/data/services";
 import { NotFound } from "@/pages/NotFound";
-
-function formatPriceNgn(amount: number): string {
-  return new Intl.NumberFormat("en-NG", {
-    style: "currency",
-    currency: "NGN",
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
 
 export function ProductDetail() {
   const { slug = "" } = useParams();
@@ -64,7 +56,7 @@ export function ProductDetail() {
             </p>
             <p className="mt-4 text-base font-semibold text-navy-800">
               {showPrice
-                ? formatPriceNgn(product.priceNgn as number)
+                ? formatNgn(product.priceNgn as number)
                 : "Request pricing"}
             </p>
             {product.availabilityNote ? (

@@ -14,8 +14,8 @@ describe("jsonLd builders", () => {
     const site = webSiteJsonLd("https://www.example.com");
     expect(org["@type"]).toBe("Organization");
     expect(site["@type"]).toBe("WebSite");
-    expect(JSON.stringify(org)).not.toMatch(/9060976424|datagram/i);
-    expect(org).not.toHaveProperty("telephone");
+    expect(org.telephone).toBe("+2349060976424");
+    expect(org.email).toBe("info@datagram.ng");
     expect(org).not.toHaveProperty("address");
   });
 
@@ -35,7 +35,12 @@ describe("jsonLd builders", () => {
     );
     expect(serviceLd["@type"]).toBe("Service");
     expect(productLd["@type"]).toBe("Product");
-    expect(productLd).not.toHaveProperty("offers");
+    expect(productLd.offers).toEqual({
+      "@type": "Offer",
+      priceCurrency: "NGN",
+      price: "750000",
+    });
+    expect(JSON.stringify(productLd.offers)).not.toMatch(/availability/i);
     expect(JSON.stringify([serviceLd, productLd])).not.toContain("FAQPage");
     expect(() => JSON.parse(JSON.stringify(serviceLd))).not.toThrow();
   });

@@ -94,10 +94,12 @@ export function About() {
             <p className="mt-8 text-sm text-slate-700">
               See the{" "}
               <TextLink to="/services">services overview</TextLink>,{" "}
-              <TextLink to="/products">products</TextLink>, and{" "}
-              <TextLink to="/locations">service areas</TextLink>, or open{" "}
-              <TextLink to="/contact">Contact</TextLink> for current ways to
-              reach us.
+              <TextLink to="/products">products</TextLink>,{" "}
+              <TextLink to="/locations">service areas</TextLink>, the{" "}
+              <TextLink to="/guide/starlink-nigeria">Nigeria guide</TextLink>,
+              and{" "}
+              <TextLink to="/our-work">installation examples</TextLink>, or
+              open <TextLink to="/contact">Contact</TextLink>.
             </p>
           </Container>
         </section>

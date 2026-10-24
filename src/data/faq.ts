@@ -49,7 +49,7 @@ export const faqItems: FaqItem[] = [
     id: "monthly-fee",
     question: "Who sets the monthly Starlink subscription fee?",
     answer:
-      "Starlink sets plan pricing and terms. Hardware supply and installation are separate conversations. We do not invent plan prices on this site.",
+      "Starlink sets plan pricing and terms. The naira figures on the product pages are hardware catalogue prices, not the monthly subscription, and they do not confirm stock.",
   },
   {
     id: "how-to-contact",

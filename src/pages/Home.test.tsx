@@ -59,7 +59,7 @@ describe("Home customer-facing copy", () => {
         pattern,
       );
     }
-    expect(html).not.toMatch(/9060976424|info@datagram|datagram\.ng/i);
+    expect(html).toMatch(/906 097 6424/);
   });
 
   it("does not promise a working enquiry submission or follow-up", () => {

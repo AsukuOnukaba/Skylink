@@ -31,23 +31,24 @@ async function renderContact(
 }
 
 describe("Contact customer-facing copy", () => {
-  it("keeps forms disabled by default without NAP or a submit workflow", async () => {
+  it("keeps forms disabled by default and shows the published contact channels", async () => {
     const html = await renderContact();
     expect(html).toMatch(/Online enquiry form is not available/i);
     expect(html).toMatch(/not open on this website yet/i);
     expect(html).not.toMatch(/type="submit"|Send quote request|Send survey/i);
     expect(html).not.toMatch(/follow up using the details you share/i);
     expect(html).not.toMatch(/\bOD-\d+\b/i);
-    expect(html).not.toMatch(/9060976424|906 097 6424/);
-    expect(html).not.toMatch(/tel:\+234/);
-    expect(html).not.toMatch(/wa\.me\//);
-  });
+    expect(html).toMatch(/906 097 6424/);
+    expect(html).toMatch(/tel:\+2349060976424/);
+    expect(html).toMatch(/info@datagram\.ng/);
+    expect(html).toMatch(/wa\.me\/2349060976424/);
+  }, 20_000);
 
   it("surfaces verified service/product/location context from the query", async () => {
     const html = await renderContact(
       "/contact?intent=product&product=starlink-gen3-standard&service=residential-installation&location=Lagos",
     );
-    expect(html).toMatch(/Starlink Gen 3 Standard kit/);
+    expect(html).toMatch(/Starlink Gen3 v4 Standard Dish/);
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/Lagos/);
     expect(html).toMatch(/Online enquiry form is not available/i);

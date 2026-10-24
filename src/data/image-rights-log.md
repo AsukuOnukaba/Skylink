@@ -74,6 +74,18 @@ Status values: `cleared` | `pending` | `denied` | `n/a (skylink-owned)` | `omitt
 | Class C `installations/**` job folders | Portfolio only if OD-06 | **pending** (portfolio gate) |
 | Class D banners / DataGram logo overlays | Exclude | **denied** |
 
-### Outstanding owner decision
+## 24 Oct 2026 non-blog reuse
 
-OD-06 portfolio approval for `/work` Class C shots. Catalogue and hero reuse above are cleared under owner-directed DataGram→Skylink permission with the honesty constraints in this log.
+Owner instruction: reuse non-blog DataGram photographs. Blog images were not copied.
+
+| Skylink file | Source judgement | Status |
+| --- | --- | --- |
+| `products/starlink-mini.jpeg` | `StarlinkMini111.jpeg` — compact terminal beside a power station | **cleared** |
+| `products/wireless-long-range-repeater.jpeg` | Catalogue TP-Link repeater. Alt text names the brand visible in the photo | **cleared as the listed product photo** |
+| `products/wired-long-range-wifi.jpeg` | Catalogue ceiling-mounted TP-Link router | **cleared as the listed product photo** |
+| Mesh router source | Watermark “starlink by DataGram”; shelf router, not a mesh node | **omitted** |
+| 45 m cable source | Stacked dish boxes and a standard dish, not a cable | **omitted** |
+| `work/*`, location and specialised service photos | Named DataGram field jobs. Captions attribute DataGram and do not call them Skylink projects | **cleared with attribution** |
+| Mini outdoor business photo | Frame is an IP-COM panel antenna | **omitted** |
+
+Work and gallery pages are the portfolio surface. They are not testimonials and they do not claim Skylink performed the jobs.

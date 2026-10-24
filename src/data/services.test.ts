@@ -10,8 +10,11 @@ import {
 
 describe("services catalogue", () => {
   it("publishes the eight confirmed services", () => {
-    expect(services).toHaveLength(8);
-    expect(publishedServices()).toHaveLength(8);
+    expect(services).toHaveLength(21);
+    expect(publishedServices()).toHaveLength(21);
+    expect(publicServicePaths()).toContain("/services/sales-installation");
+    expect(publicServicePaths()).toContain("/services/boat-installation");
+    expect(publicServicePaths()).toContain("/services/estate-wifi");
     expect(services.every((s) => s.published && s.indexable)).toBe(true);
     expect(publicServicePaths()).toContain("/services/long-range-wifi");
     expect(publicServicePaths()).toContain("/services/wisp-setup");

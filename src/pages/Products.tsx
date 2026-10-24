@@ -6,7 +6,7 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
-import { publishedProducts } from "@/data/products";
+import { formatNgn, publishedProducts } from "@/data/products";
 
 /**
  * Product catalogue index. Cards appear only for published products.
@@ -31,9 +31,9 @@ export function Products() {
               Products
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              Browse Starlink kits and related networking hardware that may
-              support an installation. This is an informational catalogue—not an
-              online shop. Pricing and supply are confirmed when you enquire.
+              Browse the eight Starlink kits and networking products in the
+              published catalogue. Prices shown are catalogue prices in naira.
+              They do not confirm stock, and this is not an online shop.
             </p>
           </Container>
         </section>
@@ -79,11 +79,7 @@ export function Products() {
                           </p>
                           <p className="mt-3 text-sm font-semibold text-navy-800">
                             {showPrice
-                              ? new Intl.NumberFormat("en-NG", {
-                                  style: "currency",
-                                  currency: "NGN",
-                                  maximumFractionDigits: 0,
-                                }).format(product.priceNgn as number)
+                              ? formatNgn(product.priceNgn as number)
                               : "Request pricing"}
                           </p>
                           <TextLink

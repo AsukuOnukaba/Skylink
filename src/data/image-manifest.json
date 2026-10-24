@@ -77,6 +77,76 @@
       }
     ]
   },
+  "/images/locations/abia-duplex.jpeg": {
+    "src": "/images/locations/abia-duplex.jpeg",
+    "width": 480,
+    "height": 640,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/locations/abia-duplex.w480.avif",
+        "webp": "/images/locations/abia-duplex.w480.webp"
+      }
+    ]
+  },
+  "/images/locations/abuja-estate.jpeg": {
+    "src": "/images/locations/abuja-estate.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/locations/abuja-estate.w480.avif",
+        "webp": "/images/locations/abuja-estate.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/locations/abuja-estate.w768.avif",
+        "webp": "/images/locations/abuja-estate.w768.webp"
+      }
+    ]
+  },
+  "/images/locations/bayelsa-vessel.jpeg": {
+    "src": "/images/locations/bayelsa-vessel.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/locations/bayelsa-vessel.w480.avif",
+        "webp": "/images/locations/bayelsa-vessel.w480.webp"
+      }
+    ]
+  },
+  "/images/locations/delta-houseboat.jpeg": {
+    "src": "/images/locations/delta-houseboat.jpeg",
+    "width": 480,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/locations/delta-houseboat.w480.avif",
+        "webp": "/images/locations/delta-houseboat.w480.webp"
+      }
+    ]
+  },
+  "/images/locations/port-harcourt-home.jpeg": {
+    "src": "/images/locations/port-harcourt-home.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/locations/port-harcourt-home.w480.avif",
+        "webp": "/images/locations/port-harcourt-home.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/locations/port-harcourt-home.w768.avif",
+        "webp": "/images/locations/port-harcourt-home.w768.webp"
+      }
+    ]
+  },
   "/images/pipeline-fixture.png": {
     "src": "/images/pipeline-fixture.png",
     "width": 960,
@@ -133,6 +203,23 @@
       }
     ]
   },
+  "/images/products/starlink-mini.jpeg": {
+    "src": "/images/products/starlink-mini.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/starlink-mini.w480.avif",
+        "webp": "/images/products/starlink-mini.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/products/starlink-mini.w768.avif",
+        "webp": "/images/products/starlink-mini.w768.webp"
+      }
+    ]
+  },
   "/images/products/starlink-pivot-mount.jpg": {
     "src": "/images/products/starlink-pivot-mount.jpg",
     "width": 768,
@@ -150,6 +237,30 @@
       }
     ]
   },
+  "/images/products/wired-long-range-wifi.jpeg": {
+    "src": "/images/products/wired-long-range-wifi.jpeg",
+    "width": 471,
+    "height": 1020,
+    "variants": [
+      {
+        "w": 471,
+        "avif": "/images/products/wired-long-range-wifi.w471.avif",
+        "webp": "/images/products/wired-long-range-wifi.w471.webp"
+      }
+    ]
+  },
+  "/images/products/wireless-long-range-repeater.jpeg": {
+    "src": "/images/products/wireless-long-range-repeater.jpeg",
+    "width": 480,
+    "height": 474,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/wireless-long-range-repeater.w480.avif",
+        "webp": "/images/products/wireless-long-range-repeater.w480.webp"
+      }
+    ]
+  },
   "/images/products/wireless-long-range-wifi.jpeg": {
     "src": "/images/products/wireless-long-range-wifi.jpeg",
     "width": 476,
@@ -159,6 +270,18 @@
         "w": 476,
         "avif": "/images/products/wireless-long-range-wifi.w476.avif",
         "webp": "/images/products/wireless-long-range-wifi.w476.webp"
+      }
+    ]
+  },
+  "/images/service-accessories.jpeg": {
+    "src": "/images/service-accessories.jpeg",
+    "width": 480,
+    "height": 480,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-accessories.w480.avif",
+        "webp": "/images/service-accessories.w480.webp"
       }
     ]
   },
@@ -179,6 +302,18 @@
       }
     ]
   },
+  "/images/service-boat-installation.jpeg": {
+    "src": "/images/service-boat-installation.jpeg",
+    "width": 480,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-boat-installation.w480.avif",
+        "webp": "/images/service-boat-installation.w480.webp"
+      }
+    ]
+  },
   "/images/service-business-connectivity.jpeg": {
     "src": "/images/service-business-connectivity.jpeg",
     "width": 471,
@@ -188,6 +323,81 @@
         "w": 471,
         "avif": "/images/service-business-connectivity.w471.avif",
         "webp": "/images/service-business-connectivity.w471.webp"
+      }
+    ]
+  },
+  "/images/service-enterprise-marine-hub.jpeg": {
+    "src": "/images/service-enterprise-marine-hub.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-enterprise-marine-hub.w480.avif",
+        "webp": "/images/service-enterprise-marine-hub.w480.webp"
+      }
+    ]
+  },
+  "/images/service-enterprise-plans.jpeg": {
+    "src": "/images/service-enterprise-plans.jpeg",
+    "width": 768,
+    "height": 462,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-enterprise-plans.w480.avif",
+        "webp": "/images/service-enterprise-plans.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-enterprise-plans.w768.avif",
+        "webp": "/images/service-enterprise-plans.w768.webp"
+      }
+    ]
+  },
+  "/images/service-estate-wifi.jpeg": {
+    "src": "/images/service-estate-wifi.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-estate-wifi.w480.avif",
+        "webp": "/images/service-estate-wifi.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-estate-wifi.w768.avif",
+        "webp": "/images/service-estate-wifi.w768.webp"
+      }
+    ]
+  },
+  "/images/service-fleet-management.jpeg": {
+    "src": "/images/service-fleet-management.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-fleet-management.w480.avif",
+        "webp": "/images/service-fleet-management.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-fleet-management.w768.avif",
+        "webp": "/images/service-fleet-management.w768.webp"
+      }
+    ]
+  },
+  "/images/service-global-roaming.jpeg": {
+    "src": "/images/service-global-roaming.jpeg",
+    "width": 480,
+    "height": 600,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-global-roaming.w480.avif",
+        "webp": "/images/service-global-roaming.w480.webp"
       }
     ]
   },
@@ -203,6 +413,18 @@
       }
     ]
   },
+  "/images/service-marine-sdwan.jpeg": {
+    "src": "/images/service-marine-sdwan.jpeg",
+    "width": 480,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-marine-sdwan.w480.avif",
+        "webp": "/images/service-marine-sdwan.w480.webp"
+      }
+    ]
+  },
   "/images/service-maritime-offshore.jpeg": {
     "src": "/images/service-maritime-offshore.jpeg",
     "width": 471,
@@ -212,6 +434,18 @@
         "w": 471,
         "avif": "/images/service-maritime-offshore.w471.avif",
         "webp": "/images/service-maritime-offshore.w471.webp"
+      }
+    ]
+  },
+  "/images/service-offshore-hse.jpeg": {
+    "src": "/images/service-offshore-hse.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-offshore-hse.w480.avif",
+        "webp": "/images/service-offshore-hse.w480.webp"
       }
     ]
   },
@@ -254,6 +488,35 @@
       }
     ]
   },
+  "/images/service-sales-installation.jpeg": {
+    "src": "/images/service-sales-installation.jpeg",
+    "width": 768,
+    "height": 576,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-sales-installation.w480.avif",
+        "webp": "/images/service-sales-installation.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/service-sales-installation.w768.avif",
+        "webp": "/images/service-sales-installation.w768.webp"
+      }
+    ]
+  },
+  "/images/service-subscription-services.jpeg": {
+    "src": "/images/service-subscription-services.jpeg",
+    "width": 478,
+    "height": 641,
+    "variants": [
+      {
+        "w": 478,
+        "avif": "/images/service-subscription-services.w478.avif",
+        "webp": "/images/service-subscription-services.w478.webp"
+      }
+    ]
+  },
   "/images/service-wifi-networking.jpeg": {
     "src": "/images/service-wifi-networking.jpeg",
     "width": 706,
@@ -275,6 +538,124 @@
         "w": 480,
         "avif": "/images/service-wisp-setup.w480.avif",
         "webp": "/images/service-wisp-setup.w480.webp"
+      }
+    ]
+  },
+  "/images/work/abuja-estate.jpeg": {
+    "src": "/images/work/abuja-estate.jpeg",
+    "width": 480,
+    "height": 1040,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/abuja-estate.w480.avif",
+        "webp": "/images/work/abuja-estate.w480.webp"
+      }
+    ]
+  },
+  "/images/work/arochukwu-duplex.jpeg": {
+    "src": "/images/work/arochukwu-duplex.jpeg",
+    "width": 480,
+    "height": 640,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/arochukwu-duplex.w480.avif",
+        "webp": "/images/work/arochukwu-duplex.w480.webp"
+      }
+    ]
+  },
+  "/images/work/coastal-houseboat.jpeg": {
+    "src": "/images/work/coastal-houseboat.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/coastal-houseboat.w480.avif",
+        "webp": "/images/work/coastal-houseboat.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/work/coastal-houseboat.w768.avif",
+        "webp": "/images/work/coastal-houseboat.w768.webp"
+      }
+    ]
+  },
+  "/images/work/enval.jpeg": {
+    "src": "/images/work/enval.jpeg",
+    "width": 480,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/enval.w480.avif",
+        "webp": "/images/work/enval.w480.webp"
+      }
+    ]
+  },
+  "/images/work/ncc-rivers.jpeg": {
+    "src": "/images/work/ncc-rivers.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/ncc-rivers.w480.avif",
+        "webp": "/images/work/ncc-rivers.w480.webp"
+      }
+    ]
+  },
+  "/images/work/nns-sagbama.jpeg": {
+    "src": "/images/work/nns-sagbama.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/nns-sagbama.w480.avif",
+        "webp": "/images/work/nns-sagbama.w480.webp"
+      }
+    ]
+  },
+  "/images/work/ph-home.jpeg": {
+    "src": "/images/work/ph-home.jpeg",
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/ph-home.w480.avif",
+        "webp": "/images/work/ph-home.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/work/ph-home.w768.avif",
+        "webp": "/images/work/ph-home.w768.webp"
+      }
+    ]
+  },
+  "/images/work/royal-fouche-degema.jpeg": {
+    "src": "/images/work/royal-fouche-degema.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/royal-fouche-degema.w480.avif",
+        "webp": "/images/work/royal-fouche-degema.w480.webp"
+      }
+    ]
+  },
+  "/images/work/warri-houseboat.jpeg": {
+    "src": "/images/work/warri-houseboat.jpeg",
+    "width": 480,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/work/warri-houseboat.w480.avif",
+        "webp": "/images/work/warri-houseboat.w480.webp"
       }
     ]
   }

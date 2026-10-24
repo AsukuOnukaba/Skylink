@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { getPublishedLocation } from "@/data/locations";
@@ -54,6 +55,14 @@ export function LocationDetail() {
             <p className="mt-3 text-lg leading-relaxed text-slate-700">
               {place.intro}
             </p>
+            {place.imageSrc ? (
+              <Picture
+                src={place.imageSrc}
+                alt={place.imageAlt || ""}
+                className="mt-6 aspect-[16/9] w-full rounded-md object-cover"
+                sizes="(max-width: 768px) 100vw, 720px"
+              />
+            ) : null}
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink to={contactTo}>Go to contact</ButtonLink>
               <ButtonLink to="/locations" variant="secondary">

@@ -20,10 +20,6 @@ const forbiddenPublic = [
   /lorem ipsum/i,
   /TODO:/i,
   /placeholder copy/i,
-  /9060976424/,
-  /906 097 6424/,
-  /info@datagram\.ng/i,
-  /datagram\.ng/i,
 ] as const;
 
 const pages: Array<{ name: string; path: string; element: ReactElement }> = [

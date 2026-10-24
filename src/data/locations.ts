@@ -20,6 +20,8 @@ export type LocationRecord = {
   localContext: string;
   relatedServiceSlugs: string[];
   faqs: LocationFaq[];
+  imageSrc?: string;
+  imageAlt?: string;
   seoTitle: string;
   seoDescription: string;
   published: boolean;
@@ -59,6 +61,9 @@ export const locations: LocationRecord[] = [
           "We can discuss it. Each site needs its own sky-view and access check, so scope is confirmed location by location.",
       },
     ],
+    imageSrc: "/images/locations/abuja-estate.jpeg",
+    imageAlt:
+      "Starlink dish mounted for an Abuja estate installation in the published field library",
     seoTitle: "Starlink installation in Abuja, FCT | Skylink",
     seoDescription:
       "Plan a Starlink install in Abuja: estate rules, rocky terrain, tree cover, and power planning for homes and offices across the FCT.",
@@ -136,6 +141,9 @@ export const locations: LocationRecord[] = [
           "We can discuss it. Tell us about access and safety requirements up front so they are built into the plan.",
       },
     ],
+    imageSrc: "/images/locations/port-harcourt-home.jpeg",
+    imageAlt:
+      "Starlink dish on a Port Harcourt residential roof, from the published installation library",
     seoTitle: "Starlink installation in Port Harcourt | Skylink",
     seoDescription:
       "Planning a Starlink install in Port Harcourt: heavy rain, humidity, tree cover, and power planning for homes, offices, and yards.",
@@ -211,8 +219,8 @@ export const locations: LocationRecord[] = [
     seoTitle: "Starlink installation in Owerri, Imo State | Skylink",
     seoDescription:
       "Starlink installation planning for Owerri homes and businesses: roof mounts, tree cover, rain protection, and power.",
-    published: false,
-    indexable: false,
+    published: true,
+    indexable: true,
   },
   {
     placeKey: "enugu",
@@ -244,8 +252,8 @@ export const locations: LocationRecord[] = [
     seoTitle: "Starlink installation in Enugu | Skylink Nigeria",
     seoDescription:
       "Starlink installation planning for Enugu: hilly terrain, sky view, rain runoff, and multi-building sites.",
-    published: false,
-    indexable: false,
+    published: true,
+    indexable: true,
   },
   {
     placeKey: "benin-city",
@@ -277,18 +285,21 @@ export const locations: LocationRecord[] = [
     seoTitle: "Starlink installation in Benin City, Edo State | Skylink",
     seoDescription:
       "Starlink installation planning for Benin City homes and businesses: close-set buildings, estate rules, rain, and power.",
-    published: false,
-    indexable: false,
+    published: true,
+    indexable: true,
   },
   {
-    placeKey: "asaba",
-    placeName: "Asaba",
+    placeKey: "delta",
+    placeName: "Delta State",
     regionLabel: "Delta State",
-    headline: "Starlink installation planning for Asaba",
+    headline: "Starlink installation planning across Delta State",
     intro:
-      "Asaba is a growing riverside capital, and its estates, government offices, and river setting each bring their own installation considerations.",
+      "Delta State covers a riverside capital and a working coast. Asaba, Warri, and the river settlements do not install the same way.",
     localContext:
-      "Asaba is the capital of Delta State, on the western bank of the River Niger, and has grown quickly with new estates, offices, and hotels alongside older residential areas. Proximity to the river means some low-lying areas are prone to flooding, so cable and equipment positions need thought. Many compounds are walled, with trees that can block low dish positions. Government and commercial buildings may have their own access rules and approvals. Rain is heavy through the wet season, and many properties use generators or inverters, so power is a standard part of the planning.",
+      "Asaba, the state capital, sits on the western bank of the Niger and has grown with new estates, offices, and hotels beside older compounds. Low ground near the river floods, so cable joints and indoor equipment should sit above the water line that residents already plan for. Warri and the houseboat traffic around it are a different job: salt air, a moving deck, and power that may be a battery bank rather than the grid. Inland compounds are often walled, with trees over the roof. Government and commercial buildings in Asaba commonly need their own access approval. Rain through the wet season and generator use are normal in both the capital and the coast, so power is part of the first conversation rather than an extra.",
+    imageSrc: "/images/locations/delta-houseboat.jpeg",
+    imageAlt:
+      "Starlink terminal on a houseboat in Warri, Delta State, from the published installation library",
     relatedServiceSlugs: [
       "residential-installation",
       "business-connectivity",
@@ -299,19 +310,19 @@ export const locations: LocationRecord[] = [
       {
         question: "Does flooding near the river matter for the install?",
         answer:
-          "In low-lying areas, yes. We aim to keep equipment and cable joints above likely water levels.",
+          "In low-lying parts of Asaba and other river towns, yes. Equipment and cable joints should sit above the water levels people already expect.",
       },
       {
-        question: "Do government or commercial buildings need approvals?",
+        question: "Is a Warri houseboat the same job as an Asaba house?",
         answer:
-          "Often they do. Tell us about access and approval requirements early so they can be built into the plan.",
+          "No. A houseboat needs a marine mount and a power plan for batteries or shore power. An Asaba compound is a roof, a wall, and usually a generator.",
       },
     ],
-    seoTitle: "Starlink installation in Asaba, Delta State | Skylink",
+    seoTitle: "Starlink installation in Delta State | Skylink",
     seoDescription:
-      "Starlink installation planning for Asaba: river-adjacent flood risk, estates, offices, and power.",
-    published: false,
-    indexable: false,
+      "Starlink planning for Delta State: Asaba flood risk and approvals, and Warri houseboats that need a marine mount.",
+    published: true,
+    indexable: true,
   },
   {
     placeKey: "yenagoa",
@@ -343,8 +354,98 @@ export const locations: LocationRecord[] = [
     seoTitle: "Starlink installation in Yenagoa, Bayelsa | Skylink",
     seoDescription:
       "Starlink installation planning for Yenagoa: flood risk, tree cover, waterway access, and power in the Niger Delta.",
-    published: false,
-    indexable: false,
+    imageSrc: "/images/locations/bayelsa-vessel.jpeg",
+    imageAlt:
+      "Starlink terminal on a vessel in Bayelsa, from the published installation library",
+    published: true,
+    indexable: true,
+  },
+  {
+    placeKey: "abia",
+    placeName: "Abia State",
+    regionLabel: "Abia State",
+    headline: "Starlink installation planning for Abia State",
+    intro:
+      "Abia mixes commercial Aba with quieter towns such as Arochukwu, where a duplex and a shop need different cable runs.",
+    localContext:
+      "Aba is a dense trading city. Shops and upper-floor homes sit close together, so a dish often has to clear signage, water tanks, and the next building rather than sit on the first flat roof that looks convenient. Power cuts are part of trading hours, which means a generator or inverter circuit is usually in the plan. Further out, towns such as Arochukwu have larger duplex compounds where the problem is coverage inside the house, not only sky view. A documented residential job in the source library is a 5-bedroom duplex there, with mesh used to carry one Starlink connection through the rooms. That is one property type, not a claim that every Abia home looks the same. Rain is heavy in season, so cable entries need sealing whether the building is a shop or a house.",
+    relatedServiceSlugs: [
+      "residential-installation",
+      "business-connectivity",
+      "wifi-networking",
+      "backup-power",
+    ],
+    faqs: [
+      {
+        question: "Can a shop in Aba use the same approach as a duplex?",
+        answer:
+          "The dish still needs sky view, but the indoor network is different. A trading floor and a 5-bedroom house should be surveyed separately.",
+      },
+    ],
+    imageSrc: "/images/locations/abia-duplex.jpeg",
+    imageAlt:
+      "Residential Starlink installation at a duplex in Arochukwu, Abia State, from the published installation library",
+    seoTitle: "Starlink installation in Abia State | Skylink",
+    seoDescription:
+      "Starlink planning for Abia: dense Aba commercial roofs and larger duplexes such as those in Arochukwu.",
+    published: true,
+    indexable: true,
+  },
+  {
+    placeKey: "anambra",
+    placeName: "Anambra State",
+    regionLabel: "Anambra State",
+    headline: "Starlink installation planning for Anambra State",
+    intro:
+      "Onitsha, Nnewi, and Awka ask for different mounts: a market roof, a factory yard, or a residential estate.",
+    localContext:
+      "Anambra's main cities do not share one skyline. Onitsha is a market city beside the Niger, with dense commercial roofs, signage, and buildings packed close enough to block a low dish. Flooding on low commercial land is a seasonal fact, so equipment should not sit at ground level. Nnewi has industrial yards and family factories where the dish may need to clear a workshop roof and the network may need to reach more than one building. Awka, the capital, is more residential and institutional, with estates and campuses where permission and longer cable runs matter. Across the state, generator use is normal and the wet season is heavy. A site in one of these cities is not a template for the other two.",
+    relatedServiceSlugs: [
+      "residential-installation",
+      "business-connectivity",
+      "long-range-wifi",
+      "backup-power",
+    ],
+    faqs: [
+      {
+        question: "Is an Onitsha market roof a good default mount?",
+        answer:
+          "Often no. Neighbouring buildings and tanks block the sky. The mount is chosen after looking at that specific roof.",
+      },
+    ],
+    seoTitle: "Starlink installation in Anambra State | Skylink",
+    seoDescription:
+      "Starlink planning for Anambra: Onitsha commercial roofs, Nnewi yards, and Awka estates are surveyed separately.",
+    published: true,
+    indexable: true,
+  },
+  {
+    placeKey: "ebonyi",
+    placeName: "Ebonyi State",
+    regionLabel: "Ebonyi State",
+    headline: "Starlink installation planning for Ebonyi State",
+    intro:
+      "Abakaliki and the surrounding towns are quieter than the big coastal cities, but hills, new estates, and unreliable power still shape the install.",
+    localContext:
+      "Ebonyi is less dense than Lagos or Onitsha, which often means a clearer sky, not an automatic install. Abakaliki has a mix of older bungalows, newer estates, and public buildings. Low hills and compounds with trees can still hide the sky from a ground-floor wall, so the check is on the roof, not on a state-wide coverage map. Distances between a main house and a gatehouse or farm building are a common reason to talk about a cable or a short wireless link. Rain is seasonal and heavy enough to matter for sealing. Grid power is not something to assume through a workday, so inverter or generator planning belongs in the same visit. Where a journey from the nearer field base is long, scheduling is part of the quote rather than a promise of same-week arrival.",
+    relatedServiceSlugs: [
+      "residential-installation",
+      "business-connectivity",
+      "long-range-wifi",
+      "backup-power",
+    ],
+    faqs: [
+      {
+        question: "Does a quieter town mean an easier install?",
+        answer:
+          "Sky view is often better than in a dense city. Access, power, and the distance between buildings still have to be checked.",
+      },
+    ],
+    seoTitle: "Starlink installation in Ebonyi State | Skylink",
+    seoDescription:
+      "Starlink planning for Ebonyi and Abakaliki: estate roofs, tree cover, longer building links, and backup power.",
+    published: true,
+    indexable: true,
   },
 ];
 

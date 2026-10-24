@@ -23,7 +23,7 @@ describe("Services hub", () => {
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/\/services\/residential-installation/);
     expect(html).toMatch(/Long-range Wi-Fi/);
-    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue|datagram/i);
-    expect(html).not.toMatch(/9060976424|info@datagram/i);
+    expect(html).toMatch(/Sales, delivery, and professional installation/);
+    expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue/i);
   });
 });

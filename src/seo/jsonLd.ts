@@ -16,6 +16,8 @@ export function organizationJsonLd(siteOrigin: string | null): Record<string, un
     name: site.brandName,
     description: site.relationshipPhrase,
   };
+  if (site.phoneE164) data.telephone = site.phoneE164;
+  if (site.email) data.email = site.email;
   if (siteOrigin) {
     data.url = `${siteOrigin}/`;
     data.logo = `${siteOrigin}/brand/skylink-logo-primary.png`;
@@ -102,7 +104,17 @@ export function productJsonLd(
   };
   if (pageUrl) data.url = pageUrl;
   if (imageUrl) data.image = [imageUrl];
-  // Intentionally omit Offer until pricePublished is true with a confirmed price.
+  if (
+    product.pricePublished &&
+    typeof product.priceNgn === "number" &&
+    product.priceNgn > 0
+  ) {
+    data.offers = {
+      "@type": "Offer",
+      priceCurrency: "NGN",
+      price: String(product.priceNgn),
+    };
+  }
   return data;
 }
 
