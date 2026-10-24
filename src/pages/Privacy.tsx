@@ -77,9 +77,14 @@ export function Privacy() {
             Analytics
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            Product analytics are not active on this build. If measurement tools
-            are added later, this page will name them and summarise what they
-            measure.
+            This build does not load a measurement tag unless a Skylink Google
+            Analytics 4 measurement id is configured for the deployment. No id
+            is published in the repository, and local and preview builds leave
+            the tag unloaded. When an id is present, Google Analytics records
+            page views through its own tag. This site may also send click and
+            successful-enquiry events that contain only the page path and, where
+            relevant, a service or product slug. Those events do not include
+            your name, phone number, email address, or message.
           </p>
 
           <h2 className="mt-10 text-xl font-semibold text-navy-800">

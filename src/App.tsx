@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Analytics } from "@/analytics/Analytics";
 import { About } from "@/pages/About";
 import { BrandFoundation } from "@/pages/BrandFoundation";
 import { Contact } from "@/pages/Contact";
@@ -42,6 +43,7 @@ export function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <Analytics />
       <AppRoutes />
     </BrowserRouter>
   );

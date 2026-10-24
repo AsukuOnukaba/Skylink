@@ -196,7 +196,10 @@ export function EnquiryForm({ kind, prefill }: EnquiryFormProps) {
 
     if (result.status === "accepted") {
       setStatus({ kind: "success" });
-      emitEnquiryAccepted(kind);
+      emitEnquiryAccepted(kind, {
+        service: kind === "product" ? "" : service,
+        product: kind === "product" ? product : "",
+      });
       queueMicrotask(() => statusRef.current?.focus());
       return;
     }

@@ -47,6 +47,10 @@ Copy `.env.example` to `.env` and fill Skylink-owned values only. Server enquiry
 
 Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `sitemap.xml`. Production indexing requires OD-10 + the flags above; misconfiguration fails the build.
 
+### Analytics (PH-11, OD-13)
+
+`VITE_GA_MEASUREMENT_ID` stays empty. The Google tag is not loaded, and no events are sent, unless that variable is a real Skylink measurement id. Local and preview builds do not enable analytics. There is no consent banner because no analytics property is approved. Do not paste a DataGram id or a placeholder.
+
 **Not deployed (24 Oct 2026).** There is no approved public URL, no live host, and no Google Search Console property. Validate SEO from local build artefacts only. Do not treat missing Google results as a failure, and do not invent or submit a local or preview URL as the production site. After the domain and host exist, deployment must set the origin and indexing flags, check live HTTP 200/404, confirm production pages are not left `noindex`, verify Search Console, and submit the production sitemap.
 
 ## Image pipeline
@@ -59,4 +63,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Through PH-10 technical SEO, local verification only.** Public routes are prerendered into `dist/spa` with page-specific HTML. Brand lab `/dev/brand` is development-only. Default builds stay non-indexable until OD-10 + `VITE_ALLOW_INDEXING`. `vercel.json` serves `404.html` with HTTP 404 for unknown paths (no SPA 200 fallback) and keeps `POST /api/enquiry`. Contact forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED`. NAP stays empty until OD-01. Production domain, hosting, live HTTP checks, and Google Search Console are still future deployment work (PH-13).
+**Through PH-12, local verification only. Not launch-ready.** Public routes are prerendered into `dist/spa` with page-specific HTML. Brand lab `/dev/brand` is development-only. Default builds stay non-indexable until OD-10 + `VITE_ALLOW_INDEXING`. Analytics stays disabled until OD-13 supplies a Skylink GA4 id. `vercel.json` serves `404.html` with HTTP 404 for unknown paths (no SPA 200 fallback) and keeps `POST /api/enquiry`. `pnpm preview` does not reproduce that HTTP 404. Contact forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED`. NAP stays empty until OD-01. Production domain, hosting, live HTTP checks, enquiry delivery, shared rate limiting, and Google Search Console remain PH-13 work and are not verified.
