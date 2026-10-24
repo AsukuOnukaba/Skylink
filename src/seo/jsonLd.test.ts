@@ -15,7 +15,7 @@ describe("jsonLd builders", () => {
     expect(org["@type"]).toBe("Organization");
     expect(site["@type"]).toBe("WebSite");
     expect(org.telephone).toBe("+2349060976424");
-    expect(org.email).toBe("info@datagram.ng");
+    expect(org.email).toBe("info@skylink.com");
     expect(org).not.toHaveProperty("address");
   });
 

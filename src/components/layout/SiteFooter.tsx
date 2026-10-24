@@ -6,12 +6,14 @@ import {
   footerLegalRoutes,
 } from "@/config/routes";
 import {
+  hasPublicEmail,
   hasPublicPhone,
   site,
 } from "@/config/site";
 
 export function SiteFooter() {
   const phoneOk = hasPublicPhone();
+  const emailOk = hasPublicEmail();
 
   return (
     <footer className="mt-auto border-t border-white/10 bg-navy-950 text-white">
@@ -71,6 +73,19 @@ export function SiteFooter() {
                   >
                     {site.phoneDisplay}
                   </TextLink>
+                  {emailOk ? (
+                    <>
+                      {" "}
+                      or email{" "}
+                      <TextLink
+                        external
+                        href={`mailto:${site.email}`}
+                        className="text-sky-300 hover:text-white"
+                      >
+                        {site.email}
+                      </TextLink>
+                    </>
+                  ) : null}
                   . More options on{" "}
                   <TextLink
                     to="/contact"

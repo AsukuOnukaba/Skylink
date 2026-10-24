@@ -40,7 +40,8 @@ describe("Contact customer-facing copy", () => {
     expect(html).not.toMatch(/\bOD-\d+\b/i);
     expect(html).toMatch(/906 097 6424/);
     expect(html).toMatch(/tel:\+2349060976424/);
-    expect(html).toMatch(/info@datagram\.ng/);
+    expect(html).toMatch(/info@skylink\.com/);
+    expect(html).not.toMatch(/info@datagram\.ng/);
     expect(html).toMatch(/wa\.me\/2349060976424/);
   }, 20_000);
 

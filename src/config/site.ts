@@ -2,9 +2,8 @@ import { parseSiteOrigin } from "@/config/seo";
 
 /**
  * Central site identity.
- * Phone, email, WhatsApp, and hours are the channels published on the
- * DataGram site and reused here by owner instruction (24 Oct 2026).
- * They are not newly invented Skylink contacts. There is still no street address.
+ * Phone, WhatsApp, and hours are the channels published on the DataGram site.
+ * The public email is the Skylink address set by the owner. There is still no street address.
  */
 export const site = {
   brandName: "Skylink",
@@ -15,7 +14,7 @@ export const site = {
   siteUrl: parseSiteOrigin(import.meta.env.VITE_SITE_URL ?? "") ?? "",
   phoneE164: "+2349060976424",
   phoneDisplay: "+234 906 097 6424",
-  email: "info@datagram.ng",
+  email: "info@skylink.com",
   hours: "Mon–Sat, 08:00–18:00 (WAT)",
   /** Neutral draft only; OD-02 owns the approved phrase. */
   relationshipPhrase:
