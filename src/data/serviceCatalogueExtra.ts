@@ -219,7 +219,7 @@ export const extraServices: ServiceRecord[] = [
     ],
     imageSrc: "/images/service-enterprise-plans.jpeg",
     imageAlt:
-      "Office connectivity equipment used when planning a higher-capacity Starlink link",
+      "Flat Starlink terminal on an industrial roof beside a port, from the published installation library",
     seoTitle: "Enterprise Starlink plans in Nigeria | Skylink",
     seoDescription:
       "Enterprise Starlink plans for organisations. Published speed ceilings disagree in the source and are not treated as guaranteed throughput.",
@@ -570,9 +570,9 @@ export const extraServices: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["starlink-gen3-standard", "starlink-flat-high-performance"],
-    imageSrc: "/images/service-enterprise-plans.jpeg",
+    imageSrc: "/images/service-priority-plans.jpeg",
     imageAlt:
-      "Connectivity planning image used for Priority plan conversations, not a specific customer site",
+      "Starlink dish on a pole above a tiled residential roof, from the published installation library",
     seoTitle: "Starlink Priority plan activation in Nigeria | Skylink",
     seoDescription:
       "Priority plan activation where an address is offered Priority instead of new residential signup. Availability is per address.",
@@ -675,9 +675,9 @@ export const extraServices: ServiceRecord[] = [
       },
     ],
     relatedProductSlugs: ["starlink-mini", "starlink-flat-high-performance"],
-    imageSrc: "/images/service-global-roaming.jpeg",
+    imageSrc: "/images/service-roaming-global-priority.jpeg",
     imageAlt:
-      "Portable Starlink terminal used to discuss roaming and Global Priority plans",
+      "Flat Starlink terminal at the bow of a vessel at sea, from the published installation library",
     seoTitle: "Starlink Roaming and Global Priority | Skylink Nigeria",
     seoDescription:
       "How roaming differs from Global Priority, and which catalogue hardware is tied to a Roam plan.",

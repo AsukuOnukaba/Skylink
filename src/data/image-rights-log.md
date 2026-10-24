@@ -87,5 +87,8 @@ Owner instruction: reuse non-blog DataGram photographs. Blog images were not cop
 | 45 m cable source | Stacked dish boxes and a standard dish, not a cable | **omitted** |
 | `work/*`, location and specialised service photos | Named DataGram field jobs. Captions attribute DataGram and do not call them Skylink projects | **cleared with attribution** |
 | Mini outdoor business photo | Frame is an IP-COM panel antenna | **omitted** |
+| `service-priority-plans.jpeg` | `starlinkEstateInstallation.jpeg` — dish on a pole over a tiled residential roof. Replaces the shared enterprise-plans photo on the Priority card | **cleared** |
+| `service-enterprise-plans.jpeg` | Replaced `High-Speed.jpeg` (round dish on a house wall). Now `starlinkCompanyInstalltionImage.jpeg` — flat terminal on an industrial roof beside a port | **cleared** |
+| `service-roaming-global-priority.jpeg` | `maritime4.jpeg` — flat terminal at a vessel bow. Replaces the shared global-roaming photo on the roaming card | **cleared** |
 
 Work and gallery pages are the portfolio surface. They are not testimonials and they do not claim Skylink performed the jobs.

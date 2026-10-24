@@ -340,18 +340,13 @@
   },
   "/images/service-enterprise-plans.jpeg": {
     "src": "/images/service-enterprise-plans.jpeg",
-    "width": 768,
-    "height": 462,
+    "width": 471,
+    "height": 1020,
     "variants": [
       {
-        "w": 480,
-        "avif": "/images/service-enterprise-plans.w480.avif",
-        "webp": "/images/service-enterprise-plans.w480.webp"
-      },
-      {
-        "w": 768,
-        "avif": "/images/service-enterprise-plans.w768.avif",
-        "webp": "/images/service-enterprise-plans.w768.webp"
+        "w": 471,
+        "avif": "/images/service-enterprise-plans.w471.avif",
+        "webp": "/images/service-enterprise-plans.w471.webp"
       }
     ]
   },
@@ -449,6 +444,18 @@
       }
     ]
   },
+  "/images/service-priority-plans.jpeg": {
+    "src": "/images/service-priority-plans.jpeg",
+    "width": 480,
+    "height": 853,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-priority-plans.w480.avif",
+        "webp": "/images/service-priority-plans.w480.webp"
+      }
+    ]
+  },
   "/images/service-relocation.jpeg": {
     "src": "/images/service-relocation.jpeg",
     "width": 960,
@@ -485,6 +492,18 @@
         "w": 1280,
         "avif": "/images/service-residential-installation.w1280.avif",
         "webp": "/images/service-residential-installation.w1280.webp"
+      }
+    ]
+  },
+  "/images/service-roaming-global-priority.jpeg": {
+    "src": "/images/service-roaming-global-priority.jpeg",
+    "width": 480,
+    "height": 252,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/service-roaming-global-priority.w480.avif",
+        "webp": "/images/service-roaming-global-priority.w480.webp"
       }
     ]
   },

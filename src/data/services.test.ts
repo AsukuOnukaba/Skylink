@@ -61,5 +61,7 @@ describe("services catalogue", () => {
         /skylink (completed|installed|project|customer)/i,
       );
     }
+    const srcs = publishedServices().map((s) => s.imageSrc);
+    expect(new Set(srcs).size).toBe(srcs.length);
   });
 });
