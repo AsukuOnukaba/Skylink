@@ -571,7 +571,7 @@ export function publicServicePaths(): string[] {
   return publishedServices().map((s) => `/services/${s.slug}`);
 }
 
-/** Homepage and services index lead with these, in this order. */
+/** Specialist maritime offerings, retained together for focused landing pages. */
 export const maritimeServiceSlugs = [
   "maritime-offshore",
   "boat-installation",
@@ -582,11 +582,11 @@ export const maritimeServiceSlugs = [
 ] as const;
 
 const generalLeadSlugs = [
+  "residential-installation",
   "business-connectivity",
   "enterprise-plans",
   "priority-plans",
   "sales-installation",
-  "residential-installation",
 ] as const;
 
 function pickPublished(slugs: readonly string[]): ServiceRecord[] {
@@ -599,7 +599,7 @@ export function maritimeServices(): ServiceRecord[] {
   return pickPublished(maritimeServiceSlugs);
 }
 
-/** Maritime offerings first, then business, then residential and the rest. */
+/** Broad customer environments first, with maritime retained as a core specialism. */
 export function servicesInCommercialOrder(): ServiceRecord[] {
   const maritime = maritimeServices();
   const lead = pickPublished(generalLeadSlugs);
@@ -608,7 +608,7 @@ export function servicesInCommercialOrder(): ServiceRecord[] {
     ...lead.map((service) => service.slug),
   ]);
   const rest = publishedServices().filter((service) => !used.has(service.slug));
-  return [...maritime, ...lead, ...rest];
+  return [...lead, ...maritime, ...rest];
 }
 
 /** Cross-links for maritime pages and for business pages that should point offshore. */

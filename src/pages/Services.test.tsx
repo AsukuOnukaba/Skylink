@@ -19,12 +19,14 @@ describe("Services hub", () => {
         <Services />
       </MemoryRouter>,
     );
-    expect(html).toMatch(/<h1[^>]*>Services<\/h1>/);
+    expect(html).toMatch(/<h1[^>]*>Starlink installation &amp; connectivity services<\/h1>/);
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/\/services\/residential-installation/);
-    expect(html.indexOf("/services/maritime-offshore")).toBeLessThan(
-      html.indexOf("/services/residential-installation"),
+    expect(html.indexOf("/services/residential-installation")).toBeLessThan(
+      html.indexOf("/services/maritime-offshore"),
     );
+    expect(html).toMatch(/Residential &amp; home connectivity/);
+    expect(html).toMatch(/Enterprise &amp; advanced networking/);
     expect(html).toMatch(/Long-range Wi-Fi/);
     expect(html).toMatch(/Sales, delivery, and professional installation/);
     expect(html).not.toMatch(/\bOD-\d+\b|\bPH-\d+\b|candidate catalogue/i);

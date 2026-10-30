@@ -50,18 +50,18 @@ describe("Home customer-facing copy", () => {
     const html = renderHomeHtml();
 
     expect(html).toContain(
-      "Starlink connectivity for vessels, offshore platforms and marine operations.",
+      "Reliable Starlink connectivity for homes, businesses, enterprises &amp; beyond.",
     );
-    expect(html).toContain('id="offshore"');
-    expect(html).toContain('id="services"');
-    expect(html).toMatch(/Explore Offshore &amp; Maritime/);
+    expect(html).toContain('id="solutions"');
+    expect(html).toContain('id="maritime"');
+    expect(html).toMatch(/Our connectivity solutions/i);
     expect(html).toMatch(/\/services\/maritime-offshore/);
     expect(html).toMatch(/Residential installation/);
     expect(html).toMatch(/\/services\/residential-installation/);
     const maritimeAt = html.indexOf("/services/maritime-offshore");
     const residentialAt = html.indexOf("/services/residential-installation");
     expect(maritimeAt).toBeGreaterThan(-1);
-    expect(maritimeAt).toBeLessThan(residentialAt);
+    expect(residentialAt).toBeLessThan(maritimeAt);
 
     for (const pattern of internalPlanningPatterns) {
       expect(html, `matched forbidden pattern: ${pattern}`).not.toMatch(
@@ -76,6 +76,6 @@ describe("Home customer-facing copy", () => {
     for (const pattern of falseCapabilityPatterns) {
       expect(html, `matched false capability: ${pattern}`).not.toMatch(pattern);
     }
-    expect(html).toMatch(/Contact for current reach options/i);
+    expect(html).toMatch(/Contact Skylink/i);
   });
 });

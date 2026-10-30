@@ -44,7 +44,7 @@ export function SiteHeader() {
             to="/contact?intent=quote"
             className="min-h-11 px-5 py-2.5"
           >
-            Go to contact
+            Get a Quote
           </ButtonLink>
         </nav>
 
@@ -83,7 +83,7 @@ export function SiteHeader() {
               className="mt-2 w-full"
               onClick={() => setOpen(false)}
             >
-              Go to contact
+              Get a Quote
             </ButtonLink>
           </Container>
         </div>

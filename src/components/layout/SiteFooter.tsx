@@ -23,6 +23,11 @@ export function SiteFooter() {
           <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-200/90">
             {site.relationshipPhrase}
           </p>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-400">
+            Professional Starlink installation, equipment, and connectivity
+            solutions for homes, businesses, enterprises, and maritime
+            operations.
+          </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
           <div>

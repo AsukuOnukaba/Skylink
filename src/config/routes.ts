@@ -13,11 +13,10 @@ export type AppRoute = {
 };
 
 const staticRoutes: AppRoute[] = [
-  { path: "/", label: "Home" },
+  { path: "/", label: "Home", primaryNav: true },
   {
     path: "/services/maritime-offshore",
     label: "Offshore & Maritime",
-    primaryNav: true,
     footer: "explore",
   },
   { path: "/services", label: "Services", primaryNav: true, footer: "explore" },

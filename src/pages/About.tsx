@@ -24,9 +24,9 @@ export function About() {
               About {site.brandName}
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.relationshipPhrase} The work we lead with is connectivity
-              for boats, work vessels, and offshore sites. Homes, offices, and
-              other sites remain part of the same careful installation practice.
+              {site.relationshipPhrase} We provide professional Starlink
+              installation and connectivity support for homes, businesses,
+              enterprise sites, vessels, and offshore operations.
             </p>
           </Container>
         </section>
@@ -43,12 +43,13 @@ export function About() {
               Who we are
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {site.brandName} helps operators and households decide whether a
-              Starlink installation is a fit. Offshore and maritime jobs are
-              scoped around the vessel, the power, and the operator's access
-              rules. Home and business installs, remounts, Wi-Fi coverage, and
-              backup power planning are still available. We do not claim to be
-              Starlink itself.
+              {site.brandName} helps households, business owners, facilities
+              teams, organisations, and marine operators decide how a Starlink
+              installation should fit their site. Our published services cover
+              mounting and cabling, Wi-Fi and network distribution, relocation,
+              equipment, backup-power planning, enterprise requirements, and
+              specialist maritime installations. We do not claim to be Starlink
+              itself.
             </p>
           </Container>
         </section>
@@ -67,16 +68,16 @@ export function About() {
             <ul className="mt-6 grid gap-4 sm:grid-cols-3">
               {[
                 {
-                  title: "Understand the site",
-                  body: "Every location is different. We start by clarifying what you need before talking about hardware or mounting.",
+                  title: "Understand the requirement",
+                  body: "We start with the location, users, connectivity needs, and the environment before recommending hardware or mounting.",
                 },
                 {
-                  title: "Explain the path",
-                  body: "Survey, quote, or a simple conversation—whichever fits—without forcing an account or checkout flow.",
+                  title: "Assess the site",
+                  body: "Sky view, mounting, cable routes, power, network layout, access, and approvals shape the agreed approach.",
                 },
                 {
-                  title: "Install with care",
-                  body: "Mounting, cabling, and handover are treated as practical field work on your property.",
+                  title: "Install and hand over",
+                  body: "We complete the agreed installation and configuration, test it on site, and explain the working setup.",
                 },
               ].map((step) => (
                 <li key={step.title}>
@@ -92,11 +93,7 @@ export function About() {
               ))}
             </ul>
             <p className="mt-8 text-sm text-slate-700">
-              See{" "}
-              <TextLink to="/services/maritime-offshore">
-                Offshore & Maritime
-              </TextLink>
-              , the <TextLink to="/services">services overview</TextLink>,{" "}
+              Explore the <TextLink to="/services">services overview</TextLink>,{" "}
               <TextLink to="/products">products</TextLink>,{" "}
               <TextLink to="/locations">service areas</TextLink>, the{" "}
               <TextLink to="/guide/starlink-nigeria">Nigeria guide</TextLink>,
@@ -108,8 +105,10 @@ export function About() {
         </section>
 
         <CtaBand
-          title={`Learn more or get in touch with ${site.brandName}`}
-          description={`Browse Services for how ${site.brandName} approaches installation, then open Contact for current reach options.`}
+          title={`Talk to ${site.brandName} about your connectivity needs`}
+          description="From a home installation or office network to an enterprise site or vessel, start with your location and requirements."
+          primary={{ to: "/contact?intent=quote", label: "Get a Quote" }}
+          secondary={{ to: "/services", label: "Explore Services" }}
         />
       </main>
     </AppShell>

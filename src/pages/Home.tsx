@@ -1,94 +1,171 @@
 import { CtaBand } from "@/components/home/CtaBand";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { AppShell } from "@/components/layout/AppShell";
+import { PageMeta } from "@/components/seo/PageMeta";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
-import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
-import { formatNgn, getPublishedProduct } from "@/data/products";
+import { publishedLocations } from "@/data/locations";
 import {
-  maritimeServices,
-  servicesInCommercialOrder,
-  type ServiceRecord,
-} from "@/data/services";
+  formatNgn,
+  getPublishedProduct,
+  type ProductRecord,
+} from "@/data/products";
+import { getPublishedService, type ServiceRecord } from "@/data/services";
 
-const deploymentStages = [
+const solutionCategories = [
   {
-    title: "Site and connectivity assessment",
-    body: "We start from the vessel or platform: where it operates, what must stay online, and whether a second path such as LTE or VSAT is already in the picture.",
+    slug: "residential-installation",
+    label: "Residential installation",
+    description:
+      "Home installations with site assessment, roof or wall mounting, cable routing, router setup, and practical Wi-Fi planning.",
   },
   {
-    title: "Mounting and obstructions",
-    body: "Masts, cranes, superstructure, and a moving deck change the sky view. The mount has to hold through spray and vibration, not just look clear on a calm day.",
+    slug: "business-connectivity",
+    label: "Business installation",
+    description:
+      "Connectivity for offices and commercial sites, planned around users, mounting, cabling, and the working network.",
   },
   {
-    title: "Cable routing",
-    body: "Cable runs on a hull have to survive flex and water. A Gen 3 cable does not fit every dish, so the route and the connector are agreed before anyone drills.",
+    slug: "enterprise-plans",
+    label: "Enterprise solutions",
+    description:
+      "Larger-site connectivity planning, integration with existing networks, and deployment requirements agreed for each organisation.",
   },
   {
-    title: "Power",
-    body: "Offshore and boat power is often a generator, a battery bank, an inverter, or shore power. The terminal's draw has to fit that supply.",
-  },
-  {
-    title: "Onboard network",
-    body: "Some jobs stop at a working router. Others, when scoped, separate crew traffic from operations or fail over to another link.",
-  },
-  {
-    title: "Operator coordination",
-    body: "Access, inductions, and permit-to-work sit with the vessel or site operator. We work inside that system. We do not replace it or issue offshore certificates.",
-  },
-  {
-    title: "Activation and handover",
-    body: "Where the agreed service includes it, we activate the link, note a baseline, and leave practical handover notes. Not every conversation includes a full install.",
+    slug: "maritime-offshore",
+    label: "Maritime & offshore",
+    description:
+      "Specialist mounting, power, cabling, and onboard network planning for vessels and offshore environments.",
   },
 ] as const;
 
-const marinePlaces = [
-  { to: "/starlink-installation-niger-delta", label: "Niger Delta" },
-  { to: "/starlink-installation-delta", label: "Delta State" },
-  { to: "/starlink-installation-yenagoa", label: "Yenagoa" },
-  { to: "/starlink-installation-port-harcourt", label: "Port Harcourt" },
+const processSteps = [
+  {
+    title: "Consultation",
+    body: "We start with your location, connectivity requirements, users, equipment, and installation environment.",
+  },
+  {
+    title: "Site assessment",
+    body: "We assess sky view, mounting options, cable routes, power, network needs, access, and other site constraints.",
+  },
+  {
+    title: "Installation & configuration",
+    body: "We complete the agreed mounting, cabling, equipment setup, and network configuration for the site.",
+  },
+  {
+    title: "Testing & handover",
+    body: "We test the installation and explain the setup, practical next steps, and relevant handover information.",
+  },
 ] as const;
 
-function ServiceCard({ service }: { service: ServiceRecord }) {
+const additionalServiceSlugs = [
+  "relocation",
+  "wifi-networking",
+  "long-range-wifi",
+  "backup-power",
+  "sales-installation",
+  "estate-wifi",
+] as const;
+
+const featuredProductSlugs = [
+  "starlink-gen3-standard",
+  "starlink-mesh-router",
+  "wireless-long-range-wifi",
+  "starlink-flat-high-performance",
+] as const;
+
+function getServices(slugs: readonly string[]): ServiceRecord[] {
+  return slugs
+    .map((slug) => getPublishedService(slug))
+    .filter((service): service is ServiceRecord => Boolean(service));
+}
+
+function ServiceCard({
+  service,
+  title,
+  description,
+}: {
+  service: ServiceRecord;
+  title?: string;
+  description?: string;
+}) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-sm">
+    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
           alt={service.imageAlt || ""}
           className="aspect-[16/10] w-full object-cover object-center"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       ) : null}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-lg font-semibold text-navy-800">{service.title}</h3>
+        <h3 className="text-lg font-semibold text-navy-800">
+          {title || service.title}
+        </h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">
-          {service.shortDescription}
+          {description || service.shortDescription}
         </p>
-        <TextLink
-          to={`/services/${service.slug}`}
-          className="mt-4 inline-flex text-sm"
-        >
-          Learn more
+        <TextLink to={`/services/${service.slug}`} className="mt-4 inline-flex text-sm">
+          Explore this solution
         </TextLink>
       </div>
-    </div>
+    </article>
+  );
+}
+
+function ProductCard({ product }: { product: ProductRecord }) {
+  const showPrice =
+    product.pricePublished &&
+    typeof product.priceNgn === "number" &&
+    product.priceNgn > 0;
+
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
+      {product.imageSrc ? (
+        <Picture
+          src={product.imageSrc}
+          alt={product.imageAlt || product.name}
+          className="aspect-[16/10] w-full object-cover object-center"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
+      ) : null}
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-base font-semibold text-navy-800">{product.name}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">
+          {product.shortDescription}
+        </p>
+        <p className="mt-3 text-sm font-semibold text-navy-950">
+          {showPrice ? formatNgn(product.priceNgn as number) : "Request pricing"}
+        </p>
+        <TextLink to={`/products/${product.slug}`} className="mt-3 inline-flex text-sm">
+          View product
+        </TextLink>
+      </div>
+    </article>
   );
 }
 
 export function Home() {
-  const maritime = maritimeServices();
-  const maritimeSlugs = new Set(maritime.map((service) => service.slug));
-  const otherServices = servicesInCommercialOrder().filter(
-    (service) => !maritimeSlugs.has(service.slug),
-  );
-  const flatHighPerformance = getPublishedProduct(
-    "starlink-flat-high-performance",
-  );
+  const solutions = solutionCategories
+    .map((category) => ({
+      ...category,
+      service: getPublishedService(category.slug),
+    }))
+    .filter(
+      (item): item is (typeof solutionCategories)[number] & { service: ServiceRecord } =>
+        Boolean(item.service),
+    );
+  const additionalServices = getServices(additionalServiceSlugs);
+  const maritime = getPublishedService("maritime-offshore");
+  const products = featuredProductSlugs
+    .map((slug) => getPublishedProduct(slug))
+    .filter((product): product is ProductRecord => Boolean(product));
+  const places = publishedLocations().slice(0, 4);
 
   return (
     <AppShell>
@@ -98,41 +175,30 @@ export function Home() {
           aria-labelledby="home-hero-heading"
           className="relative overflow-hidden bg-navy-950 text-white"
         >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-40"
-            aria-hidden="true"
-          >
+          <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-sky-500/30" />
             <div className="absolute -right-8 top-16 h-96 w-96 rounded-full border border-sky-300/20" />
           </div>
-
           <Container className="relative grid gap-10 py-14 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:items-center md:py-20 lg:py-24">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.14em] text-sky-300">
-                Offshore & maritime connectivity
+                Professional Starlink installation & connectivity
               </p>
               <h1
                 id="home-hero-heading"
                 className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[3.15rem]"
               >
-                Starlink connectivity for vessels, offshore platforms and marine
-                operations.
+                Reliable Starlink connectivity for homes, businesses, enterprises & beyond.
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200/90">
-                {site.brandName} helps plan Starlink installations for boats,
-                work vessels and offshore sites, including site assessments,
-                equipment mounting, cable routing, power considerations and
-                onboard Wi-Fi and network setup.
+                From residential installations and business networking to enterprise deployments and maritime connectivity, {site.brandName} helps you plan, install, and optimise Starlink solutions for your location and requirements.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <ButtonLink
-                  to="/services/maritime-offshore"
-                  variant="primaryOnDark"
-                >
-                  Explore Offshore & Maritime
+                <ButtonLink to="/services" variant="primaryOnDark">
+                  Explore Our Services
                 </ButtonLink>
-                <ButtonLink to="/services" variant="secondaryOnDark">
-                  Explore Our Solutions
+                <ButtonLink to="/contact?intent=quote" variant="secondaryOnDark">
+                  Get a Quote
                 </ButtonLink>
               </div>
             </div>
@@ -140,213 +206,148 @@ export function Home() {
           </Container>
         </section>
 
-        {maritime.length > 0 ? (
-          <section
-            id="offshore"
-            aria-labelledby="home-maritime-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container>
-              <div className="max-w-2xl">
-                <h2
-                  id="home-maritime-heading"
-                  className="text-3xl font-bold text-navy-950"
-                >
-                  Connectivity built for marine environments
-                </h2>
-                <p className="mt-3 text-base leading-relaxed text-slate-700">
-                  From working vessels to offshore platforms, plan connectivity
-                  around the site, the equipment, the power, the mounting, and
-                  the onboard network. Each offering below is a different job.
-                </p>
-              </div>
-              <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {maritime.map((service) => (
-                  <li key={service.slug}>
-                    <ServiceCard service={service} />
-                  </li>
-                ))}
-              </ul>
-            </Container>
-          </section>
-        ) : null}
-
-        <section
-          id="marine-deployment"
-          aria-labelledby="home-process-heading"
-          className="bg-slate-100 py-[var(--space-section)]"
-        >
+        <section id="solutions" aria-labelledby="home-solutions-heading" className="bg-white py-[var(--space-section)]">
           <Container>
             <div className="max-w-2xl">
-              <h2
-                id="home-process-heading"
-                className="text-3xl font-bold text-navy-950"
-              >
-                How a marine deployment is approached
+              <h2 id="home-solutions-heading" className="text-3xl font-bold text-navy-950">
+                Our connectivity solutions
               </h2>
               <p className="mt-3 text-base leading-relaxed text-slate-700">
-                A house install is mostly sky view and a cable to a router. On
-                the water, motion, salt, restricted access, and the operator's
-                own safety rules decide the job. These are the stages we work
-                through when they apply. They are not a package that every
-                enquiry includes.
+                Professional installation and connectivity planning for the environment where you need Starlink to work.
               </p>
             </div>
-            <ol className="mt-10 grid gap-4 md:grid-cols-2">
-              {deploymentStages.map((stage, index) => (
-                <li key={stage.title}>
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {solutions.map(({ service, label, description }) => (
+                <li key={service.slug}>
+                  <ServiceCard service={service} title={label} description={description} />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+
+        <section id="how-it-works" aria-labelledby="home-process-heading" className="bg-slate-100 py-[var(--space-section)]">
+          <Container>
+            <div className="max-w-2xl">
+              <h2 id="home-process-heading" className="text-3xl font-bold text-navy-950">
+                How Skylink works
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-slate-700">
+                The exact scope changes by property, business, enterprise site, or vessel, but every project starts with the environment and the connectivity requirement.
+              </p>
+            </div>
+            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <li key={step.title}>
                   <Card className="h-full">
-                    <p className="text-sm font-semibold text-sky-700">
-                      {index + 1}
-                    </p>
-                    <h3 className="mt-2 text-lg font-semibold text-navy-800">
-                      {stage.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                      {stage.body}
-                    </p>
+                    <p className="text-sm font-semibold text-sky-700">0{index + 1}</p>
+                    <h3 className="mt-2 text-lg font-semibold text-navy-800">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-700">{step.body}</p>
                   </Card>
                 </li>
               ))}
             </ol>
-            <p className="mt-8 text-sm">
-              <TextLink to="/services/maritime-offshore">
-                Review the marine deployment process
-              </TextLink>
-            </p>
           </Container>
         </section>
 
-        {flatHighPerformance ? (
-          <section
-            id="marine-equipment"
-            aria-labelledby="home-equipment-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container className="grid gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center">
-              {flatHighPerformance.imageSrc ? (
+        {maritime ? (
+          <section id="maritime" aria-labelledby="home-maritime-heading" className="bg-white py-[var(--space-section)]">
+            <Container className="grid gap-8 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:items-center">
+              {maritime.imageSrc ? (
                 <Picture
-                  src={flatHighPerformance.imageSrc}
-                  alt={
-                    flatHighPerformance.imageAlt ||
-                    "Starlink Flat High Performance kit"
-                  }
+                  src={maritime.imageSrc}
+                  alt={maritime.imageAlt || "Maritime Starlink installation"}
                   className="aspect-[4/3] w-full rounded-lg object-cover object-center"
-                  sizes="(max-width: 768px) 100vw, 520px"
+                  sizes="(max-width: 768px) 100vw, 560px"
                 />
               ) : null}
               <div>
-                <h2
-                  id="home-equipment-heading"
-                  className="text-3xl font-bold text-navy-950"
-                >
-                  Equipment discussed for marine work
+                <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">Maritime specialisation</p>
+                <h2 id="home-maritime-heading" className="mt-3 text-3xl font-bold text-navy-950">
+                  Specialised connectivity for maritime & offshore operations
                 </h2>
-                <p className="mt-3 text-base leading-relaxed text-slate-700">
-                  The boat and offshore pages discuss the{" "}
-                  {flatHighPerformance.name} for demanding and on-water use. It
-                  is not the right terminal for every craft, and the plan
-                  Starlink offers for it is confirmed per vessel. A listed price
-                  is the catalogue figure, not a statement that the kit is in
-                  stock.
+                <p className="mt-4 text-base leading-relaxed text-slate-700">
+                  Vessel and offshore installations bring specific mounting, motion, salt exposure, power, cable-routing, access, and onboard-network requirements. Skylink scopes those constraints with the operator and keeps the detailed deployment process on the dedicated maritime pages.
                 </p>
-                {flatHighPerformance.pricePublished &&
-                flatHighPerformance.priceNgn ? (
-                  <p className="mt-4 text-lg font-semibold text-navy-950">
-                    {formatNgn(flatHighPerformance.priceNgn)}
-                  </p>
-                ) : null}
-                <div className="mt-6 flex flex-wrap gap-4 text-sm">
-                  <TextLink to={`/products/${flatHighPerformance.slug}`}>
-                    View the Flat High Performance kit
-                  </TextLink>
-                  <TextLink to="/services/boat-installation">
-                    View vessel installation solutions
-                  </TextLink>
+                <div className="mt-6">
+                  <ButtonLink to="/services/maritime-offshore">Explore Maritime & Offshore</ButtonLink>
                 </div>
               </div>
             </Container>
           </section>
         ) : null}
 
-        <section
-          id="marine-areas"
-          aria-labelledby="home-areas-heading"
-          className="bg-slate-100 py-[var(--space-section)]"
-        >
+        <section id="additional-services" aria-labelledby="home-additional-heading" className="bg-slate-100 py-[var(--space-section)]">
           <Container>
-            <div className="max-w-2xl">
-              <h2
-                id="home-areas-heading"
-                className="text-3xl font-bold text-navy-950"
-              >
-                Where marine work is discussed
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-700">
-                These pages describe local conditions. They are not offices, and
-                they do not promise a crew on every creek or platform. Scope is
-                still agreed per job.
-              </p>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl">
+                <h2 id="home-additional-heading" className="text-3xl font-bold text-navy-950">
+                  More installation & connectivity support
+                </h2>
+                <p className="mt-3 text-base leading-relaxed text-slate-700">
+                  Extend, move, protect, or improve an existing connection with published services matched to your site.
+                </p>
+              </div>
+              <TextLink to="/services" className="shrink-0">View all services</TextLink>
             </div>
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {marinePlaces.map((place) => (
-                <li key={place.to}>
-                  <Card className="h-full">
-                    <h3 className="text-lg font-semibold text-navy-800">
-                      <TextLink to={place.to}>{place.label}</TextLink>
-                    </h3>
-                  </Card>
-                </li>
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {additionalServices.map((service) => (
+                <li key={service.slug}><ServiceCard service={service} /></li>
               ))}
             </ul>
-            <p className="mt-8 text-sm">
-              <TextLink to="/locations">All service areas</TextLink>
-            </p>
           </Container>
         </section>
 
-        {otherServices.length > 0 ? (
-          <section
-            id="services"
-            aria-labelledby="home-other-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
+        {products.length > 0 ? (
+          <section id="products" aria-labelledby="home-products-heading" className="bg-white py-[var(--space-section)]">
             <Container>
-              <div className="max-w-2xl">
-                <h2
-                  id="home-other-heading"
-                  className="text-3xl font-bold text-navy-950"
-                >
-                  Offices, homes, and other work
-                </h2>
-                <p className="mt-3 text-base text-slate-700">
-                  Enterprise and business connectivity, then residential
-                  installation and the rest of the catalogue. These remain
-                  available. They are not the first reason this site exists.
-                </p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div className="max-w-2xl">
+                  <h2 id="home-products-heading" className="text-3xl font-bold text-navy-950">Products & equipment</h2>
+                  <p className="mt-3 text-base leading-relaxed text-slate-700">
+                    Explore general-purpose Starlink kits, networking hardware, mounting accessories, and specialist equipment. Published prices do not confirm stock.
+                  </p>
+                </div>
+                <TextLink to="/products" className="shrink-0">Browse all products</TextLink>
               </div>
-              <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {otherServices.map((service) => (
-                  <li key={service.slug}>
-                    <ServiceCard service={service} />
-                  </li>
-                ))}
+              <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {products.map((product) => <li key={product.slug}><ProductCard product={product} /></li>)}
               </ul>
             </Container>
           </section>
         ) : null}
 
+        {places.length > 0 ? (
+          <section id="service-areas" aria-labelledby="home-areas-heading" className="bg-slate-100 py-[var(--space-section)]">
+            <Container>
+              <div className="max-w-2xl">
+                <h2 id="home-areas-heading" className="text-3xl font-bold text-navy-950">Service areas</h2>
+                <p className="mt-3 text-base leading-relaxed text-slate-700">
+                  Browse published location guidance for local building, access, weather, and installation conditions. These pages do not imply an office in every location.
+                </p>
+              </div>
+              <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {places.map((place) => (
+                  <li key={place.placeKey}>
+                    <Card className="h-full">
+                      <h3 className="text-lg font-semibold text-navy-800">
+                        <TextLink to={`/starlink-installation-${place.placeKey}`}>{place.placeName}</TextLink>
+                      </h3>
+                      <p className="mt-2 text-sm text-slate-700">{place.regionLabel}</p>
+                    </Card>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 text-sm"><TextLink to="/locations">View all service areas</TextLink></p>
+            </Container>
+          </section>
+        ) : null}
+
         <CtaBand
-          title="Contact Skylink about a marine project"
-          description={`Call or WhatsApp ${site.phoneDisplay}, or email ${site.email}. Contact for current reach options. The online enquiry form is not available.`}
-          primary={{
-            to: "/contact?intent=quote&service=maritime-offshore",
-            label: "Contact Skylink About a Marine Project",
-          }}
-          secondary={{
-            to: "/services/boat-installation",
-            label: "View Vessel Installation Solutions",
-          }}
+          title="Ready to get connected?"
+          description={`Whether you are setting up Starlink at home, connecting your business, planning an enterprise deployment, or exploring maritime solutions, speak with ${site.brandName} about your requirements.`}
+          primary={{ to: "/contact", label: "Contact Skylink" }}
+          secondary={{ to: "/services", label: "Explore Services" }}
         />
       </main>
     </AppShell>

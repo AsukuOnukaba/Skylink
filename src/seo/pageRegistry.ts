@@ -80,10 +80,10 @@ export function listPublicPages(): PageSeoRecord[] {
   pages.push(
     staticPage(
       "/",
-      `${site.brandName} — Starlink for vessels and offshore sites`,
-      `${site.brandName} plans Starlink connectivity for boats, work vessels, and offshore sites in Nigeria, and still installs for offices and homes. Contact for current reach options.`,
+      `${site.brandName} — Starlink installation & connectivity`,
+      `${site.brandName} provides professional Starlink installation, equipment, and connectivity solutions for homes, businesses, enterprises, vessels, and offshore sites in Nigeria.`,
       {
-        ogImagePath: "/images/hero-maritime-vessel.jpeg",
+        ogImagePath: "/images/hero-starlink-installation.jpeg",
         jsonLd: [organizationJsonLd(siteOrigin), webSiteJsonLd(siteOrigin)],
       },
     ),
@@ -93,7 +93,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/services",
       `Starlink installation services — ${site.brandName}`,
-      `Offshore and maritime Starlink work comes first, followed by offices, homes, and the rest of the ${site.brandName} service list.`,
+      `Explore ${site.brandName} Starlink services for homes, businesses, enterprise sites, advanced networking, vessels, and offshore operations.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),
@@ -147,7 +147,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/about",
       `About ${site.brandName} — Starlink installation business`,
-      `${site.relationshipPhrase} ${site.brandName} leads with Starlink connectivity for vessels and offshore sites, and still installs for offices and homes in Nigeria.`,
+      `${site.relationshipPhrase} ${site.brandName} supports residential, business, enterprise, and maritime customers with professional Starlink installation and connectivity services in Nigeria.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),

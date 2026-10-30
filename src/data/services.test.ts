@@ -65,9 +65,9 @@ describe("services catalogue", () => {
     const srcs = publishedServices().map((s) => s.imageSrc);
     expect(new Set(srcs).size).toBe(srcs.length);
     const ordered = servicesInCommercialOrder().map((s) => s.slug);
-    expect(ordered[0]).toBe("maritime-offshore");
-    expect(ordered.indexOf("maritime-offshore")).toBeLessThan(
-      ordered.indexOf("residential-installation"),
+    expect(ordered[0]).toBe("residential-installation");
+    expect(ordered.indexOf("residential-installation")).toBeLessThan(
+      ordered.indexOf("maritime-offshore"),
     );
   });
 });

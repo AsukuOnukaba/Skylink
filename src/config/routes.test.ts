@@ -11,7 +11,7 @@ describe("route registry", () => {
   it("exposes products and locations in nav when catalogues are published", () => {
     const paths = primaryNavRoutes.map((r) => r.path);
     expect(paths).toEqual([
-      "/services/maritime-offshore",
+      "/",
       "/services",
       "/products",
       "/locations",
