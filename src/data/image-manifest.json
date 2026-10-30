@@ -215,6 +215,23 @@
       }
     ]
   },
+  "/images/products/starlink-mesh-router.jpeg": {
+    "src": "/images/products/starlink-mesh-router.jpeg",
+    "width": 1254,
+    "height": 1254,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/products/starlink-mesh-router.w480.avif",
+        "webp": "/images/products/starlink-mesh-router.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/products/starlink-mesh-router.w768.avif",
+        "webp": "/images/products/starlink-mesh-router.w768.webp"
+      }
+    ]
+  },
   "/images/products/starlink-mini.jpeg": {
     "src": "/images/products/starlink-mini.jpeg",
     "width": 768,

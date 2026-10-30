@@ -280,7 +280,7 @@ export const products: ProductRecord[] = [
     whatsInBox: ["Starlink Mesh Router", "Power supply", "Quick start guide"],
     imageSrc: "/images/products/starlink-mesh-router.jpeg",
     imageAlt:
-      "Official Starlink Router 3 product view on a grey background, compatible for use as a Gen 3 mesh router",
+      "White four-antenna wireless router shown on a clean white studio background",
     priceNgn: 250_000,
     pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
