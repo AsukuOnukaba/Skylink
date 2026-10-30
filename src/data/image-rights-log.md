@@ -48,7 +48,7 @@ Status values: `cleared` | `pending` | `denied` | `n/a (skylink-owned)` | `omitt
 
 | Skylink path | DataGram source | Product slug | Subject (verified) | Status | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `…/products/starlink-gen3-standard.jpeg` | Gen3 dish + portable power field photo | `starlink-gen3-standard` | Gen 3 Standard dish on kickstand | **cleared** | Alt names the dish; does not claim the power station is in-box |
+| `…/products/starlink-gen3-standard.jpeg` | Owner-supplied image in the 30 Oct 2026 replacement request | `starlink-gen3-standard` | Gen3 v4 Standard kit with dish, router, power supply, and cables | **cleared for requested catalogue use** | Replacement supplied directly for this product card; alt describes the visible kit components |
 | `…/products/starlink-flat-high-performance.jpeg` | `FlatHighperformanceversion.jpeg` | `starlink-flat-high-performance` | Unboxed Flat HP kit on wood floor | **cleared** | Model-accurate unboxing |
 | `…/products/starlink-pivot-mount.jpg` | Pivot mount unboxing | `starlink-pivot-mount` | Pivot mount in retail insert | **cleared** | Accessory match |
 | `…/products/wireless-long-range-wifi.jpeg` | `Long-Range.jpeg` | `wireless-long-range-wifi` | Outdoor PtP antenna pair | **cleared** | Matches wireless long-range kit class |

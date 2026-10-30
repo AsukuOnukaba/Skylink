@@ -85,7 +85,7 @@ export const products: ProductRecord[] = [
     ],
     imageSrc: "/images/products/starlink-gen3-standard.jpeg",
     imageAlt:
-      "Starlink Gen 3 Standard dish on a kickstand beside a portable power station",
+      "Starlink Gen3 v4 Standard kit with dish, router, power supply, and connection cables on a white background",
     priceNgn: 750_000,
     pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,

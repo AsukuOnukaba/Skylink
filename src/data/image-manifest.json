@@ -200,8 +200,8 @@
   },
   "/images/products/starlink-gen3-standard.jpeg": {
     "src": "/images/products/starlink-gen3-standard.jpeg",
-    "width": 960,
-    "height": 1280,
+    "width": 1254,
+    "height": 1254,
     "variants": [
       {
         "w": 480,
