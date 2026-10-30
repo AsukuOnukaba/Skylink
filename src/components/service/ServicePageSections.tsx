@@ -1,4 +1,4 @@
-import { CheckCircle2, CircleAlert, ClipboardCheck, UserRound } from "lucide-react";
+import { CheckCircle2, CircleAlert, ClipboardCheck } from "lucide-react";
 import { ProductImage } from "@/components/catalogue/ProductImage";
 import { Icon } from "@/components/icons/Icon";
 import { ButtonLink } from "@/components/ui/ButtonLink";

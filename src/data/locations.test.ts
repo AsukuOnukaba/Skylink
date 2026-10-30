@@ -68,5 +68,7 @@ describe("locations catalogue", () => {
     for (const banned of ["datagram", "₦", "certified", "1000+"]) {
       expect(text.includes(banned)).toBe(false);
     }
+    expect(publishedLocations().every((location) => Boolean(location.imageSrc))).toBe(true);
+    expect(publishedLocations().every((location) => (location.imageAlt?.length ?? 0) > 20)).toBe(true);
   });
 });

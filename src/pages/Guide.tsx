@@ -1,6 +1,7 @@
 import { CtaBand } from "@/components/home/CtaBand";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
@@ -34,6 +35,16 @@ export function Guide() {
               className="mt-6 aspect-[16/9] w-full rounded-md object-cover"
               sizes="(max-width: 768px) 100vw, 720px"
             />
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Installation planning summary">
+              {[
+                ["1. Clear sky", "Check obstructions before choosing a mount."],
+                ["2. Stable power", "Plan for grid, inverter, generator, or battery use."],
+                ["3. Cable route", "Protect connectors, bends, entries, and exposed runs."],
+                ["4. Useful Wi-Fi", "Design coverage for the rooms and buildings that matter."],
+              ].map(([title, body]) => (
+                <Card key={title} className="p-4"><h2 className="text-sm font-semibold text-navy-800">{title}</h2><p className="mt-2 text-xs leading-relaxed text-slate-600">{body}</p></Card>
+              ))}
+            </div>
             <nav aria-label="Guide contents" className="mt-8">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
                 On this page

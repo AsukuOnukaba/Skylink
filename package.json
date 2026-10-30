@@ -13,6 +13,8 @@
     "test": "vitest run",
     "seo:generate": "node scripts/seo-generate.mjs",
     "seo:check": "node scripts/check-prerender.mjs",
+    "qa:pages": "node scripts/check-page-completeness.mjs",
+    "qa:http": "node scripts/check-http-routes.mjs",
     "images:fixture": "node scripts/generate-pipeline-fixture.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
     "images:pipeline": "pnpm images:fixture && pnpm images:optimize"

@@ -52,10 +52,14 @@ describe("products catalogue", () => {
     expect(getPublishedProduct("wired-long-range-wifi")?.imageSrc).toBe(
       "/images/products/wired-long-range-wifi.jpeg",
     );
-    // No honest photo: mesh file is watermarked and shows the wrong router;
-    // the only cable file shows boxed dishes, not a 45 m cable.
-    expect(getPublishedProduct("starlink-mesh-router")?.imageSrc).toBeUndefined();
-    expect(getPublishedProduct("starlink-gen3-45m-cable")?.imageSrc).toBeUndefined();
+    expect(getPublishedProduct("starlink-mesh-router")?.imageSrc).toBe(
+      "/images/products/starlink-mesh-router.jpeg",
+    );
+    expect(getPublishedProduct("starlink-gen3-45m-cable")?.imageSrc).toBe(
+      "/images/products/starlink-gen3-45m-cable.jpeg",
+    );
+    expect(publishedProducts().every((product) => Boolean(product.imageSrc))).toBe(true);
+    expect(publishedProducts().every((product) => (product.imageAlt?.length ?? 0) > 20)).toBe(true);
   });
 
   it("links only to existing service slugs", () => {

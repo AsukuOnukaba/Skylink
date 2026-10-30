@@ -22,6 +22,7 @@ export type LocationRecord = {
   faqs: LocationFaq[];
   imageSrc?: string;
   imageAlt?: string;
+  imageCaption?: string;
   seoTitle: string;
   seoDescription: string;
   published: boolean;
@@ -103,6 +104,11 @@ export const locations: LocationRecord[] = [
           "Yes. Our relocation service covers removing and remounting an existing kit, with a fresh sky-view check at the new address.",
       },
     ],
+    imageSrc: "/images/service-business-connectivity.jpeg",
+    imageAlt:
+      "Illustrative commercial Starlink installation environment relevant to dense Lagos buildings",
+    imageCaption:
+      "Illustrative commercial installation context; not presented as a Skylink project or a named Lagos site.",
     seoTitle: "Starlink installation in Lagos | Skylink Nigeria",
     seoDescription:
       "Starlink installation planning for Lagos: apartment approvals, coastal corrosion, dense-building sky view, and power planning.",
@@ -183,6 +189,11 @@ export const locations: LocationRecord[] = [
           "Some may fall under our maritime and offshore service, where scope is agreed per job after we understand the access and operator requirements.",
       },
     ],
+    imageSrc: "/images/locations/bayelsa-vessel.jpeg",
+    imageAlt:
+      "Starlink terminal on a vessel in the Niger Delta installation library",
+    imageCaption:
+      "Niger Delta field-library context, shown with attribution and not presented as a Skylink project.",
     seoTitle: "Starlink in the Niger Delta | Skylink Nigeria",
     seoDescription:
       "Starlink connectivity planning for the Niger Delta: flooding, vegetation, remote access, and power for river towns and offshore support sites.",
@@ -216,6 +227,11 @@ export const locations: LocationRecord[] = [
           "Yes. Cable entry points and mounts need good sealing to avoid water ingress.",
       },
     ],
+    imageSrc: "/images/hero-starlink-tile-roof.jpeg",
+    imageAlt:
+      "Illustrative tiled-roof Starlink installation environment relevant to Owerri homes",
+    imageCaption:
+      "Illustrative residential installation context; not presented as a completed Skylink project in Owerri.",
     seoTitle: "Starlink installation in Owerri, Imo State | Skylink",
     seoDescription:
       "Starlink installation planning for Owerri homes and businesses: roof mounts, tree cover, rain protection, and power.",
@@ -249,6 +265,11 @@ export const locations: LocationRecord[] = [
           "Possibly, using cable or a planned wireless link where line of sight allows.",
       },
     ],
+    imageSrc: "/images/hero-starlink-pole-solar.jpeg",
+    imageAlt:
+      "Illustrative pole-mounted Starlink installation with backup-power context relevant to Enugu properties",
+    imageCaption:
+      "Illustrative mounting and power context; not presented as a completed Skylink project in Enugu.",
     seoTitle: "Starlink installation in Enugu | Skylink Nigeria",
     seoDescription:
       "Starlink installation planning for Enugu: hilly terrain, sky view, rain runoff, and multi-building sites.",
@@ -282,6 +303,11 @@ export const locations: LocationRecord[] = [
           "They can. Check with your estate management first; we can explain what to ask.",
       },
     ],
+    imageSrc: "/images/hero-starlink-rooftop-hp.jpeg",
+    imageAlt:
+      "Illustrative professional rooftop Starlink installation relevant to Benin City buildings",
+    imageCaption:
+      "Illustrative rooftop installation context; not presented as a completed Skylink project in Benin City.",
     seoTitle: "Starlink installation in Benin City, Edo State | Skylink",
     seoDescription:
       "Starlink installation planning for Benin City homes and businesses: close-set buildings, estate rules, rain, and power.",
@@ -413,6 +439,11 @@ export const locations: LocationRecord[] = [
           "Often no. Neighbouring buildings and tanks block the sky. The mount is chosen after looking at that specific roof.",
       },
     ],
+    imageSrc: "/images/service-residential-installation.jpeg",
+    imageAlt:
+      "Illustrative residential wall-mount installation relevant to Anambra homes and commercial properties",
+    imageCaption:
+      "Illustrative mounting context; not presented as a completed Skylink project in Anambra State.",
     seoTitle: "Starlink installation in Anambra State | Skylink",
     seoDescription:
       "Starlink planning for Anambra: Onitsha commercial roofs, Nnewi yards, and Awka estates are surveyed separately.",
@@ -441,6 +472,11 @@ export const locations: LocationRecord[] = [
           "Sky view is often better than in a dense city. Access, power, and the distance between buildings still have to be checked.",
       },
     ],
+    imageSrc: "/images/service-relocation.jpeg",
+    imageAlt:
+      "Illustrative pole-mounted Starlink installation relevant to compounds in Ebonyi State",
+    imageCaption:
+      "Illustrative compound installation context; not presented as a completed Skylink project in Ebonyi State.",
     seoTitle: "Starlink installation in Ebonyi State | Skylink",
     seoDescription:
       "Starlink planning for Ebonyi and Abakaliki: estate roofs, tree cover, longer building links, and backup power.",

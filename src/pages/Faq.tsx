@@ -54,10 +54,11 @@ export function Faq() {
             </div>
 
             <p className="mt-8 text-sm text-slate-700">
-              Still deciding? Read{" "}
-              <TextLink to="/about">About {site.brandName}</TextLink> or the{" "}
-              <TextLink to="/services">services overview</TextLink>, then visit{" "}
-              <TextLink to="/contact">Contact</TextLink>.
+              Explore <TextLink to="/services/residential-installation">residential installation</TextLink>,{" "}
+              <TextLink to="/services/business-connectivity">business connectivity</TextLink>,{" "}
+              <TextLink to="/services/enterprise-plans">enterprise solutions</TextLink>, or{" "}
+              <TextLink to="/services/maritime-offshore">maritime connectivity</TextLink>. You can also read{" "}
+              <TextLink to="/about">About {site.brandName}</TextLink> or visit <TextLink to="/contact">Contact</TextLink>.
             </p>
           </Container>
         </section>

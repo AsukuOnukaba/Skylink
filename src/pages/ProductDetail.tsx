@@ -191,6 +191,8 @@ export function ProductDetail() {
         <CtaBand
           title={`Ask about ${product.name}`}
           description={`This site does not take checkout orders. Open Contact about this product for current reach options with ${site.brandName}.`}
+          primary={{ to: contactTo, label: "Enquire About This Product" }}
+          secondary={{ to: "/products", label: "All Products" }}
         />
       </main>
     </AppShell>

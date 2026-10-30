@@ -49,6 +49,9 @@ export function Gallery() {
                       <span className="mt-1 block text-slate-500">
                         {project.place}
                       </span>
+                      <TextLink to={project.servicePath} className="mt-3 inline-flex text-xs">
+                        {project.serviceLabel}
+                      </TextLink>
                     </figcaption>
                   </figure>
                 </li>
@@ -56,7 +59,14 @@ export function Gallery() {
             </ul>
           </Container>
         </section>
+        <CtaBand
+          title="Planning a similar installation environment?"
+          description="These are attributed DataGram field-library examples, not Skylink case studies. Explore the matching Skylink service or discuss your own site requirements."
+          primary={{ to: "/services", label: "Explore Services" }}
+          secondary={{ to: "/contact?intent=quote", label: "Get a Quote" }}
+        />
       </main>
     </AppShell>
   );
 }
+import { CtaBand } from "@/components/home/CtaBand";

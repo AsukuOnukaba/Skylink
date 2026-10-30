@@ -52,7 +52,7 @@ export function ServiceDetail() {
         <section aria-labelledby="service-overview-heading" className="bg-white py-[var(--space-section)]">
           <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">Service overview</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">Overview</p>
               <h2 id="service-overview-heading" className="mt-2 text-2xl font-bold text-navy-950">Plan for the actual environment</h2>
             </div>
             <p className="text-base leading-relaxed text-slate-700">{service.description}</p>

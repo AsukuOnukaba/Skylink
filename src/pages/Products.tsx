@@ -113,6 +113,8 @@ export function Products() {
         <CtaBand
           title={`Need help choosing hardware with ${site.brandName}?`}
           description={`This site does not run a shopping cart. Read Services or About, then open Contact for current ways to reach ${site.brandName}.`}
+          primary={{ to: "/contact?intent=product", label: "Ask About a Product" }}
+          secondary={{ to: "/services", label: "Explore Services" }}
         />
       </main>
     </AppShell>
