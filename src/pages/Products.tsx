@@ -1,8 +1,8 @@
 import { CtaBand } from "@/components/home/CtaBand";
+import { ProductImage } from "@/components/catalogue/ProductImage";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Container } from "@/components/ui/Container";
-import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
@@ -59,14 +59,11 @@ export function Products() {
                   return (
                     <li key={product.slug}>
                       <div className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
-                        {product.imageSrc ? (
-                          <Picture
-                            src={product.imageSrc}
-                            alt={product.imageAlt || product.name}
-                            className="aspect-[16/10] w-full object-cover object-center"
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          />
-                        ) : null}
+                        <ProductImage
+                          product={product}
+                          className="aspect-[16/10] w-full"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
                         <div className="flex flex-1 flex-col p-6">
                           <h3 className="text-lg font-semibold text-navy-800">
                             {product.name}

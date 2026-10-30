@@ -18,24 +18,27 @@ const visuals = {
 export function HeroVisual() {
   return (
     <figure className="rounded-xl border border-white/10 bg-navy-800/60 p-3 shadow-md">
-      <div className="grid aspect-[4/5] grid-cols-2 grid-rows-[minmax(0,1.5fr)_minmax(0,1fr)] gap-3 overflow-hidden rounded-lg sm:aspect-[5/6]">
+      <div className="grid h-[28rem] grid-cols-2 grid-rows-[minmax(0,1.45fr)_minmax(0,1fr)] gap-3 overflow-hidden rounded-lg sm:h-[34rem] md:h-[32rem] lg:h-[36rem]">
         <Picture
           src={visuals.residential.src}
           alt={visuals.residential.alt}
           priority
           sizes="(max-width: 768px) 100vw, 560px"
+          pictureClassName="col-span-2 block min-h-0 overflow-hidden"
           className="col-span-2 h-full w-full object-cover object-center"
         />
         <Picture
           src={visuals.business.src}
           alt={visuals.business.alt}
           sizes="(max-width: 768px) 50vw, 280px"
+          pictureClassName="block min-h-0 overflow-hidden"
           className="h-full w-full object-cover object-center"
         />
         <Picture
           src={visuals.maritime.src}
           alt={visuals.maritime.alt}
           sizes="(max-width: 768px) 50vw, 280px"
+          pictureClassName="block min-h-0 overflow-hidden"
           className="h-full w-full object-cover object-[center_40%]"
         />
       </div>

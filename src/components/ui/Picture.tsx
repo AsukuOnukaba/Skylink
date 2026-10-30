@@ -18,6 +18,8 @@ type PictureProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   priority?: boolean;
   /** Responsive sizes hint for srcset selection. */
   sizes?: string;
+  /** Optional classes for the rendered picture wrapper. */
+  pictureClassName?: string;
 };
 
 /**
@@ -31,6 +33,7 @@ export function Picture({
   width,
   height,
   sizes = "(max-width: 768px) 100vw, 768px",
+  pictureClassName,
   ...rest
 }: PictureProps) {
   const entry = manifest[src];
@@ -59,7 +62,7 @@ export function Picture({
   const webpSrcSet = sorted.map((v) => `${v.webp} ${v.w}w`).join(", ");
 
   return (
-    <picture>
+    <picture className={pictureClassName}>
       <source type="image/avif" srcSet={avifSrcSet} sizes={sizes} />
       <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
       <img

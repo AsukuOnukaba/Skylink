@@ -278,6 +278,9 @@ export const products: ProductRecord[] = [
       },
     ],
     whatsInBox: ["Starlink Mesh Router", "Power supply", "Quick start guide"],
+    imageSrc: "/images/products/starlink-mesh-router.jpeg",
+    imageAlt:
+      "Official Starlink Router 3 product view on a grey background, compatible for use as a Gen 3 mesh router",
     priceNgn: 250_000,
     pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,
@@ -313,6 +316,9 @@ export const products: ProductRecord[] = [
       "45 m Starlink Gen 3 flat cable",
       "Integrated proprietary Starlink connectors",
     ],
+    imageSrc: "/images/products/starlink-gen3-45m-cable.jpeg",
+    imageAlt:
+      "Official Starlink 45 metre Standard cable shown coiled with its two Gen 3 compatible connectors",
     priceNgn: 250_000,
     pricePublished: true,
     availabilityNote: AVAILABILITY_NOTE,

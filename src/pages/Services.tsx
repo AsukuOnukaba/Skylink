@@ -100,6 +100,42 @@ function ServiceCard({ service }: { service: ServiceRecord }) {
   );
 }
 
+function FeaturedService({ service }: { service: ServiceRecord }) {
+  return (
+    <Link
+      to={`/services/${service.slug}`}
+      className="group mt-8 grid overflow-hidden rounded-xl border border-slate-200 bg-white no-underline transition duration-200 hover:border-sky-300 hover:shadow-md focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)] md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
+    >
+      {service.imageSrc ? (
+        <Picture
+          src={service.imageSrc}
+          alt={service.imageAlt || ""}
+          pictureClassName="block min-h-0 overflow-hidden"
+          className="h-full min-h-64 w-full object-cover object-center"
+          sizes="(max-width: 768px) 100vw, 48vw"
+        />
+      ) : null}
+      <div className="flex flex-col justify-center p-7 sm:p-9">
+        <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">
+          Featured service
+        </p>
+        <h3 className="mt-3 text-2xl font-bold text-navy-950 group-hover:text-sky-700">
+          {service.title}
+        </h3>
+        <p className="mt-3 text-base leading-relaxed text-slate-700">
+          {service.shortDescription}
+        </p>
+        <p className="mt-4 text-sm leading-relaxed text-slate-600">
+          {service.audience}
+        </p>
+        <span className="mt-6 text-sm font-semibold text-sky-700 group-hover:underline">
+          Explore {service.title.toLowerCase()}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export function Services() {
   const live = publishedServices();
   const bySlug = new Map(live.map((service) => [service.slug, service]));
@@ -163,11 +199,23 @@ export function Services() {
                     <p className="mt-3 text-base leading-relaxed text-slate-700">{group.description}</p>
                   </div>
                 </div>
-                <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {group.services.map((service) => (
-                    <li key={service.slug}><ServiceCard service={service} /></li>
-                  ))}
-                </ul>
+                {group.services.length === 1 ? (
+                  <FeaturedService service={group.services[0]} />
+                ) : (
+                  <ul
+                    className={`mt-8 grid gap-5 sm:grid-cols-2 ${
+                      group.services.length === 3
+                        ? "lg:grid-cols-3"
+                        : group.services.length >= 4
+                          ? "lg:grid-cols-3"
+                          : ""
+                    }`}
+                  >
+                    {group.services.map((service) => (
+                      <li key={service.slug}><ServiceCard service={service} /></li>
+                    ))}
+                  </ul>
+                )}
               </Container>
             </section>
           ) : null,

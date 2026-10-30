@@ -2,288 +2,120 @@ import { useParams } from "react-router-dom";
 import { CtaBand } from "@/components/home/CtaBand";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Card } from "@/components/ui/Card";
-import { Container } from "@/components/ui/Container";
-import { Picture } from "@/components/ui/Picture";
-import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
+import {
+  RelatedProductCards,
+  RelatedServiceCards,
+  ServiceFitAndBenefits,
+  ServiceHero,
+  ServiceProcess,
+  ServiceRequirements,
+} from "@/components/service/ServicePageSections";
+import { Container } from "@/components/ui/Container";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
+import { getPublishedProduct } from "@/data/products";
 import {
   getPublishedService,
   maritimeServiceSlugs,
   relatedPublishedServices,
 } from "@/data/services";
-import { getPublishedProduct } from "@/data/products";
 import { NotFound } from "@/pages/NotFound";
 
 export function ServiceDetail() {
   const { slug = "" } = useParams();
   const service = getPublishedService(slug);
 
-  if (!service) {
-    return <NotFound />;
-  }
+  if (!service) return <NotFound />;
 
   const relatedProducts = service.relatedProductSlugs
     .map((productSlug) => getPublishedProduct(productSlug))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+    .filter((product): product is NonNullable<typeof product> => Boolean(product));
   const relatedServices = relatedPublishedServices(service.slug);
-  const maritimePage = (maritimeServiceSlugs as readonly string[]).includes(
-    service.slug,
-  );
-
-  const intent = service.primaryCta;
-  const contactTo = `/contact?intent=${intent}&service=${encodeURIComponent(service.slug)}`;
+  const maritimePage = (maritimeServiceSlugs as readonly string[]).includes(service.slug);
+  const contactTo = `/contact?intent=${service.primaryCta}&service=${encodeURIComponent(service.slug)}`;
+  const ctaLabel = enquiryContactCtaLabel(service.primaryCta);
 
   return (
     <AppShell>
       <PageMeta path={`/services/${service.slug}`} />
       <main id="main">
-        <section className="bg-white py-[var(--space-section)]">
-          <Container className="max-w-3xl">
-            <Breadcrumbs
-              items={[
-                { label: "Home", to: "/" },
-                { label: "Services", to: "/services" },
-                { label: service.title },
-              ]}
-            />
-            <h1 className="mt-4 text-3xl font-bold text-navy-950 sm:text-4xl">
-              {service.title}
-            </h1>
-            <p className="mt-3 text-lg leading-relaxed text-slate-700">
-              {service.shortDescription}
-            </p>
-            <p className="mt-2 text-sm text-slate-500">{service.audience}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink to={contactTo}>
-                {enquiryContactCtaLabel(intent)}
-              </ButtonLink>
-              <ButtonLink to="/services" variant="secondary">
-                All services
-              </ButtonLink>
+        <section className="bg-slate-100 py-[var(--space-section)]">
+          <Container>
+            <div className="max-w-3xl">
+              <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Services", to: "/services" }, { label: service.title }]} />
+              <h1 className="mt-4 text-3xl font-bold text-navy-950 sm:text-4xl">{service.title}</h1>
             </div>
+            <ServiceHero service={service} contactTo={contactTo} ctaLabel={ctaLabel} />
           </Container>
         </section>
 
-        {service.imageSrc ? (
-          <section className="bg-slate-100 py-[var(--space-section)]">
-            <Container className="max-w-3xl">
-              <Picture
-                src={service.imageSrc}
-                alt={service.imageAlt || ""}
-                className="aspect-[4/3] w-full rounded-lg object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
-            </Container>
-          </section>
-        ) : null}
-
-        <section
-          aria-labelledby="service-overview-heading"
-          className={
-            service.imageSrc
-              ? "bg-white py-[var(--space-section)]"
-              : "bg-slate-100 py-[var(--space-section)]"
-          }
-        >
-          <Container className="max-w-3xl">
-            <h2
-              id="service-overview-heading"
-              className="text-2xl font-bold text-navy-950"
-            >
-              Overview
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-700">
-              {service.description}
-            </p>
+        <section aria-labelledby="service-overview-heading" className="bg-white py-[var(--space-section)]">
+          <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">Service overview</p>
+              <h2 id="service-overview-heading" className="mt-2 text-2xl font-bold text-navy-950">Plan for the actual environment</h2>
+            </div>
+            <p className="text-base leading-relaxed text-slate-700">{service.description}</p>
           </Container>
         </section>
 
-        {service.suitableFor.length > 0 ? (
-          <section
-            aria-labelledby="service-suitable-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-suitable-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                Who it is for
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-slate-700">
-                {service.suitableFor.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+        {(service.suitableFor.length > 0 || service.inclusions.length > 0) ? (
+          <section aria-labelledby="service-fit-heading" className="bg-slate-100 py-[var(--space-section)]">
+            <Container>
+              <h2 id="service-fit-heading" className="text-2xl font-bold text-navy-950">Fit and scope</h2>
+              <div className="mt-6"><ServiceFitAndBenefits service={service} /></div>
             </Container>
           </section>
         ) : null}
 
-        {service.inclusions.length > 0 ? (
-          <section
-            aria-labelledby="service-included-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-included-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                What is included
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-slate-700">
-                {service.inclusions.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </Container>
-          </section>
-        ) : null}
-
-        {service.customerProvides.length > 0 ||
-        service.limitations.length > 0 ? (
-          <section
-            aria-labelledby="service-limits-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-limits-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                What you will need and limits
-              </h2>
-              {service.customerProvides.length > 0 ? (
-                <>
-                  <h3 className="mt-4 text-lg font-semibold text-navy-800">
-                    Typically needed from you
-                  </h3>
-                  <ul className="mt-2 list-disc space-y-2 pl-5 text-base text-slate-700">
-                    {service.customerProvides.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              ) : null}
-              {service.limitations.length > 0 ? (
-                <>
-                  <h3 className="mt-6 text-lg font-semibold text-navy-800">
-                    Honest limits
-                  </h3>
-                  <ul className="mt-2 list-disc space-y-2 pl-5 text-base text-slate-700">
-                    {service.limitations.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              ) : null}
+        {(service.customerProvides.length > 0 || service.limitations.length > 0) ? (
+          <section aria-labelledby="service-requirements-heading" className="bg-white py-[var(--space-section)]">
+            <Container>
+              <h2 id="service-requirements-heading" className="text-2xl font-bold text-navy-950">Requirements and boundaries</h2>
+              <div className="mt-6"><ServiceRequirements service={service} /></div>
             </Container>
           </section>
         ) : null}
 
         {service.processSteps.length > 0 ? (
-          <section
-            aria-labelledby="service-process-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-process-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                How it usually works
-              </h2>
-              <ol className="mt-6 space-y-4">
-                {service.processSteps.map((step, index) => (
-                  <li key={step}>
-                    <Card>
-                      <p className="text-sm font-semibold text-sky-700">
-                        Step {index + 1}
-                      </p>
-                      <p className="mt-1 text-base text-slate-700">{step}</p>
-                    </Card>
-                  </li>
-                ))}
-              </ol>
+          <section aria-labelledby="service-process-heading" className="bg-slate-100 py-[var(--space-section)]">
+            <Container>
+              <div className="max-w-2xl">
+                <h2 id="service-process-heading" className="text-2xl font-bold text-navy-950">How it usually works</h2>
+                <p className="mt-3 text-base text-slate-700">The final sequence is agreed around the site, access, equipment, and service scope.</p>
+              </div>
+              <div className="mt-6"><ServiceProcess steps={service.processSteps} /></div>
             </Container>
           </section>
         ) : null}
 
         {relatedServices.length > 0 ? (
-          <section
-            aria-labelledby="service-related-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-related-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                Related services
-              </h2>
-              <ul className="mt-4 space-y-2 text-base">
-                {relatedServices.map((item) => (
-                  <li key={item.slug}>
-                    <TextLink to={`/services/${item.slug}`}>{item.title}</TextLink>
-                  </li>
-                ))}
-              </ul>
+          <section aria-labelledby="service-related-heading" className="bg-white py-[var(--space-section)]">
+            <Container>
+              <h2 id="service-related-heading" className="text-2xl font-bold text-navy-950">Related services</h2>
+              <div className="mt-6"><RelatedServiceCards services={relatedServices} /></div>
             </Container>
           </section>
         ) : null}
 
         {relatedProducts.length > 0 ? (
-          <section
-            aria-labelledby="service-products-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-products-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                Related products
-              </h2>
-              <ul className="mt-4 space-y-2 text-base">
-                {relatedProducts.map((product) => (
-                  <li key={product.slug}>
-                    <TextLink to={`/products/${product.slug}`}>
-                      {product.name}
-                    </TextLink>
-                  </li>
-                ))}
-              </ul>
+          <section aria-labelledby="service-products-heading" className="bg-slate-100 py-[var(--space-section)]">
+            <Container>
+              <h2 id="service-products-heading" className="text-2xl font-bold text-navy-950">Related products</h2>
+              <div className="mt-6"><RelatedProductCards products={relatedProducts} /></div>
             </Container>
           </section>
         ) : null}
 
         {service.faqs.length > 0 ? (
-          <section
-            aria-labelledby="service-faq-heading"
-            className="bg-white py-[var(--space-section)]"
-          >
-            <Container className="max-w-3xl">
-              <h2
-                id="service-faq-heading"
-                className="text-2xl font-bold text-navy-950"
-              >
-                Questions about this service
-              </h2>
-              <div className="mt-6 space-y-4">
+          <section aria-labelledby="service-faq-heading" className="bg-white py-[var(--space-section)]">
+            <Container className="max-w-4xl">
+              <h2 id="service-faq-heading" className="text-2xl font-bold text-navy-950">Questions about this service</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {service.faqs.map((faq) => (
-                  <details
-                    key={faq.question}
-                    className="rounded-md border border-slate-200 bg-white px-5 py-4"
-                  >
-                    <summary className="cursor-pointer font-semibold text-navy-800">
-                      {faq.question}
-                    </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                      {faq.answer}
-                    </p>
+                  <details key={faq.question} className="h-fit rounded-md border border-slate-200 bg-white px-5 py-4">
+                    <summary className="cursor-pointer font-semibold text-navy-800">{faq.question}</summary>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
                   </details>
                 ))}
               </div>
@@ -292,32 +124,10 @@ export function ServiceDetail() {
         ) : null}
 
         <CtaBand
-          title={
-            maritimePage
-              ? "Contact Skylink about a marine project"
-              : `Talk through ${service.title.toLowerCase()}`
-          }
-          description={`Open Contact about this service for current reach options. The online enquiry form is not available.`}
-          primary={{
-            to: contactTo,
-            label: maritimePage
-              ? "Contact Skylink About a Marine Project"
-              : enquiryContactCtaLabel(intent),
-          }}
-          secondary={{
-            to:
-              service.slug === "boat-installation"
-                ? "/services/maritime-offshore"
-                : maritimePage
-                  ? "/services/boat-installation"
-                  : "/services",
-            label:
-              service.slug === "boat-installation"
-                ? "Explore Offshore & Maritime"
-                : maritimePage
-                  ? "View Vessel Installation Solutions"
-                  : "All services",
-          }}
+          title={maritimePage ? "Contact Skylink about a marine project" : `Talk through ${service.title.toLowerCase()}`}
+          description={`Contact Skylink with the location, equipment, and requirement for ${service.title.toLowerCase()}. Online form submission remains unavailable until delivery is configured.`}
+          primary={{ to: contactTo, label: maritimePage ? "Discuss a Marine Project" : ctaLabel }}
+          secondary={{ to: "/services", label: "All Services" }}
         />
       </main>
     </AppShell>

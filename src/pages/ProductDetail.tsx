@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { CtaBand } from "@/components/home/CtaBand";
+import { ProductImage } from "@/components/catalogue/ProductImage";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
-import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
@@ -75,18 +75,15 @@ export function ProductDetail() {
           </Container>
         </section>
 
-        {product.imageSrc ? (
-          <section className="bg-slate-100 py-[var(--space-section)]">
-            <Container className="max-w-3xl">
-              <Picture
-                src={product.imageSrc}
-                alt={product.imageAlt || product.name}
-                className="aspect-[4/3] w-full rounded-lg object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
-            </Container>
-          </section>
-        ) : null}
+        <section className="bg-slate-100 py-[var(--space-section)]">
+          <Container className="max-w-3xl">
+            <ProductImage
+              product={product}
+              className="aspect-[4/3] w-full rounded-lg border border-slate-200 bg-white"
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+          </Container>
+        </section>
 
         <section
           aria-labelledby="product-desc-heading"

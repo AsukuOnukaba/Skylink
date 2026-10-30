@@ -1,4 +1,5 @@
 import { CtaBand } from "@/components/home/CtaBand";
+import { ProductImage } from "@/components/catalogue/ProductImage";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageMeta } from "@/components/seo/PageMeta";
@@ -126,14 +127,11 @@ function ProductCard({ product }: { product: ProductRecord }) {
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
-      {product.imageSrc ? (
-        <Picture
-          src={product.imageSrc}
-          alt={product.imageAlt || product.name}
-          className="aspect-[16/10] w-full object-cover object-center"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
-      ) : null}
+      <ProductImage
+        product={product}
+        className="aspect-[16/10] w-full"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+      />
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-base font-semibold text-navy-800">{product.name}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">

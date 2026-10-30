@@ -52,6 +52,8 @@ Status values: `cleared` | `pending` | `denied` | `n/a (skylink-owned)` | `omitt
 | `…/products/starlink-flat-high-performance.jpeg` | `FlatHighperformanceversion.jpeg` | `starlink-flat-high-performance` | Unboxed Flat HP kit on wood floor | **cleared** | Model-accurate unboxing |
 | `…/products/starlink-pivot-mount.jpg` | Pivot mount unboxing | `starlink-pivot-mount` | Pivot mount in retail insert | **cleared** | Accessory match |
 | `…/products/wireless-long-range-wifi.jpeg` | `Long-Range.jpeg` | `wireless-long-range-wifi` | Outdoor PtP antenna pair | **cleared** | Matches wireless long-range kit class |
+| `…/products/starlink-mesh-router.jpeg` | Starlink `accessories_guide_standard.pdf`, Router 3 page | `starlink-mesh-router` | Official Router 3 product render; Router 3 is documented by Starlink as mesh-compatible | **cleared for product identification** | Cropped from the official manufacturer accessory guide; not represented as Skylink photography |
+| `…/products/starlink-gen3-45m-cable.jpeg` | Starlink `accessories_guide_standard.pdf`, Starlink Cables page | `starlink-gen3-45m-cable` | Official 45 m Standard 4 / 4 X cable render | **cleared for product identification** | Cropped from the official manufacturer accessory guide; preserves the correct connector and cable generation |
 
 ### Omitted (subject mismatch or Class D)
 
