@@ -4,13 +4,17 @@
  * Do not redefine these per page.
  */
 :root {
-  /* Core palette */
-  --sky-700: #00537d;
-  --sky-700-hover: #004365;
-  --sky-500: #159fd0;
-  --sky-300: #79c9e8;
-  --navy-950: #071a2b;
-  --navy-800: #12344b;
+  /* Core palette — brighter blue identity. Shared controls read these tokens. */
+  --navy-950: #061b39;
+  --navy-800: #0a2a52;
+  --royal: #124ce3;
+  --electric: #087cfa;
+  --cyan: #20c8f4;
+  --ice: #eaf6ff;
+  --sky-700: var(--royal);
+  --sky-700-hover: #0c3db8;
+  --sky-500: var(--electric);
+  --sky-300: var(--cyan);
   --slate-700: #344b5b;
   --slate-500: #637786;
   --slate-200: #dce5eb;
@@ -57,9 +61,9 @@
   --space-section: clamp(3rem, 6vw, 5rem);
 
   /* Elevation */
-  --shadow-sm: 0 1px 2px rgb(7 26 43 / 0.06);
-  --shadow-md: 0 4px 16px rgb(7 26 43 / 0.08);
+  --shadow-sm: 0 1px 2px rgb(6 27 57 / 0.06);
+  --shadow-md: 0 8px 24px rgb(6 27 57 / 0.12);
 
   /* Focus ring */
-  --focus-ring: 0 0 0 3px rgb(21 159 208 / 0.45);
+  --focus-ring: 0 0 0 3px rgb(8 124 250 / 0.45);
 }

@@ -92,6 +92,7 @@ Owner instruction: reuse non-blog DataGram photographs. Blog images were not cop
 | `service-priority-plans.jpeg` | `starlinkEstateInstallation.jpeg` — dish on a pole over a tiled residential roof. Replaces the shared enterprise-plans photo on the Priority card | **cleared** |
 | `service-enterprise-plans.jpeg` | Replaced `High-Speed.jpeg` (round dish on a house wall). Now `starlinkCompanyInstalltionImage.jpeg` — flat terminal on an industrial roof beside a port | **cleared** |
 | `hero-maritime-vessel.jpeg` | `maritime5.jpeg` — flat terminal at the bow of a working vessel. Homepage hero only. Not captioned as a Skylink project | **cleared** |
+| `hero-cinematic-maritime.jpeg` | Owner-supplied artwork, 31 Oct 2026 (`cinematic_maritime_satellite_technology_scene`). Homepage hero background only. Illustrative maritime scene, not a documented Skylink installation | **cleared for hero use** |
 | `service-maritime-offshore.jpeg` | Replaced the phone-watermarked railing shot with `maritime3.jpeg` — flat terminal on a vessel, other craft and a bridge behind | **cleared** |
 | `service-fleet-management.jpeg` | Replaced the frame that shows a “Starlink by DataGram” banner. Now Warri houseboat photo 3 — terminal on a deck bracket beside a river, no readable operator name | **cleared** |
 | `service-roaming-global-priority.jpeg` | `maritime4.jpeg` — flat terminal at a vessel bow. Replaces the shared global-roaming photo on the roaming card | **cleared** |

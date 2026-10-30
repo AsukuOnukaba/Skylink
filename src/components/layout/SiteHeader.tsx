@@ -12,9 +12,11 @@ import { cn } from "@/lib/cn";
 
 function navClassName({ isActive }: { isActive: boolean }) {
   return cn(
-    "rounded-sm px-2 py-1 text-sm font-medium text-slate-700 transition-colors hover:text-sky-700",
+    "rounded-sm px-2 py-1 text-sm font-medium transition-colors",
     "focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]",
-    isActive && "text-sky-700",
+    isActive
+      ? "text-royal underline decoration-2 underline-offset-8"
+      : "text-slate-700 hover:text-electric",
   );
 }
 
@@ -42,6 +44,7 @@ export function SiteHeader() {
           ))}
           <ButtonLink
             to="/contact?intent=quote"
+            variant="electric"
             className="min-h-11 px-5 py-2.5"
           >
             Get a Quote
@@ -80,6 +83,7 @@ export function SiteHeader() {
             ))}
             <ButtonLink
               to="/contact?intent=quote"
+              variant="electric"
               className="mt-2 w-full"
               onClick={() => setOpen(false)}
             >

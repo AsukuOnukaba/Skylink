@@ -13,6 +13,10 @@ export default {
           800: "var(--navy-800)",
           950: "var(--navy-950)",
         },
+        royal: "var(--royal)",
+        electric: "var(--electric)",
+        cyan: "var(--cyan)",
+        ice: "var(--ice)",
         slate: {
           100: "var(--slate-100)",
           200: "var(--slate-200)",

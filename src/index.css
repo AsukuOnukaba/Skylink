@@ -57,3 +57,191 @@
     }
   }
 }
+
+/* Homepage hero. The photograph stays still; only these layers animate. */
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes hero-atmosphere {
+  from {
+    opacity: 0.08;
+  }
+  to {
+    opacity: 0.16;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-photo {
+  background-color: var(--navy-950);
+  background-image: url("/images/hero-cinematic-maritime.jpeg");
+  background-image: image-set(
+    url("/images/hero-cinematic-maritime.w1024.avif") type("image/avif"),
+    url("/images/hero-cinematic-maritime.w1024.webp") type("image/webp"),
+    url("/images/hero-cinematic-maritime.jpeg") type("image/jpeg")
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 84% 42%;
+}
+
+@media (max-width: 767px) {
+  .hero-photo {
+    background-position: 96% center;
+    background-image: url("/images/hero-cinematic-maritime.w768.webp");
+    background-image: image-set(
+      url("/images/hero-cinematic-maritime.w768.avif") type("image/avif"),
+      url("/images/hero-cinematic-maritime.w768.webp") type("image/webp"),
+      url("/images/hero-cinematic-maritime.jpeg") type("image/jpeg")
+    );
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-photo {
+    background-position: 72% 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-photo {
+    background-position: center 40%;
+  }
+}
+
+.hero-kenburns {
+  transform-origin: 68% 42%;
+  animation: hero-kenburns 22s ease-in-out infinite alternate;
+}
+
+.hero-atmosphere {
+  background: linear-gradient(
+    105deg,
+    var(--electric) 0%,
+    var(--cyan) 42%,
+    transparent 72%
+  );
+  animation: hero-atmosphere 12s ease-in-out infinite alternate;
+}
+
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgb(6 27 57 / 0.86) 0%,
+    rgb(6 27 57 / 0.62) 28%,
+    rgb(6 27 57 / 0.18) 52%,
+    transparent 70%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-scrim {
+    background: linear-gradient(
+      90deg,
+      rgb(6 27 57 / 0.9) 0%,
+      rgb(6 27 57 / 0.72) 38%,
+      rgb(6 27 57 / 0.34) 62%,
+      rgb(6 27 57 / 0.14) 100%
+    );
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 0.42s ease-out both;
+}
+
+.hero-d1 {
+  animation-delay: 0.08s;
+}
+
+.hero-d2 {
+  animation-delay: 0.18s;
+}
+
+.hero-d3 {
+  animation-delay: 0.28s;
+}
+
+.hero-d4 {
+  animation-delay: 0.36s;
+}
+
+.hero-d5 {
+  animation-delay: 0.44s;
+}
+
+.hero-d6 {
+  animation-delay: 0.52s;
+}
+
+.hero-chip {
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+  background: color-mix(in srgb, var(--cyan) 16%, transparent);
+  color: var(--white);
+}
+
+.hero-chip:hover {
+  border-color: var(--cyan);
+  background: color-mix(in srgb, var(--cyan) 30%, transparent);
+}
+
+.btn-on-dark-secondary {
+  border: 1px solid rgb(255 255 255 / 0.75);
+  background: color-mix(in srgb, var(--navy-950) 45%, transparent);
+  color: var(--white);
+}
+
+.btn-on-dark-secondary:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.cta-band {
+  background: linear-gradient(
+    115deg,
+    var(--navy-950) 0%,
+    #0b2f66 58%,
+    var(--royal) 100%
+  );
+}
+
+footer a.site-footer-link {
+  color: #d7e6f5;
+  text-decoration-thickness: 1px;
+}
+
+footer a.site-footer-link:hover {
+  color: var(--cyan);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns,
+  .hero-atmosphere,
+  .hero-rise {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-atmosphere {
+    opacity: 0.12 !important;
+  }
+
+  .hero-rise {
+    opacity: 1 !important;
+  }
+}

@@ -25,7 +25,7 @@ export function CtaBand({
   return (
     <section
       aria-labelledby="closing-cta-heading"
-      className="bg-navy-950 py-[var(--space-section)] text-white"
+      className="cta-band py-[var(--space-section)] text-white"
     >
       <Container className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-xl">

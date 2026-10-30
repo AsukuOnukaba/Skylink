@@ -20,10 +20,10 @@ export function SiteFooter() {
       <Container className="grid gap-10 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div>
           <Logo width={140} onDark className="max-h-12 w-auto" />
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-200/90">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-[#d7e6f5]">
             {site.relationshipPhrase}
           </p>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-400">
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-[#b7c5d3]">
             Professional Starlink installation, equipment, and connectivity
             solutions for homes, businesses, enterprises, and maritime
             operations.
@@ -37,7 +37,7 @@ export function SiteFooter() {
                 <li key={link.path}>
                   <TextLink
                     to={link.path}
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     {link.label}
                   </TextLink>
@@ -52,7 +52,7 @@ export function SiteFooter() {
                 <li key={link.path}>
                   <TextLink
                     to={link.path}
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     {link.label}
                   </TextLink>
@@ -61,20 +61,20 @@ export function SiteFooter() {
               <li>
                 <TextLink
                   to="/contact"
-                  className="text-sky-300 hover:text-white"
+                  className="site-footer-link"
                 >
                   Contact
                 </TextLink>
               </li>
             </ul>
-            <p className="mt-4 text-sm text-slate-400">
+            <p className="mt-4 text-sm text-[#b7c5d3]">
               {phoneOk ? (
                 <>
                   Call{" "}
                   <TextLink
                     external
                     href={`tel:${site.phoneE164}`}
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     {site.phoneDisplay}
                   </TextLink>
@@ -85,7 +85,7 @@ export function SiteFooter() {
                       <TextLink
                         external
                         href={`mailto:${site.email}`}
-                        className="text-sky-300 hover:text-white"
+                        className="site-footer-link"
                       >
                         {site.email}
                       </TextLink>
@@ -94,7 +94,7 @@ export function SiteFooter() {
                   . More options on{" "}
                   <TextLink
                     to="/contact"
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     Contact
                   </TextLink>
@@ -105,21 +105,21 @@ export function SiteFooter() {
                   Read{" "}
                   <TextLink
                     to="/services"
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     Services
                   </TextLink>{" "}
                   and{" "}
                   <TextLink
                     to="/about"
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     About
                   </TextLink>
                   , or open{" "}
                   <TextLink
                     to="/contact"
-                    className="text-sky-300 hover:text-white"
+                    className="site-footer-link"
                   >
                     Contact
                   </TextLink>{" "}
@@ -131,7 +131,7 @@ export function SiteFooter() {
         </div>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="py-4 text-xs text-slate-500">
+        <Container className="py-4 text-xs text-[#b7c5d3]">
           <span>
             © {new Date().getFullYear()} {site.brandName}
           </span>

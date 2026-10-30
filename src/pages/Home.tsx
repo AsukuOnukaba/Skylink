@@ -1,3 +1,5 @@
+import { ArrowRight, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { CtaBand } from "@/components/home/CtaBand";
 import { ProductImage } from "@/components/catalogue/ProductImage";
 import { HeroVisual } from "@/components/home/HeroVisual";
@@ -9,6 +11,7 @@ import { Container } from "@/components/ui/Container";
 import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
+import { cn } from "@/lib/cn";
 import { publishedLocations } from "@/data/locations";
 import {
   formatNgn,
@@ -72,6 +75,12 @@ const additionalServiceSlugs = [
   "estate-wifi",
 ] as const;
 
+const heroLocations = [
+  { label: "Lagos", to: "/starlink-installation-lagos" },
+  { label: "Abuja", to: "/starlink-installation-abuja" },
+  { label: "Port Harcourt", to: "/starlink-installation-port-harcourt" },
+] as const;
+
 const featuredProductSlugs = [
   "starlink-gen3-standard",
   "starlink-mesh-router",
@@ -95,7 +104,7 @@ function ServiceCard({
   description?: string;
 }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-electric hover:shadow-md">
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
@@ -111,8 +120,12 @@ function ServiceCard({
         <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">
           {description || service.shortDescription}
         </p>
-        <TextLink to={`/services/${service.slug}`} className="mt-4 inline-flex text-sm">
+        <TextLink
+          to={`/services/${service.slug}`}
+          className="mt-4 inline-flex items-center gap-1 text-sm font-semibold"
+        >
           Explore this solution
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </TextLink>
       </div>
     </article>
@@ -171,36 +184,50 @@ export function Home() {
       <main id="main">
         <section
           aria-labelledby="home-hero-heading"
-          className="relative overflow-hidden bg-navy-950 text-white"
+          className="relative isolate overflow-hidden bg-navy-950 text-white lg:min-h-[650px]"
         >
-          <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-sky-500/30" />
-            <div className="absolute -right-8 top-16 h-96 w-96 rounded-full border border-sky-300/20" />
-          </div>
-          <Container className="relative grid gap-10 py-14 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:items-center md:py-20 lg:py-24">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-sky-300">
+          <HeroVisual />
+          <Container className="relative z-10 flex flex-col justify-center pb-24 pt-8 sm:pb-24 sm:pt-12 lg:min-h-[650px] lg:py-16">
+            <div className="w-full max-w-[38rem]">
+              <p className="hero-rise text-sm font-semibold uppercase tracking-[0.14em] text-cyan">
                 Professional Starlink installation & connectivity
               </p>
               <h1
                 id="home-hero-heading"
-                className="mt-4 text-balance text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[3.15rem]"
+                className="hero-rise hero-d1 mt-4 text-balance text-[2rem] font-bold leading-[1.1] text-white sm:text-5xl lg:text-[3.15rem]"
               >
                 Reliable Starlink connectivity for homes, businesses, enterprises & beyond.
               </h1>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-200/90">
-                From residential installations and business networking to enterprise deployments and maritime connectivity, {site.brandName} helps you plan, install, and optimise Starlink solutions for your location and requirements.
+              <p className="hero-rise hero-d2 mt-5 text-lg leading-relaxed text-white">
+                Professional Starlink installation and connectivity solutions for homes, businesses, enterprise sites and maritime operations. Serving Lagos, Abuja and Port Harcourt, with installation requirements assessed for each location.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <ButtonLink to="/services" variant="primaryOnDark">
-                  Explore Our Services
-                </ButtonLink>
-                <ButtonLink to="/contact?intent=quote" variant="secondaryOnDark">
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {heroLocations.map((place, index) => (
+                  <li
+                    key={place.to}
+                    className={cn(
+                      "hero-rise",
+                      index === 0 && "hero-d3",
+                      index === 1 && "hero-d4",
+                      index === 2 && "hero-d5",
+                    )}
+                  >
+                    <Link to={place.to} className="hero-chip inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium no-underline focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      {place.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="hero-rise hero-d6 mt-8 flex flex-wrap gap-3">
+                <ButtonLink to="/contact?intent=quote" variant="electric">
                   Get a Quote
+                </ButtonLink>
+                <ButtonLink to="/services" variant="secondaryOnDark">
+                  Explore Our Services
                 </ButtonLink>
               </div>
             </div>
-            <HeroVisual />
           </Container>
         </section>
 
@@ -224,7 +251,7 @@ export function Home() {
           </Container>
         </section>
 
-        <section id="how-it-works" aria-labelledby="home-process-heading" className="bg-slate-100 py-[var(--space-section)]">
+        <section id="how-it-works" aria-labelledby="home-process-heading" className="bg-ice py-[var(--space-section)]">
           <Container>
             <div className="max-w-2xl">
               <h2 id="home-process-heading" className="text-3xl font-bold text-navy-950">
@@ -275,7 +302,7 @@ export function Home() {
           </section>
         ) : null}
 
-        <section id="additional-services" aria-labelledby="home-additional-heading" className="bg-slate-100 py-[var(--space-section)]">
+        <section id="additional-services" aria-labelledby="home-additional-heading" className="bg-ice py-[var(--space-section)]">
           <Container>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
@@ -316,7 +343,7 @@ export function Home() {
         ) : null}
 
         {places.length > 0 ? (
-          <section id="service-areas" aria-labelledby="home-areas-heading" className="bg-slate-100 py-[var(--space-section)]">
+          <section id="service-areas" aria-labelledby="home-areas-heading" className="bg-ice py-[var(--space-section)]">
             <Container>
               <div className="max-w-2xl">
                 <h2 id="home-areas-heading" className="text-3xl font-bold text-navy-950">Service areas</h2>

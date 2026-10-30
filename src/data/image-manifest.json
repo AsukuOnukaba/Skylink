@@ -1,4 +1,26 @@
 {
+  "/images/hero-cinematic-maritime.jpeg": {
+    "src": "/images/hero-cinematic-maritime.jpeg",
+    "width": 1024,
+    "height": 576,
+    "variants": [
+      {
+        "w": 480,
+        "avif": "/images/hero-cinematic-maritime.w480.avif",
+        "webp": "/images/hero-cinematic-maritime.w480.webp"
+      },
+      {
+        "w": 768,
+        "avif": "/images/hero-cinematic-maritime.w768.avif",
+        "webp": "/images/hero-cinematic-maritime.w768.webp"
+      },
+      {
+        "w": 1024,
+        "avif": "/images/hero-cinematic-maritime.w1024.avif",
+        "webp": "/images/hero-cinematic-maritime.w1024.webp"
+      }
+    ]
+  },
   "/images/hero-maritime-vessel.jpeg": {
     "src": "/images/hero-maritime-vessel.jpeg",
     "width": 480,

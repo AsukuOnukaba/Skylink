@@ -52,6 +52,18 @@ describe("Home customer-facing copy", () => {
     expect(html).toContain(
       "Reliable Starlink connectivity for homes, businesses, enterprises &amp; beyond.",
     );
+    expect(html).toContain(
+      "Serving Lagos, Abuja and Port Harcourt, with installation requirements assessed for each location.",
+    );
+    expect(html).toContain('href="/starlink-installation-lagos"');
+    expect(html).toContain('href="/starlink-installation-abuja"');
+    expect(html).toContain('href="/starlink-installation-port-harcourt"');
+    expect(html).toContain('href="/contact?intent=quote"');
+    expect(html).toContain('href="/services"');
+    expect(html).toContain("/images/hero-cinematic-maritime.jpeg");
+    expect(html).toContain('aria-label="Chat with Skylink on WhatsApp"');
+    expect(html).toContain("https://wa.me/2349060976424");
+    expect(html).toContain('aria-label="Ask Skylink AI"');
     expect(html).toContain('id="solutions"');
     expect(html).toContain('id="maritime"');
     expect(html).toMatch(/Our connectivity solutions/i);

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { FloatingContact } from "@/components/contact/FloatingContact";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
@@ -18,6 +19,7 @@ export function AppShell({ children }: AppShellProps) {
       <SiteHeader />
       {children}
       <SiteFooter />
+      <FloatingContact />
     </div>
   );
 }
