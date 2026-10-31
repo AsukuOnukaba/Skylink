@@ -1,9 +1,8 @@
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Sparkles, X } from "lucide-react";
-import { Logo } from "@/components/brand/Logo";
 import {
-  GUIDE_CAPABILITY,
   GUIDE_WELCOME,
   answerGuide,
   guideQuickQuestions,
@@ -14,7 +13,7 @@ import {
   buildWhatsappHref,
   enquiryContextFromLocation,
 } from "@/config/whatsapp";
-import { hasPublicWhatsapp, site } from "@/config/site";
+import { hasPublicWhatsapp } from "@/config/site";
 import { cn } from "@/lib/cn";
 
 type GuideMessage = {
@@ -49,9 +48,10 @@ export function FloatingContact() {
   const noteId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
+  const logRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
-
   const wasOpen = useRef(false);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
 
   useEffect(() => {
     if (!open) return;
@@ -67,6 +67,33 @@ export function FloatingContact() {
     if (wasOpen.current && !open) launcherRef.current?.focus();
     wasOpen.current = open;
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+    function syncOffset() {
+      const current = window.visualViewport;
+      if (!current) return;
+      const covered = window.innerHeight - current.height - current.offsetTop;
+      setKeyboardOffset(Math.max(0, Math.round(covered)));
+    }
+    syncOffset();
+    viewport.addEventListener("resize", syncOffset);
+    viewport.addEventListener("scroll", syncOffset);
+    return () => {
+      viewport.removeEventListener("resize", syncOffset);
+      viewport.removeEventListener("scroll", syncOffset);
+      setKeyboardOffset(0);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const log = logRef.current;
+    if (!log) return;
+    log.scrollTop = log.scrollHeight;
+  }, [messages, open]);
 
   function pushQuestion(question: string) {
     const text = question.trim();
@@ -87,7 +114,120 @@ export function FloatingContact() {
     pushQuestion(draft);
   }
 
+  const panel =
+    open && typeof document !== "undefined"
+      ? createPortal(
+          <section
+            id={panelId}
+            role="region"
+            aria-label="Skylink Assistant"
+            data-analytics-placement="floating"
+            className="fixed z-30 flex min-h-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-md left-[calc(0.75rem+env(safe-area-inset-left))] right-[calc(0.75rem+env(safe-area-inset-right))] w-auto md:left-auto md:right-[calc(1.5rem+env(safe-area-inset-right))] md:w-[min(380px,calc(100vw-3rem))]"
+            style={{
+              bottom: `calc(1.5rem + 52px + 1rem + 52px + 0.75rem + env(safe-area-inset-bottom) + ${keyboardOffset}px)`,
+              maxHeight: `calc(100dvh - 5.5rem - 0.75rem - 1.5rem - 52px - 1rem - 52px - 0.75rem - env(safe-area-inset-top) - env(safe-area-inset-bottom) - ${keyboardOffset}px)`,
+            }}
+          >
+            <header className="flex shrink-0 items-center gap-3 bg-navy-950 px-4 py-3 text-white">
+              <p className="min-w-0 flex-1 text-sm font-semibold text-white">
+                Skylink Assistant
+              </p>
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm text-white hover:bg-white/10 focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+                aria-label="Close chat"
+                onClick={() => setOpen(false)}
+              >
+                <Icon icon={X} size="ui" />
+              </button>
+            </header>
+            <div
+              ref={logRef}
+              className="flex min-h-24 flex-[1_100_auto] flex-col gap-3 overflow-y-auto overscroll-contain px-4 py-3"
+            >
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={cn(
+                    "max-w-[95%] shrink-0 rounded-lg px-3 py-2 text-sm leading-relaxed",
+                    message.role === "visitor"
+                      ? "ml-auto bg-royal text-white"
+                      : "bg-ice text-navy-950",
+                  )}
+                >
+                  <p>{message.text}</p>
+                  {message.links && message.links.length > 0 ? (
+                    <ul className="mt-2 space-y-1">
+                      {message.links.map((link) => (
+                        <li key={link.to}>
+                          <Link
+                            to={link.to}
+                            className="font-semibold text-royal underline-offset-2 hover:underline"
+                            onClick={() => setOpen(false)}
+                          >
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+            <div className="flex min-h-14 min-w-0 flex-wrap gap-2 overflow-y-auto overscroll-contain border-t border-slate-200 px-4 py-3">
+              {guideQuickQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-left text-xs font-medium text-navy-800 hover:border-electric focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+                  onClick={() => pushQuestion(question)}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+            <form
+              onSubmit={onSubmit}
+              className="flex shrink-0 gap-2 border-t border-slate-200 px-4 py-3"
+            >
+              <label className="sr-only" htmlFor={`${panelId}-input`}>
+                Your question
+              </label>
+              <input
+                id={`${panelId}-input`}
+                ref={inputRef}
+                value={draft}
+                onChange={(event) => setDraft(event.target.value)}
+                placeholder="Ask about services or service areas"
+                className="min-h-11 min-w-0 flex-1 rounded-sm border border-slate-200 px-3 text-sm text-navy-950 focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+              />
+              <button
+                type="submit"
+                className="inline-flex min-h-11 shrink-0 items-center rounded-sm bg-electric px-3 text-sm font-semibold text-white hover:bg-royal focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+              >
+                Send
+              </button>
+            </form>
+            {whatsappHref ? (
+              <div className="shrink-0 border-t border-slate-200 px-4 py-3">
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold text-royal underline-offset-2 hover:underline"
+                >
+                  Message the team on WhatsApp
+                </a>
+              </div>
+            ) : null}
+          </section>,
+          document.body,
+        )
+      : null;
+
   return (
+    <>
+      {panel}
     <div
       className="fixed z-30 flex flex-col items-end gap-4"
       style={{
@@ -96,106 +236,6 @@ export function FloatingContact() {
       }}
       data-analytics-placement="floating"
     >
-      {open ? (
-        <section
-          id={panelId}
-          role="region"
-          aria-label="Skylink guide"
-          className="flex max-h-[min(34rem,calc(100dvh-13rem))] w-[min(24rem,calc(100vw-2.75rem))] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-md"
-        >
-          <header className="flex items-start gap-3 bg-navy-950 px-4 py-3 text-white">
-            <Logo width={72} onDark className="mt-0.5 max-h-8" />
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-white">{site.brandName}</p>
-              <p className="text-xs leading-snug text-[#d7e6f5]">Published-page guide</p>
-            </div>
-            <button
-              type="button"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm text-white hover:bg-white/10 focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
-              aria-label="Close chat"
-              onClick={() => setOpen(false)}
-            >
-              <Icon icon={X} size="ui" />
-            </button>
-          </header>
-          <p className="border-b border-slate-200 bg-ice px-4 py-2 text-xs leading-relaxed text-slate-700">
-            {GUIDE_CAPABILITY}
-          </p>
-          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-3">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={cn(
-                  "max-w-[95%] rounded-lg px-3 py-2 text-sm leading-relaxed",
-                  message.role === "visitor"
-                    ? "ml-auto bg-royal text-white"
-                    : "bg-ice text-navy-950",
-                )}
-              >
-                <p>{message.text}</p>
-                {message.links && message.links.length > 0 ? (
-                  <ul className="mt-2 space-y-1">
-                    {message.links.map((link) => (
-                      <li key={link.to}>
-                        <Link
-                          to={link.to}
-                          className="font-semibold text-royal underline-offset-2 hover:underline"
-                          onClick={() => setOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            ))}
-          </div>
-          <div className="flex max-h-28 flex-wrap gap-2 overflow-y-auto border-t border-slate-200 px-4 py-2">
-            {guideQuickQuestions.map((question) => (
-              <button
-                key={question}
-                type="button"
-                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-left text-xs font-medium text-navy-800 hover:border-electric focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
-                onClick={() => pushQuestion(question)}
-              >
-                {question}
-              </button>
-            ))}
-          </div>
-          <form onSubmit={onSubmit} className="flex gap-2 border-t border-slate-200 p-3">
-            <label className="sr-only" htmlFor={`${panelId}-input`}>
-              Your question
-            </label>
-            <input
-              id={`${panelId}-input`}
-              ref={inputRef}
-              value={draft}
-              onChange={(event) => setDraft(event.target.value)}
-              placeholder="Ask about services or service areas"
-              className="min-h-11 min-w-0 flex-1 rounded-sm border border-slate-200 px-3 text-sm text-navy-950 focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
-            />
-            <button
-              type="submit"
-              className="inline-flex min-h-11 items-center rounded-sm bg-electric px-3 text-sm font-semibold text-white hover:bg-royal focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
-            >
-              Send
-            </button>
-          </form>
-          {whatsappHref ? (
-            <div className="border-t border-slate-200 px-4 py-3">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold text-royal underline-offset-2 hover:underline"
-              >
-                Message the team on WhatsApp
-              </a>
-            </div>
-          ) : null}
-        </section>
-      ) : null}
 
       <button
         ref={launcherRef}
@@ -231,5 +271,6 @@ export function FloatingContact() {
         </a>
       ) : null}
     </div>
+    </>
   );
 }
