@@ -53,11 +53,13 @@ describe("Home customer-facing copy", () => {
       "Reliable Starlink connectivity for homes, businesses, enterprises &amp; beyond.",
     );
     expect(html).toContain(
-      "Serving Lagos, Abuja and Port Harcourt, with installation requirements assessed for each location.",
+      "Starlink installation and connectivity services across Lagos, Abuja, Port Harcourt and other confirmed service areas in Nigeria.",
     );
     expect(html).toContain('href="/starlink-installation-lagos"');
     expect(html).toContain('href="/starlink-installation-abuja"');
     expect(html).toContain('href="/starlink-installation-port-harcourt"');
+    expect(html).toContain('href="/locations"');
+    expect(html).toContain("View all service areas");
     expect(html).toContain('href="/contact?intent=quote"');
     expect(html).toContain('href="/services"');
     expect(html).toContain("/images/hero-cinematic-maritime.jpeg");

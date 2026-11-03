@@ -12,7 +12,9 @@ import {
   ServiceRequirements,
 } from "@/components/service/ServicePageSections";
 import { Container } from "@/components/ui/Container";
+import { TextLink } from "@/components/ui/TextLink";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
+import { hasPublishedLocations } from "@/data/locations";
 import { getPublishedProduct } from "@/data/products";
 import {
   getPublishedService,
@@ -55,7 +57,16 @@ export function ServiceDetail() {
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-sky-700">Overview</p>
               <h2 id="service-overview-heading" className="mt-2 text-2xl font-bold text-navy-950">Plan for the actual environment</h2>
             </div>
-            <p className="text-base leading-relaxed text-slate-700">{service.description}</p>
+            <div>
+              <p className="text-base leading-relaxed text-slate-700">{service.description}</p>
+              {hasPublishedLocations() ? (
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  Local mounting, access, and weather notes are published for{" "}
+                  <TextLink to="/locations">confirmed service areas</TextLink>{" "}
+                  across Nigeria.
+                </p>
+              ) : null}
+            </div>
           </Container>
         </section>
 

@@ -12,7 +12,7 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
-import { publishedLocations } from "@/data/locations";
+import { getPublishedLocation } from "@/data/locations";
 import {
   formatNgn,
   getPublishedProduct,
@@ -176,7 +176,9 @@ export function Home() {
   const products = featuredProductSlugs
     .map((slug) => getPublishedProduct(slug))
     .filter((product): product is ProductRecord => Boolean(product));
-  const places = publishedLocations().slice(0, 4);
+  const places = (["lagos", "abuja", "port-harcourt"] as const)
+    .map((key) => getPublishedLocation(key))
+    .filter((place): place is NonNullable<typeof place> => Boolean(place));
 
   return (
     <AppShell>
@@ -199,9 +201,9 @@ export function Home() {
                 Reliable Starlink connectivity for homes, businesses, enterprises & beyond.
               </h1>
               <p className="hero-rise hero-d2 mt-5 text-lg leading-relaxed text-white">
-                Professional Starlink installation and connectivity solutions for homes, businesses, enterprise sites and maritime operations. Serving Lagos, Abuja and Port Harcourt, with installation requirements assessed for each location.
+                Starlink installation and connectivity services across Lagos, Abuja, Port Harcourt and other confirmed service areas in Nigeria.
               </p>
-              <ul className="mt-5 flex flex-wrap gap-2">
+              <ul className="mt-5 flex flex-wrap items-center gap-2">
                 {heroLocations.map((place, index) => (
                   <li
                     key={place.to}
@@ -218,6 +220,14 @@ export function Home() {
                     </Link>
                   </li>
                 ))}
+                <li className="hero-rise hero-d5">
+                  <Link
+                    to="/locations"
+                    className="inline-flex min-h-9 items-center px-2 text-sm font-medium text-cyan underline-offset-4 hover:underline focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+                  >
+                    View all service areas
+                  </Link>
+                </li>
               </ul>
               <div className="hero-rise hero-d6 mt-8 flex flex-wrap gap-3">
                 <ButtonLink to="/contact?intent=quote" variant="electric">
@@ -348,7 +358,7 @@ export function Home() {
               <div className="max-w-2xl">
                 <h2 id="home-areas-heading" className="text-3xl font-bold text-navy-950">Service areas</h2>
                 <p className="mt-3 text-base leading-relaxed text-slate-700">
-                  Browse published location guidance for local building, access, weather, and installation conditions. These pages do not imply an office in every location.
+                  Featured guidance for Lagos, Abuja, and Port Harcourt, plus other confirmed service areas across Nigeria. These pages describe local installation conditions and do not imply an office in every location.
                 </p>
               </div>
               <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

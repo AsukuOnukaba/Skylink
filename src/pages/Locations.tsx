@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CtaBand } from "@/components/home/CtaBand";
 import { AppShell } from "@/components/layout/AppShell";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -6,13 +7,27 @@ import { Picture } from "@/components/ui/Picture";
 import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
 import { site } from "@/config/site";
-import { publishedLocations } from "@/data/locations";
+import {
+  confirmedAreasByRegion,
+  coverageRegionSections,
+  locationIndexLabel,
+  regionalGuideLocations,
+  type LocationRecord,
+} from "@/data/locations";
 
 /**
  * Service-area index. Cards appear only for published places with real localContext.
+ * Organised by region around the 15 client-confirmed areas; Niger Delta is a guide.
  */
 export function Locations() {
-  const live = publishedLocations();
+  const regions = coverageRegionSections
+    .map((section) => ({
+      ...section,
+      places: confirmedAreasByRegion(section.id),
+    }))
+    .filter((section) => section.places.length > 0);
+  const guides = regionalGuideLocations();
+  const hasCards = regions.length > 0;
 
   return (
     <AppShell>
@@ -30,14 +45,17 @@ export function Locations() {
               Service areas
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              {site.brandName} works where a crew can attend in person. Each
-              place page explains local building and site conditions that affect
-              a Starlink install in that area.
+              {site.brandName} provides Starlink installation and connectivity
+              services across confirmed locations in Nigeria. Each place page
+              explains local building and site conditions that affect an
+              install. These pages do not imply a physical office in every
+              location, or that every installation can be completed
+              immediately.
             </p>
           </Container>
         </section>
 
-        {live.length > 0 ? (
+        {hasCards ? (
           <section
             aria-labelledby="locations-grid-heading"
             className="bg-slate-100 py-[var(--space-section)]"
@@ -47,23 +65,45 @@ export function Locations() {
                 id="locations-grid-heading"
                 className="text-2xl font-bold text-navy-950"
               >
-                Places we cover
+                Confirmed service locations
               </h2>
-              <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {live.map((place) => (
-                  <li key={place.placeKey}>
-                    <Link to={`/starlink-installation-${place.placeKey}`} className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white no-underline transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]">
-                      {place.imageSrc ? <Picture src={place.imageSrc} alt={place.imageAlt || ""} pictureClassName="block overflow-hidden" className="aspect-[16/10] w-full object-cover" sizes="(max-width: 640px) 100vw, 33vw" /> : null}
-                      <div className="flex flex-1 flex-col p-6">
-                        <h3 className="text-lg font-semibold text-navy-800 group-hover:text-sky-700">{place.placeName}</h3>
-                        <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">{place.regionLabel}</p>
-                        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">{place.intro}</p>
-                        <span className="mt-4 inline-flex text-sm font-medium text-sky-700">Installation details</span>
-                      </div>
-                    </Link>
-                  </li>
+              <div className="mt-10 space-y-12">
+                {regions.map((section) => (
+                  <div key={section.id}>
+                    <h3 className="text-lg font-semibold text-navy-900">
+                      {section.label}
+                    </h3>
+                    <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                      {section.places.map((place) => (
+                        <li key={place.placeKey} className="h-full">
+                          <LocationCard place={place} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
+              {guides.length > 0 ? (
+                <div className="mt-14 border-t border-slate-200 pt-10">
+                  <h3 className="text-lg font-semibold text-navy-900">
+                    Regional guide
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-700">
+                    The Niger Delta overview supports confirmed Rivers, Delta,
+                    and Bayelsa coverage. It is not a separate sixteenth
+                    service area and does not claim every delta settlement is
+                    covered.
+                  </p>
+                  <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {guides.map((place) => (
+                      <li key={place.placeKey} className="h-full">
+                        <LocationCard place={place} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </Container>
           </section>
         ) : (
@@ -90,4 +130,38 @@ export function Locations() {
     </AppShell>
   );
 }
-import { Link } from "react-router-dom";
+
+function LocationCard({ place }: { place: LocationRecord }) {
+  const title = locationIndexLabel(place);
+
+  return (
+    <Link
+      to={`/starlink-installation-${place.placeKey}`}
+      className="group flex h-full min-h-[18rem] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white no-underline transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+    >
+      {place.imageSrc ? (
+        <Picture
+          src={place.imageSrc}
+          alt={place.imageAlt || ""}
+          pictureClassName="block overflow-hidden"
+          className="aspect-[16/10] w-full object-cover"
+          sizes="(max-width: 640px) 100vw, 33vw"
+        />
+      ) : null}
+      <div className="flex flex-1 flex-col p-6">
+        <h4 className="text-lg font-semibold text-navy-800 group-hover:text-sky-700">
+          {title}
+        </h4>
+        <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
+          {place.regionLabel}
+        </p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-700">
+          {place.intro}
+        </p>
+        <span className="mt-4 inline-flex text-sm font-medium text-sky-700">
+          Installation details
+        </span>
+      </div>
+    </Link>
+  );
+}

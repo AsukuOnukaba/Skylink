@@ -7,7 +7,10 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Picture } from "@/components/ui/Picture";
 import { PageMeta } from "@/components/seo/PageMeta";
-import { getPublishedLocation } from "@/data/locations";
+import {
+  getPublishedLocation,
+  locationInstallationProcess,
+} from "@/data/locations";
 import { getPublishedService } from "@/data/services";
 import { NotFound } from "@/pages/NotFound";
 
@@ -113,10 +116,44 @@ export function LocationDetail() {
           </section>
         ) : null}
 
+        <section
+          aria-labelledby="location-process-heading"
+          className="bg-slate-100 py-[var(--space-section)]"
+        >
+          <Container className="max-w-4xl">
+            <h2
+              id="location-process-heading"
+              className="text-2xl font-bold text-navy-950"
+            >
+              Installation process
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-700">
+              The same consultation, survey, quotation, installation, and
+              handover sequence applies in {place.placeName}. Timing depends on
+              access, site conditions, and crew availability.
+            </p>
+            <ol className="mt-6 space-y-3">
+              {locationInstallationProcess.map((step, index) => (
+                <li
+                  key={step}
+                  className="flex gap-4 rounded-md border border-slate-200 bg-white px-5 py-4"
+                >
+                  <span className="text-sm font-semibold text-sky-700">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm leading-relaxed text-slate-700">
+                    {step}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </Container>
+        </section>
+
         {place.faqs.length > 0 ? (
           <section
             aria-labelledby="location-faq-heading"
-            className="bg-slate-100 py-[var(--space-section)]"
+            className="bg-white py-[var(--space-section)]"
           >
             <Container className="max-w-3xl">
               <h2

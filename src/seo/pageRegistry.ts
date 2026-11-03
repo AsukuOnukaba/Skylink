@@ -30,6 +30,8 @@ export type PageSeoRecord = {
   prerender: boolean;
   /** Page-level indexability (still gated by global indexing mode). */
   indexable: boolean;
+  /** ISO date for sitemap lastmod when available. */
+  lastModified?: string;
   /** Site-relative image path for OG when cleared assets exist. */
   ogImagePath?: string;
   breadcrumbs?: BreadcrumbItem[];
@@ -129,7 +131,7 @@ export function listPublicPages(): PageSeoRecord[] {
     staticPage(
       "/locations",
       `Starlink installation areas — ${site.brandName}`,
-      `${site.brandName} lists installation areas when local service details are confirmed. Browse places here, or use Contact for the next available step.`,
+      `${site.brandName} installs Starlink across confirmed service areas in Nigeria, including Lagos, Abuja, Port Harcourt, and other published locations. Browse local guidance or contact us to discuss your site.`,
       {
         breadcrumbs: [
           crumb("Home", "/", siteOrigin),
@@ -355,6 +357,7 @@ function locationPage(
     description: place.seoDescription,
     prerender: true,
     indexable: place.indexable,
+    lastModified: place.contentUpdatedAt,
     breadcrumbs: crumbs,
     jsonLd,
   };
@@ -374,13 +377,29 @@ export function prerenderPaths(): string[] {
 }
 
 /** Absolute sitemap URLs when global indexing is enabled. */
+export type SitemapEntry = {
+  loc: string;
+  lastModified?: string;
+};
+
 export function sitemapEntries(): string[] {
+  return sitemapEntryRecords().map((entry) => entry.loc);
+}
+
+export function sitemapEntryRecords(): SitemapEntry[] {
   const { indexingEnabled, siteOrigin } = resolveIndexing({ failClosed: false });
   if (!indexingEnabled || !siteOrigin) return [];
-  return listPublicPages()
-    .filter((page) => page.prerender && page.indexable)
-    .map((page) => absoluteUrl(siteOrigin, page.path))
-    .filter((url): url is string => Boolean(url));
+  const entries: SitemapEntry[] = [];
+  for (const page of listPublicPages()) {
+    if (!page.prerender || !page.indexable) continue;
+    const loc = absoluteUrl(siteOrigin, page.path);
+    if (!loc) continue;
+    entries.push({
+      loc,
+      lastModified: page.lastModified,
+    });
+  }
+  return entries;
 }
 
 export function buildRobotsTxt(): string {
@@ -403,13 +422,17 @@ export function buildRobotsTxt(): string {
 }
 
 export function buildSitemapXml(): string | null {
-  const entries = sitemapEntries();
+  const entries = sitemapEntryRecords();
   if (entries.length === 0) return null;
   const urls = entries
-    .map(
-      (loc) =>
-        `  <url>\n    <loc>${loc.replace(/&/g, "&amp;")}</loc>\n  </url>`,
-    )
+    .map((entry) => {
+      const loc = entry.loc.replace(/&/g, "&amp;");
+      const lastmod =
+        entry.lastModified && /^\d{4}-\d{2}-\d{2}/.test(entry.lastModified)
+          ? `\n    <lastmod>${entry.lastModified.slice(0, 10)}</lastmod>`
+          : "";
+      return `  <url>\n    <loc>${loc}</loc>${lastmod}\n  </url>`;
+    })
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }

@@ -103,11 +103,15 @@ export function answerGuide(question: string): GuideReply {
     );
   }
 
-  if (/port harcourt|portharcourt/.test(q)) {
+  if (/port harcourt|portharcourt|rivers state/.test(q)) {
     return placeReply("port-harcourt") ?? fallback();
   }
   if (/\blagos\b/.test(q)) return placeReply("lagos") ?? fallback();
   if (/\babuja\b/.test(q)) return placeReply("abuja") ?? fallback();
+  if (/\bibadan\b|oyo state/.test(q)) return placeReply("ibadan") ?? fallback();
+  if (/\bogun\b/.test(q)) return placeReply("ogun") ?? fallback();
+  if (/akwa ibom/.test(q)) return placeReply("akwa-ibom") ?? fallback();
+  if (/cross river/.test(q)) return placeReply("cross-river") ?? fallback();
 
   if (/home|house|residential|apartment|duplex/.test(q)) {
     return (
@@ -139,7 +143,7 @@ export function answerGuide(question: string): GuideReply {
 
   if (/where|service area|which cit|location|cities/.test(q)) {
     return {
-      text: "Published service areas include Lagos, Abuja, and Port Harcourt, along with other location pages. Those pages describe local installation conditions. They do not mean Skylink has an office in each city. Requirements are assessed for each location.",
+      text: "Published service areas include Lagos, Abuja, and Port Harcourt, along with other confirmed locations in Nigeria. Those pages describe local installation conditions. They do not mean Skylink has an office in each city. Requirements are assessed for each location.",
       links: [
         { label: "Lagos", to: "/starlink-installation-lagos" },
         { label: "Abuja", to: "/starlink-installation-abuja" },

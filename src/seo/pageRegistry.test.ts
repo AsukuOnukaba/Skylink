@@ -28,6 +28,10 @@ describe("pageRegistry", () => {
     expect(paths).toContain("/products/starlink-mini");
     expect(paths).toContain("/starlink-installation-lagos");
     expect(paths).toContain("/starlink-installation-owerri");
+    expect(paths).toContain("/starlink-installation-ibadan");
+    expect(paths).toContain("/starlink-installation-ogun");
+    expect(paths).toContain("/starlink-installation-akwa-ibom");
+    expect(paths).toContain("/starlink-installation-cross-river");
     expect(paths).toContain("/guide/starlink-nigeria");
     expect(paths).toContain("/services/sales-installation");
     expect(paths).not.toContain("/dev/brand");
@@ -60,11 +64,23 @@ describe("pageRegistry", () => {
     expect(entries).toContain(
       "https://www.example.com/starlink-installation-owerri",
     );
+    expect(entries).toContain(
+      "https://www.example.com/starlink-installation-ibadan",
+    );
+    expect(entries).toContain(
+      "https://www.example.com/starlink-installation-cross-river",
+    );
     expect(entries.join("\n")).not.toMatch(/localhost|vercel\.app/i);
 
     const xml = buildSitemapXml();
     expect(xml).toContain("<urlset");
     expect(xml).toContain("<loc>https://www.example.com/</loc>");
+    expect(xml).toContain(
+      "<loc>https://www.example.com/starlink-installation-ibadan</loc>",
+    );
+    expect(xml).toMatch(
+      /starlink-installation-ibadan<\/loc>\s*<lastmod>2026-11-03<\/lastmod>/,
+    );
 
     const robots = buildRobotsTxt();
     expect(robots).toContain("Sitemap: https://www.example.com/sitemap.xml");

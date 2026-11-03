@@ -1,17 +1,21 @@
 import { describe, expect, it } from "vitest";
 import {
+  confirmedServiceAreas,
+  coverageRegionSections,
   getPublishedLocation,
   hasPublishedLocations,
   isPublishableLocation,
+  locationIndexLabel,
   locations,
   publicLocationPaths,
   publishedLocations,
+  regionalGuideLocations,
   type LocationRecord,
 } from "./locations";
 import { services } from "./services";
 
 describe("locations catalogue", () => {
-  it("publishes the non-blog location catalogue", () => {
+  it("publishes confirmed service areas plus the Niger Delta guide", () => {
     expect(publishedLocations().map((l) => l.placeKey)).toEqual([
       "abuja",
       "lagos",
@@ -25,12 +29,50 @@ describe("locations catalogue", () => {
       "abia",
       "anambra",
       "ebonyi",
+      "ibadan",
+      "ogun",
+      "akwa-ibom",
+      "cross-river",
+    ]);
+    expect(confirmedServiceAreas()).toHaveLength(15);
+    expect(regionalGuideLocations().map((l) => l.placeKey)).toEqual([
+      "niger-delta",
     ]);
     expect(hasPublishedLocations()).toBe(true);
     expect(publicLocationPaths()).toContain("/starlink-installation-abuja");
     expect(publicLocationPaths()).toContain("/starlink-installation-owerri");
+    expect(publicLocationPaths()).toContain("/starlink-installation-ibadan");
+    expect(publicLocationPaths()).toContain("/starlink-installation-ogun");
+    expect(publicLocationPaths()).toContain(
+      "/starlink-installation-akwa-ibom",
+    );
+    expect(publicLocationPaths()).toContain(
+      "/starlink-installation-cross-river",
+    );
     expect(getPublishedLocation("lagos")?.placeName).toBe("Lagos");
     expect(getPublishedLocation("delta")?.placeName).toBe("Delta State");
+    expect(locationIndexLabel(getPublishedLocation("port-harcourt")!)).toBe(
+      "Rivers State / Port Harcourt",
+    );
+  });
+
+  it("groups confirmed areas into the four coverage regions", () => {
+    const grouped = coverageRegionSections.flatMap((section) =>
+      confirmedServiceAreas()
+        .filter((place) => place.coverageRegion === section.id)
+        .map((place) => place.placeKey),
+    );
+    expect(grouped).toHaveLength(15);
+    expect(new Set(grouped).size).toBe(15);
+    expect(
+      confirmedServiceAreas().every(
+        (place) =>
+          place.coverageRegion &&
+          coverageRegionSections.some(
+            (section) => section.id === place.coverageRegion,
+          ),
+      ),
+    ).toBe(true);
   });
 
   it("requires non-empty localContext before a place is publishable", () => {
@@ -38,6 +80,8 @@ describe("locations catalogue", () => {
       placeKey: "lagos",
       placeName: "Lagos",
       regionLabel: "South West",
+      indexKind: "confirmed",
+      coverageRegion: "south-west",
       headline: "Starlink installation in Lagos",
       intro: "Generic intro",
       localContext: "   ",
@@ -45,6 +89,7 @@ describe("locations catalogue", () => {
       faqs: [],
       seoTitle: "Lagos",
       seoDescription: "Lagos",
+      contentUpdatedAt: "2026-11-03",
       published: true,
       indexable: true,
     };
@@ -63,12 +108,21 @@ describe("locations catalogue", () => {
       for (const slug of l.relatedServiceSlugs) {
         expect(serviceSlugs.has(slug)).toBe(true);
       }
+      expect(l.contentUpdatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(l.seoTitle.length).toBeGreaterThan(10);
+      expect(l.seoDescription.length).toBeGreaterThan(40);
     }
     const text = JSON.stringify(locations).toLowerCase();
     for (const banned of ["datagram", "₦", "certified", "1000+"]) {
       expect(text.includes(banned)).toBe(false);
     }
-    expect(publishedLocations().every((location) => Boolean(location.imageSrc))).toBe(true);
-    expect(publishedLocations().every((location) => (location.imageAlt?.length ?? 0) > 20)).toBe(true);
+    expect(
+      publishedLocations().every((location) => Boolean(location.imageSrc)),
+    ).toBe(true);
+    expect(
+      publishedLocations().every(
+        (location) => (location.imageAlt?.length ?? 0) > 20,
+      ),
+    ).toBe(true);
   });
 });
