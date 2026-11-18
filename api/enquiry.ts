@@ -8,8 +8,8 @@ import {
 } from "../src/shared/processEnquiry";
 
 /**
- * Minimal Node serverless request shape used by `@vercel/node`.
- * Keep this local so the API entry does not depend on `@vercel/node` types.
+ * Minimal Node serverless request/response shapes (legacy `@vercel/node`).
+ * Used by `createEnquiryHandler` for Vitest and local Node smoke invokes.
  */
 export type EnquiryApiRequest = {
   method?: string;
@@ -60,6 +60,30 @@ export function coerceEnquiryBody(raw: unknown): unknown {
   return raw;
 }
 
+async function readWebRequestBody(request: Request): Promise<unknown> {
+  let text: string;
+  try {
+    text = await request.text();
+  } catch {
+    return null;
+  }
+  return coerceEnquiryBody(text);
+}
+
+function jsonResponse(
+  status: number,
+  body: unknown,
+  extraHeaders?: Record<string, string>,
+): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      ...extraHeaders,
+    },
+  });
+}
+
 const defaultDeps: EnquiryHandlerDeps = {
   resolveDeliveryFromEnv: defaultResolveDeliveryFromEnv,
   processEnquiry: defaultProcessEnquiry,
@@ -70,8 +94,44 @@ const defaultDeps: EnquiryHandlerDeps = {
 };
 
 /**
- * Build the Vercel handler. Tests inject delivery/process doubles;
- * production uses the default export below.
+ * Shared enquiry pipeline used by Web Standard and Node adapters.
+ */
+export async function handleEnquiryHttp(
+  method: string,
+  rawBody: unknown,
+  deps: Partial<EnquiryHandlerDeps> = {},
+): Promise<{ status: number; body: unknown; headers?: Record<string, string> }> {
+  const {
+    resolveDeliveryFromEnv,
+    processEnquiry,
+    log,
+  } = { ...defaultDeps, ...deps };
+
+  try {
+    const normalized = (method || "GET").toUpperCase();
+    if (normalized !== "POST") {
+      return {
+        status: 405,
+        headers: { Allow: "POST" },
+        body: { ok: false, error: "Method not allowed" },
+      };
+    }
+
+    const delivery = resolveDeliveryFromEnv(process.env);
+    const result = await processEnquiry(rawBody, delivery, log);
+    return { status: result.status, body: result.body };
+  } catch {
+    // Do not map unexpected errors to 503 — keep them distinguishable.
+    log("enquiry handler unexpected_error");
+    return {
+      status: 500,
+      body: { ok: false, error: "Internal server error" },
+    };
+  }
+}
+
+/**
+ * Node (req, res) adapter for Vitest and local esbuild smoke tests.
  */
 export function createEnquiryHandler(
   deps: Partial<EnquiryHandlerDeps> = {},
@@ -79,52 +139,66 @@ export function createEnquiryHandler(
   req: EnquiryApiRequest,
   res: EnquiryApiResponse,
 ) => Promise<unknown> {
-  const {
-    resolveDeliveryFromEnv,
-    processEnquiry,
-    log,
-  } = { ...defaultDeps, ...deps };
-
   return async function handler(
     req: EnquiryApiRequest,
     res: EnquiryApiResponse,
   ): Promise<unknown> {
-    try {
-      const method = (req.method ?? "GET").toUpperCase();
-      if (method !== "POST") {
-        res.setHeader("Allow", "POST");
-        return res.status(405).json({ ok: false, error: "Method not allowed" });
+    const outcome = await handleEnquiryHttp(
+      req.method ?? "GET",
+      coerceEnquiryBody(req.body),
+      deps,
+    );
+    if (outcome.headers) {
+      for (const [name, value] of Object.entries(outcome.headers)) {
+        res.setHeader(name, value);
       }
-
-      const delivery = resolveDeliveryFromEnv(process.env);
-      const result = await processEnquiry(
-        coerceEnquiryBody(req.body),
-        delivery,
-        log,
-      );
-
-      return res.status(result.status).json(result.body);
-    } catch {
-      // Distinguish unexpected failures from intentional 503 not-configured.
-      // Do not expose stack traces or env/secrets to clients.
-      log("enquiry handler unexpected_error");
-      return res.status(500).json({ ok: false, error: "Internal server error" });
     }
+    return res.status(outcome.status).json(outcome.body);
   };
 }
 
 /**
- * POST /api/enquiry — TRD enquiry endpoint (PH-08).
- *
- * Status contract:
- * - 202 only after the resolved delivery adapter reports acceptance
- * - 400 validation / honeypot / malformed body
- * - 405 unsupported method (`Allow: POST`)
- * - 502 provider/network failure after a configured delivery attempt
- * - 503 delivery not configured (including stub blocked in production)
- * - 500 unexpected internal failure (JSON, no stack traces)
- * - 429 expected from Vercel Firewall (not this file)
- *
- * Forms stay gated by `VITE_ENQUIRY_FORMS_ENABLED` (default off).
+ * Web Standard fetch handler (documented Vercel Node.js ESM entry).
  */
-export default createEnquiryHandler();
+export function createEnquiryFetchHandler(
+  deps: Partial<EnquiryHandlerDeps> = {},
+): (request: Request) => Promise<Response> {
+  return async function fetchHandler(request: Request): Promise<Response> {
+    const outcome = await handleEnquiryHttp(
+      request.method,
+      await readWebRequestBody(request),
+      deps,
+    );
+    return jsonResponse(outcome.status, outcome.body, outcome.headers);
+  };
+}
+
+const fetchHandler = createEnquiryFetchHandler();
+
+/** Named method export for the Vercel Node.js runtime. */
+export async function POST(request: Request): Promise<Response> {
+  return fetchHandler(request);
+}
+
+async function methodNotAllowed(): Promise<Response> {
+  return jsonResponse(
+    405,
+    { ok: false, error: "Method not allowed" },
+    { Allow: "POST" },
+  );
+}
+
+export const GET = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
+export const OPTIONS = methodNotAllowed;
+export const HEAD = methodNotAllowed;
+
+/**
+ * Default Web Standard entry for Vercel Node.js.
+ * @see https://vercel.com/docs/functions/runtimes/node-js
+ */
+export default {
+  fetch: fetchHandler,
+};

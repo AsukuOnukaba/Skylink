@@ -57,7 +57,17 @@ Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `site
 
 `POST /api/enquiry` is implemented in `api/enquiry.ts` with shared Zod validation and fail-closed delivery (`src/shared/processEnquiry.ts`, `enquiryDelivery.ts`). Expected statuses: **405** (non-POST, `Allow: POST`), **400** (validation), **503** (delivery not configured), **502** (provider failure), **202** (provider accepted only), **500** (unexpected internal — JSON, no stack traces).
 
-PH-13A found production returning **`FUNCTION_INVOCATION_FAILED`**. Corrective changes modernize `vercel.json` (no legacy `builds`) and harden the handler. **Forms stay off** (`VITE_ENQUIRY_FORMS_ENABLED` unset/false). Details: `../planning/skylink/10-enquiry-api-corrective.md`. Do not claim the live endpoint is fixed until a separately approved deploy is verified.
+PH-13A found production returning **`FUNCTION_INVOCATION_FAILED`**. Run 1 repairs the Vercel Node/ESM entry (`export default { fetch }`, root ESM `compilerOptions`, Node 20 engines) and keeps the status contract. **Forms stay off** (`VITE_ENQUIRY_FORMS_ENABLED` unset/false). Details: `../planning/skylink/10-api-runtime-correction.md`. Do not claim the live endpoint is fixed until a separately approved deploy is verified.
+
+### Security headers and operations (PH-13B / Run 2, 18 Nov 2026)
+
+`vercel.json` sets Content-Security-Policy (no `unsafe-inline` / `unsafe-eval`; GA hosts allowed for a future approved measurement id), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, and `Permissions-Policy`. Platform HSTS is left to Vercel (not redefined). Static `Access-Control-Allow-Origin: *` is overridden to `https://www.skylink.ng` because the app is same-origin only. Shared enquiry rate limiting (OD-16 / FR-32) still requires a **published Vercel Firewall** rule — it is not enabled from this repository. Ops detail: `../planning/skylink/11-security-and-operations-hardening.md`.
+
+```bash
+pnpm qa:headers                                              # validate vercel.json policy
+pnpm build && pnpm qa:security-serve                         # local server with those headers
+SKYLINK_QA_ORIGIN=http://127.0.0.1:4322 pnpm qa:headers      # probe local header server
+```
 
 ## Image pipeline
 
@@ -69,4 +79,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Live on Vercel for owner review; not launch-complete (18 Nov 2026).** Catalogue includes 21 services, 8 priced products, expanded locations, Nigeria guide, support, installation examples, and gallery. Blog articles are not imported. Phone, WhatsApp, and `info@skylink.com` are the published contact channels. Enquiry forms stay off. Analytics stays off. Default builds stay `noindex`. Enquiry delivery provider (OD-07/OD-15), shared rate limiting (OD-16), indexing activation, and Search Console remain open. Enquiry API code correction is prepared; live `POST /api/enquiry` still needs a separately approved redeploy before it can be called fixed.
+**Live on Vercel for owner review; not launch-complete (18 Nov 2026).** Catalogue includes 21 services, 8 priced products, expanded locations, Nigeria guide, support, installation examples, and gallery. Blog articles are not imported. Phone, WhatsApp, and `info@skylink.com` are the published contact channels. Enquiry forms stay off. Analytics stays off. Default builds stay `noindex`. Enquiry delivery provider (OD-07/OD-15), shared rate limiting (OD-16), indexing activation, and Search Console remain open. Enquiry API code correction and security-header hardening are prepared in repo; live production still needs a separately approved redeploy before headers/API can be called fixed. Do not claim WAF, monitoring, or backup controls are active without dashboard verification.

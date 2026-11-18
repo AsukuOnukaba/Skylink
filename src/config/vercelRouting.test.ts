@@ -41,7 +41,12 @@ describe("vercel.json routing (PH-10 / enquiry corrective)", () => {
     expect(config.builds).toBeUndefined();
     expect(config.buildCommand).toContain("vercel-build");
     expect(config.outputDirectory).toBe("dist/spa");
-    expect(config.functions?.["api/enquiry.ts"]).toBeTruthy();
+
+    const enquiryFn = config.functions?.["api/enquiry.ts"] as
+      | { memory?: number; maxDuration?: number }
+      | undefined;
+    expect(enquiryFn).toBeTruthy();
+    expect(enquiryFn?.maxDuration).toBe(10);
 
     const enquiryRoute = config.routes.find(
       (route) => route.src === "/api/enquiry" && route.dest === "/api/enquiry",

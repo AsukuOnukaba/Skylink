@@ -49,6 +49,7 @@ export function FloatingContact() {
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const nextId = useRef(1);
   const wasOpen = useRef(false);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
@@ -95,6 +96,14 @@ export function FloatingContact() {
     log.scrollTop = log.scrollHeight;
   }, [messages, open]);
 
+  // CSS custom property via CSSOM (not a React style= attribute) so CSP
+  // style-src 'self' can stay free of 'unsafe-inline'.
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    panel.style.setProperty("--skylink-kb-offset", `${keyboardOffset}px`);
+  }, [keyboardOffset, open]);
+
   function pushQuestion(question: string) {
     const text = question.trim();
     if (!text) return;
@@ -118,15 +127,12 @@ export function FloatingContact() {
     open && typeof document !== "undefined"
       ? createPortal(
           <section
+            ref={panelRef}
             id={panelId}
             role="region"
             aria-label="Skylink Assistant"
             data-analytics-placement="floating"
-            className="fixed z-30 flex min-h-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-md left-[calc(0.75rem+env(safe-area-inset-left))] right-[calc(0.75rem+env(safe-area-inset-right))] w-auto md:left-auto md:right-[calc(1.5rem+env(safe-area-inset-right))] md:w-[min(380px,calc(100vw-3rem))]"
-            style={{
-              bottom: `calc(1.5rem + 52px + 1rem + 52px + 0.75rem + env(safe-area-inset-bottom) + ${keyboardOffset}px)`,
-              maxHeight: `calc(100dvh - 5.5rem - 0.75rem - 1.5rem - 52px - 1rem - 52px - 0.75rem - env(safe-area-inset-top) - env(safe-area-inset-bottom) - ${keyboardOffset}px)`,
-            }}
+            className="fixed z-30 flex min-h-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-md left-[calc(0.75rem+env(safe-area-inset-left))] right-[calc(0.75rem+env(safe-area-inset-right))] w-auto md:left-auto md:right-[calc(1.5rem+env(safe-area-inset-right))] md:w-[min(380px,calc(100vw-3rem))] bottom-[calc(1.5rem+52px+1rem+52px+0.75rem+env(safe-area-inset-bottom)+var(--skylink-kb-offset,0px))] max-h-[calc(100dvh-5.5rem-0.75rem-1.5rem-52px-1rem-52px-0.75rem-env(safe-area-inset-top)-env(safe-area-inset-bottom)-var(--skylink-kb-offset,0px))]"
           >
             <header className="flex shrink-0 items-center gap-3 bg-navy-950 px-4 py-3 text-white">
               <p className="min-w-0 flex-1 text-sm font-semibold text-white">
@@ -229,11 +235,7 @@ export function FloatingContact() {
     <>
       {panel}
     <div
-      className="fixed z-30 flex flex-col items-end gap-4"
-      style={{
-        right: "calc(1.5rem + env(safe-area-inset-right))",
-        bottom: "calc(1.5rem + env(safe-area-inset-bottom))",
-      }}
+      className="fixed z-30 flex flex-col items-end gap-4 right-[calc(1.5rem+env(safe-area-inset-right))] bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
       data-analytics-placement="floating"
     >
 

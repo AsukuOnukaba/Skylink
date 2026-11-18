@@ -26,5 +26,8 @@ node_modules/.tmp/
 # Test / coverage
 coverage/
 
+# Local scratch / bundled smoke artefacts (never commit)
+tmp/
+
 # Vercel
 .vercel/
