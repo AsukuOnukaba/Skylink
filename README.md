@@ -51,7 +51,13 @@ Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `site
 
 `VITE_GA_MEASUREMENT_ID` stays empty. The Google tag is not loaded, and no events are sent, unless that variable is a real Skylink measurement id. Local and preview builds do not enable analytics. There is no consent banner because no analytics property is approved. Do not paste a DataGram id or a placeholder.
 
-**Not deployed (24 Oct 2026).** There is no approved public URL, no live host, and no Google Search Console property. Validate SEO from local build artefacts only. Do not treat missing Google results as a failure, and do not invent or submit a local or preview URL as the production site. After the domain and host exist, deployment must set the origin and indexing flags, check live HTTP 200/404, confirm production pages are not left `noindex`, verify Search Console, and submit the production sitemap.
+**Production host exists (`skylink.ng` / `www.skylink.ng`) but launch is not complete.** Indexing stays off until OD-10 + explicit go. Validate SEO changes against live HTTP after each approved deploy; local `pnpm preview` status codes are not Vercel’s. Do not invent Search Console data. After any SEO-flag change, confirm live canonicals, `robots.txt`, sitemap host consistency, and that production is not left on unintended `noindex`.
+
+### Enquiry API (PH-08 corrective, 18 Nov 2026)
+
+`POST /api/enquiry` is implemented in `api/enquiry.ts` with shared Zod validation and fail-closed delivery (`src/shared/processEnquiry.ts`, `enquiryDelivery.ts`). Expected statuses: **405** (non-POST, `Allow: POST`), **400** (validation), **503** (delivery not configured), **502** (provider failure), **202** (provider accepted only), **500** (unexpected internal — JSON, no stack traces).
+
+PH-13A found production returning **`FUNCTION_INVOCATION_FAILED`**. Corrective changes modernize `vercel.json` (no legacy `builds`) and harden the handler. **Forms stay off** (`VITE_ENQUIRY_FORMS_ENABLED` unset/false). Details: `../planning/skylink/10-enquiry-api-corrective.md`. Do not claim the live endpoint is fixed until a separately approved deploy is verified.
 
 ## Image pipeline
 
@@ -63,4 +69,4 @@ Originals live in `media-originals/`. Brand logo originals live in `brand-assets
 
 ## Current phase
 
-**Content catalogue expanded from the non-blog DataGram source (24 Oct 2026). Still local only, not launch-ready.** Public routes are prerendered into `dist/spa`. The catalogue is 21 services, 8 priced products, 12 location pages, plus the Nigeria guide, support, installation examples, and gallery. Blog articles are not imported. Phone, WhatsApp, and `info@skylink.com` are the published contact channels. Enquiry forms stay off. Analytics stays off. Default builds stay `noindex`. Production domain, hosting, live HTTP checks, enquiry delivery, shared rate limiting, and Google Search Console remain unverified.
+**Live on Vercel for owner review; not launch-complete (18 Nov 2026).** Catalogue includes 21 services, 8 priced products, expanded locations, Nigeria guide, support, installation examples, and gallery. Blog articles are not imported. Phone, WhatsApp, and `info@skylink.com` are the published contact channels. Enquiry forms stay off. Analytics stays off. Default builds stay `noindex`. Enquiry delivery provider (OD-07/OD-15), shared rate limiting (OD-16), indexing activation, and Search Console remain open. Enquiry API code correction is prepared; live `POST /api/enquiry` still needs a separately approved redeploy before it can be called fixed.

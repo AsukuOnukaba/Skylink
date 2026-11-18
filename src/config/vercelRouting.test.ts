@@ -5,11 +5,15 @@ import { describe, expect, it } from "vitest";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
-describe("vercel.json routing (PH-10)", () => {
+describe("vercel.json routing (PH-10 / enquiry corrective)", () => {
   const config = JSON.parse(
     readFileSync(path.join(root, "vercel.json"), "utf8"),
   ) as {
+    buildCommand?: string;
+    outputDirectory?: string;
+    builds?: unknown;
     routes: Array<Record<string, unknown>>;
+    functions?: Record<string, unknown>;
   };
 
   it("keeps enquiry API separate and does not SPA-fallback unknown paths to index.html", () => {
@@ -31,5 +35,18 @@ describe("vercel.json routing (PH-10)", () => {
         route.status === 404,
     );
     expect(apiCatch).toBeTruthy();
+  });
+
+  it("uses modern build output settings and routes all methods to the enquiry function", () => {
+    expect(config.builds).toBeUndefined();
+    expect(config.buildCommand).toContain("vercel-build");
+    expect(config.outputDirectory).toBe("dist/spa");
+    expect(config.functions?.["api/enquiry.ts"]).toBeTruthy();
+
+    const enquiryRoute = config.routes.find(
+      (route) => route.src === "/api/enquiry" && route.dest === "/api/enquiry",
+    );
+    expect(enquiryRoute).toBeTruthy();
+    expect(enquiryRoute?.methods).toBeUndefined();
   });
 });

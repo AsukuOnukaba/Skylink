@@ -1,32 +1,32 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "pnpm vercel-build",
+  "outputDirectory": "dist/spa",
+  "framework": null,
+  "functions": {
+    "api/enquiry.ts": {
+      "memory": 256,
+      "maxDuration": 10
+    }
+  },
+  "headers": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist/spa" }
-    },
-    {
-      "src": "api/enquiry.ts",
-      "use": "@vercel/node"
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "routes": [
     {
       "src": "/api/enquiry",
-      "methods": ["POST"],
-      "dest": "/api/enquiry.ts"
+      "dest": "/api/enquiry"
     },
     {
       "src": "/api/(.*)",
       "status": 404
-    },
-    {
-      "src": "/assets/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      },
-      "continue": true
     },
     {
       "handle": "filesystem"
