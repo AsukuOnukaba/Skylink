@@ -11,3 +11,17 @@
 | Placement | Works on light and dark surfaces. Prefer `navy-950` or white section backgrounds. |
 
 Never use DataGram’s `starlinklogo.png` or any other mark as the Skylink logo.
+
+## Favicon / app icon
+
+Derived from the primary logo’s dish mark (wordmark removed), for tab and home-screen use only.
+
+| Asset | Path |
+| --- | --- |
+| Square mark master | `../public/brand/skylink-mark.png` |
+| Favicon (ICO) | `../public/favicon.ico` |
+| Favicon (SVG) | `../public/favicon.svg` |
+| Favicon PNGs | `../public/favicon-16x16.png`, `../public/favicon-32x32.png`, `../public/favicon-48x48.png` |
+| Apple touch icon | `../public/apple-touch-icon.png` (180×180 on navy) |
+
+Linked from `index.html`. Do not invent a separate mark for favicons.
