@@ -27,6 +27,7 @@ Do **not** treat reachability as launch-complete. Do **not** enable indexing, an
 - React Router
 - Tailwind CSS 3
 - pnpm
+- Node.js **26.x** on Vercel (`package.json` `engines`, `.nvmrc`, `.node-version`)
 
 Application source lives under `src/`. Production client build output is `dist/spa` for Vercel-compatible static hosting. Serverless enquiry entry: `api/enquiry.ts`.
 
