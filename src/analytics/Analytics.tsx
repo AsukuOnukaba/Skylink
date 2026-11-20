@@ -1,14 +1,23 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { analyticsEnabled } from "@/analytics/config";
-import { installAnalytics, trackEvent } from "@/analytics/track";
+import {
+  installAnalytics,
+  trackEvent,
+  trackPageView,
+} from "@/analytics/track";
 
 /**
- * Installs GA4 only when a valid measurement id is configured, and records
- * tel: / WhatsApp clicks. Renders nothing. Does not add a consent banner:
- * OD-13 and any consent policy are still open, and the tag stays unloaded
- * until an id exists.
+ * Installs GA4 only when enabled, records SPA page views on React Router
+ * location changes, and records tel: / WhatsApp clicks.
+ *
+ * Renders nothing. No consent banner is added here: a formal consent policy
+ * remains an owner decision (OD-13). Advertising personalisation and Google
+ * Signals stay off in the gtag config.
  */
 export function Analytics() {
+  const location = useLocation();
+
   useEffect(() => {
     if (!analyticsEnabled()) return;
     installAnalytics();
@@ -32,6 +41,12 @@ export function Analytics() {
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, []);
+
+  useEffect(() => {
+    if (!analyticsEnabled()) return;
+    installAnalytics();
+    trackPageView(location.pathname);
+  }, [location.pathname]);
 
   return null;
 }

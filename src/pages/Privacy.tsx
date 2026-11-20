@@ -77,14 +77,25 @@ export function Privacy() {
             Analytics
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-700">
-            This build does not load a measurement tag unless a Skylink Google
-            Analytics 4 measurement id is configured for the deployment. No id
-            is published in the repository, and local and preview builds leave
-            the tag unloaded. When an id is present, Google Analytics records
-            page views through its own tag. This site may also send click and
-            successful-enquiry events that contain only the page path and, where
-            relevant, a service or product slug. Those events do not include
-            your name, phone number, email address, or message.
+            This website can load Google Analytics 4 (gtag) when a Skylink
+            measurement id is configured for the production deployment. The id
+            is supplied through a host environment variable and is not stored in
+            the public repository. Local development and preview deployments
+            leave the tag unloaded unless an explicit non-production override is
+            used for testing.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-slate-700">
+            When the tag is active, Google Analytics may record page views for
+            route changes on this site, plus click events for published phone
+            and WhatsApp links, and successful online enquiry events only after
+            the server accepts a submission. Those application events include
+            only the page path and, where relevant, a service or product slug.
+            They do not include your name, phone number, email address, or
+            message. Advertising personalisation signals and Google Signals are
+            not enabled by this site’s tag configuration. A separate cookie or
+            consent banner is not shown on this build; if a formal consent
+            policy is required for your jurisdiction, it will be added after
+            owner approval.
           </p>
 
           <h2 className="mt-10 text-xl font-semibold text-navy-800">

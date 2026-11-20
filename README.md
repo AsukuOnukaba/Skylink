@@ -68,7 +68,7 @@ Default builds emit `noindex` HTML, `robots.txt` without a sitemap, and no `site
 
 ### Analytics (PH-11, OD-13)
 
-`VITE_GA_MEASUREMENT_ID` stays empty until a real Skylink GA4 id and consent policy are approved. Do not paste a DataGram id or a placeholder.
+Set `VITE_GA_MEASUREMENT_ID` on **Vercel Production** only (Skylink GA4 property). The value is never committed. Local and preview builds leave the tag unloaded unless `SKYLINK_FORCE_ANALYTICS=true` (tests / explicit local debug). SPA page views are sent once per route with `send_page_view: false` — disable GA4 Admin “Page changes based on browser history events” to avoid duplicates. Advertising personalisation and Google Signals stay off in code. No Google Tag Manager.
 
 ### Enquiry API (PH-08 / Run 1)
 
