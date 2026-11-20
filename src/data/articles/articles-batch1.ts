@@ -51,7 +51,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Home installs are scoped under residential installation. Power design belongs with backup power planning. For a deeper walkthrough of sky view, Wi‑Fi, and plan class, see the Nigeria guide."),
     ],
     relatedServicePaths: [{ path: "/services/residential-installation", label: "Residential installation" }, { path: "/services/backup-power", label: "Backup power" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-site-survey-nigeria", "diy-vs-professional-starlink-installation-nigeria", "starlink-generator-inverter-power-nigeria"],
+    relatedArticleSlugs: ["starlink-site-survey-nigeria", "diy-vs-professional-starlink-installation-nigeria", "starlink-generator-inverter-power-nigeria", "starlink-mount-roof-nigeria", "starlink-cable-routing-nigeria"],
     cta: {
       heading: "Ready to plan a home install?",
       description: "Tell Skylink about your property type, roof access, and power setup. Coverage and scheduling are confirmed per enquiry.",
@@ -95,7 +95,7 @@ export const batch1Articles: ArticleRecord[] = [
       ol("You share property basics and any photos.", "Skylink flags obvious blockers or missing permissions.", "Where needed, a visit confirms mount and cable.", "A quotation reflects what was actually scoped — not a generic package promise."),
     ],
     relatedServicePaths: [{ path: "/services/residential-installation", label: "Residential installation" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-apartment-estate-approval-nigeria"],
+    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-apartment-estate-approval-nigeria", "starlink-mount-roof-nigeria", "starlink-obstruction-nigeria"],
     cta: {
       heading: "Need a survey discussion?",
       description: "Share your address type, photos if available, and access constraints. Fees and visit timing are confirmed when live channels allow.",
@@ -136,7 +136,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("When you relocate within the same city or to a new estate, use the relocation service so the kit is taken down cleanly and reassessed at the new address."),
     ],
     relatedServicePaths: [{ path: "/services/residential-installation", label: "Residential installation" }, { path: "/starlink-installation-lagos", label: "Lagos installation" }, { path: "/starlink-installation-abuja", label: "Abuja installation" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-installation-lagos-apartments-estates", "starlink-installation-checklist-nigeria"],
+    relatedArticleSlugs: ["starlink-installation-lagos-apartments-estates", "starlink-installation-checklist-nigeria", "starlink-roof-access-safety-nigeria"],
     cta: {
       heading: "Planning an apartment or estate install?",
       description: "Send the property type and any management rules you already know.",
@@ -175,7 +175,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("If the link is already installed and unstable, start with offline troubleshooting, then revisit power. For first-time installs, pair this article with the home installation checklist."),
     ],
     relatedServicePaths: [{ path: "/services/backup-power", label: "Backup power" }, { path: "/services/residential-installation", label: "Residential installation" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-offline-searching-troubleshooting-nigeria"],
+    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-offline-searching-troubleshooting-nigeria", "starlink-keeps-rebooting-nigeria", "starlink-power-supply-nigeria"],
     cta: {
       heading: "Need power planning with your install?",
       description: "Describe your generator or inverter setup when you enquire.",
@@ -212,7 +212,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Say whether the kit is already on site, what the building type is, and whether approvals are cleared. Browse installation examples for visual context, remembering those photographs are field-library images with their stated captions — not a promise of an identical mount at your address."),
     ],
     relatedServicePaths: [{ path: "/services/residential-installation", label: "Residential installation" }, { path: "/our-work", label: "Installation examples" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-site-survey-nigeria"],
+    relatedArticleSlugs: ["starlink-installation-checklist-nigeria", "starlink-site-survey-nigeria", "questions-for-starlink-installer-nigeria"],
     cta: {
       heading: "Prefer a professional install?",
       description: "Request a quote with your property type and whether you already own a kit.",
@@ -236,7 +236,7 @@ export const batch1Articles: ArticleRecord[] = [
     heroImageSrc: "/images/service-sales-installation.jpeg",
     heroImageAlt: "Starlink sales and installation equipment context",
     blocks: [
-      p("Nigerian buyers usually choose between a compact travel-oriented kit and a standard home kit. Marketing names change over time; what matters is how you will use the terminal day to day."),
+      p("Nigerian buyers usually choose between a compact travel-oriented kit and a standard home kit. Marketing names change over time; what matters is how you will use the terminal day to day. Confirm current kit names and included accessories on [Starlink’s official shop](https://www.starlink.com/) and Skylink’s [product catalogue](/products) rather than older blog posts."),
       h2("Quick comparison"),
       table(["Factor", "Mini-oriented use", "Standard Gen 3-oriented use"], [["Primary role", "Travel, temporary sites, compact mounts", "Home or office primary link"], ["Portability", "Higher", "Lower"], ["Typical install", "Faster temporary setups; still needs clear sky", "More permanent roof/wall/pole mounts"], ["Wi‑Fi needs", "Often smaller spaces", "Often whole-home coverage planning"]]),
       note("Hardware and subscription prices change. Use Skylink product pages for published catalogue figures, and Starlink’s own checkout for plan pricing. This article does not invent naira amounts."),
@@ -250,7 +250,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("If you want hardware and mounting handled together, use Skylink’s sales and installation service and the published product catalogue. Authenticity and completeness matter — see our genuine-kit checklist."),
     ],
     relatedServicePaths: [{ path: "/products", label: "Products" }, { path: "/products/starlink-mini", label: "Starlink Mini" }, { path: "/products/starlink-gen3-standard", label: "Gen 3 Standard" }, { path: "/services/sales-installation", label: "Sales and installation" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["genuine-starlink-kit-nigeria", "starlink-installation-checklist-nigeria"],
+    relatedArticleSlugs: ["genuine-starlink-kit-nigeria", "starlink-installation-checklist-nigeria", "starlink-kits-nigeria", "starlink-flat-hp-vs-standard-nigeria"],
     cta: {
       heading: "Choosing a kit?",
       description: "Ask Skylink about supply and installation together for your use case.",
@@ -289,7 +289,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Browse published products, then enquire with your address type and whether you need installation on the same job."),
     ],
     relatedServicePaths: [{ path: "/services/sales-installation", label: "Sales and installation" }, { path: "/products", label: "Products" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-mini-vs-standard-nigeria", "diy-vs-professional-starlink-installation-nigeria"],
+    relatedArticleSlugs: ["starlink-mini-vs-standard-nigeria", "diy-vs-professional-starlink-installation-nigeria", "starlink-kits-nigeria", "starlink-ethernet-adapter-nigeria"],
     cta: {
       heading: "Prefer a documented sales path?",
       description: "Enquire about kit supply and installation through Skylink.",
@@ -313,7 +313,7 @@ export const batch1Articles: ArticleRecord[] = [
     heroImageSrc: "/images/service-relocation.jpeg",
     heroImageAlt: "Starlink relocation and remount service context",
     blocks: [
-      p("When Starlink shows offline or keeps searching for satellites, Nigerian users should separate local faults (power, cable, obstruction) from wider service incidents. Work through quick checks before assuming the dish is broken."),
+      p("When Starlink shows offline or keeps searching for satellites, Nigerian users should separate local faults (power, cable, obstruction) from wider service incidents. Work through quick checks before assuming the dish is broken. Use the Starlink app obstruction and cable diagnostics, and treat [Starlink’s own status and support pages](https://www.starlink.com/support) as the source for account-level outages rather than social media rumours."),
       h2("First checks (about ten minutes)"),
       ol("Confirm the router and dish have power.", "Reseat outdoor cable connections if you can do so safely.", "Open the Starlink app and note any obstruction or cable alerts.", "Look for recent physical changes: new water tank, scaffold, or tree growth.", "Ask others nearby whether they see a wider outage — without treating social media as proof."),
       h2("Power-related symptoms"),
@@ -327,7 +327,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Skylink’s relocation service covers remounts and moves. The support page lists preparation notes and contact channels."),
     ],
     relatedServicePaths: [{ path: "/support", label: "Support" }, { path: "/services/relocation", label: "Relocation" }, { path: "/services/backup-power", label: "Backup power" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-generator-inverter-power-nigeria", "diy-vs-professional-starlink-installation-nigeria"],
+    relatedArticleSlugs: ["starlink-generator-inverter-power-nigeria", "diy-vs-professional-starlink-installation-nigeria", "starlink-slow-speed-nigeria", "starlink-outage-vs-local-fault-nigeria"],
     cta: {
       heading: "Still offline after basic checks?",
       description: "Contact Skylink for support or a remount assessment.",
@@ -365,7 +365,7 @@ export const batch1Articles: ArticleRecord[] = [
       note("Skylink does not publish guaranteed Mbps or SLA percentages on this page. Throughput depends on plan class, congestion, and local network design."),
     ],
     relatedServicePaths: [{ path: "/services/business-connectivity", label: "Business connectivity" }, { path: "/services/wifi-networking", label: "Wi‑Fi networking" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-backup-fibre-business-nigeria", "starlink-vs-fibre-vs-5g-nigeria"],
+    relatedArticleSlugs: ["starlink-backup-fibre-business-nigeria", "starlink-vs-fibre-vs-5g-nigeria", "starlink-hotels-sme-nigeria", "starlink-pos-cctv-business-nigeria"],
     cta: {
       heading: "Planning office connectivity?",
       description: "Request a business quote with site type and user count estimates.",
@@ -402,7 +402,7 @@ export const batch1Articles: ArticleRecord[] = [
       note("We do not prescribe a single brand of firewall or invent uptime percentages. Formal designs follow your IT policies and a scoped survey."),
     ],
     relatedServicePaths: [{ path: "/services/business-connectivity", label: "Business connectivity" }, { path: "/services/backup-power", label: "Backup power" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-office-business-installation-nigeria", "starlink-vs-fibre-vs-5g-nigeria"],
+    relatedArticleSlugs: ["starlink-office-business-installation-nigeria", "starlink-vs-fibre-vs-5g-nigeria", "starlink-business-sla-expectations-nigeria"],
     cta: {
       heading: "Discuss failover design",
       description: "Tell us about your primary link and what must stay online.",
@@ -478,7 +478,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Use the Lagos location page for local FAQs and service links, then contact Skylink with your estate constraints."),
     ],
     relatedServicePaths: [{ path: "/starlink-installation-lagos", label: "Lagos service area" }, { path: "/services/residential-installation", label: "Residential installation" }, { path: "/contact?intent=quote&location=Lagos", label: "Lagos quote" }],
-    relatedArticleSlugs: ["starlink-apartment-estate-approval-nigeria", "starlink-installation-checklist-nigeria"],
+    relatedArticleSlugs: ["starlink-apartment-estate-approval-nigeria", "starlink-installation-checklist-nigeria", "starlink-installation-abuja-estates"],
     cta: {
       heading: "Planning a Lagos install?",
       description: "Request a Lagos quote with your area and property type.",
@@ -559,7 +559,7 @@ export const batch1Articles: ArticleRecord[] = [
       note("No article can guarantee service in every sea state or operating corridor. Confirmation follows survey and Starlink’s own service rules."),
     ],
     relatedServicePaths: [{ path: "/services/maritime-offshore", label: "Maritime and offshore" }, { path: "/services/boat-installation", label: "Boat installation" }, { path: "/products/starlink-flat-high-performance", label: "Flat High Performance" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-boat-installation-nigeria", "starlink-installation-port-harcourt-rivers"],
+    relatedArticleSlugs: ["starlink-boat-installation-nigeria", "starlink-installation-port-harcourt-rivers", "starlink-flat-hp-maritime-nigeria", "maritime-starlink-survey-checklist-nigeria"],
     cta: {
       heading: "Planning vessel connectivity?",
       description: "Send vessel type, operating area description, and power notes to start a maritime discussion.",
@@ -598,7 +598,7 @@ export const batch1Articles: ArticleRecord[] = [
       p("Operators based around Port Harcourt sometimes combine shore office connectivity with vessel work — keep those as separate scopes in your enquiry."),
     ],
     relatedServicePaths: [{ path: "/services/boat-installation", label: "Boat installation" }, { path: "/services/maritime-offshore", label: "Maritime and offshore" }, { path: "/contact", label: "Contact" }],
-    relatedArticleSlugs: ["starlink-maritime-nigeria-planning-checklist", "starlink-mini-vs-standard-nigeria"],
+    relatedArticleSlugs: ["starlink-maritime-nigeria-planning-checklist", "starlink-mini-vs-standard-nigeria", "starlink-workboat-power-mount-nigeria"],
     cta: {
       heading: "Enquire about boat installation",
       description: "Tell us the boat type and whether the kit will travel between shore and vessel.",

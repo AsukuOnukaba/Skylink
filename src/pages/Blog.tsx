@@ -12,10 +12,27 @@ const categoryLabel: Record<string, string> = {
   business: "Business",
   local: "Local",
   maritime: "Maritime",
+  news: "Developments",
+  forecast: "Outlook",
 };
+
+const CATEGORY_ORDER = [
+  "residential",
+  "equipment",
+  "troubleshooting",
+  "business",
+  "local",
+  "maritime",
+  "news",
+  "forecast",
+] as const;
 
 export function Blog() {
   const articles = publishedArticles();
+  const grouped = CATEGORY_ORDER.map((category) => ({
+    category,
+    items: articles.filter((article) => article.category === category),
+  })).filter((group) => group.items.length > 0);
 
   return (
     <AppShell>
@@ -39,36 +56,41 @@ export function Blog() {
           </Container>
         </section>
 
-        <section className="bg-slate-100 py-[var(--space-section)]">
-          <Container className="max-w-4xl">
-            <ul className="grid gap-4">
-              {articles.map((article) => (
-                <li key={article.slug}>
-                  <Link
-                    to={`/blog/${article.slug}`}
-                    className="block rounded-lg border border-slate-200 bg-white p-5 no-underline transition hover:border-sky-300 hover:shadow-md focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
-                      {categoryLabel[article.category] ?? article.category}
-                    </p>
-                    <h2 className="mt-2 text-xl font-semibold text-navy-900">
-                      {article.title}
-                    </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                      {article.excerpt}
-                    </p>
-                    <p className="mt-3 text-xs text-slate-500">
-                      Published {article.date}
-                      {article.updated && article.updated !== article.date
-                        ? ` · Updated ${article.updated}`
-                        : ""}
-                    </p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Container>
-        </section>
+        {grouped.map((group) => (
+          <section
+            key={group.category}
+            className="border-t border-slate-200 bg-slate-100 py-[var(--space-section)]"
+          >
+            <Container className="max-w-4xl">
+              <h2 className="text-2xl font-bold text-navy-950">
+                {categoryLabel[group.category] ?? group.category}
+              </h2>
+              <ul className="mt-6 grid gap-4">
+                {group.items.map((article) => (
+                  <li key={article.slug}>
+                    <Link
+                      to={`/blog/${article.slug}`}
+                      className="block rounded-lg border border-slate-200 bg-white p-5 no-underline transition hover:border-sky-300 hover:shadow-md focus-visible:outline-none focus-visible:shadow-[var(--focus-ring)]"
+                    >
+                      <h3 className="text-xl font-semibold text-navy-900">
+                        {article.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                        {article.excerpt}
+                      </p>
+                      <p className="mt-3 text-xs text-slate-500">
+                        Published {article.date}
+                        {article.updated && article.updated !== article.date
+                          ? ` · Updated ${article.updated}`
+                          : ""}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Container>
+          </section>
+        ))}
       </main>
     </AppShell>
   );

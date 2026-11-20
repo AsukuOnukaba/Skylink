@@ -37,6 +37,10 @@ describe("pageRegistry", () => {
     expect(paths).toContain(
       "/blog/starlink-installation-checklist-nigeria",
     );
+    const blogArticles = paths.filter(
+      (path) => path.startsWith("/blog/") && path !== "/blog",
+    );
+    expect(blogArticles).toHaveLength(100);
     expect(paths).toContain("/services/sales-installation");
     expect(paths).not.toContain("/dev/brand");
     expect(paths).not.toContain("/contact?intent=quote");

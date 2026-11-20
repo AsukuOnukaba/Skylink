@@ -31,7 +31,9 @@ export type ArticleRecord = {
     | "troubleshooting"
     | "business"
     | "local"
-    | "maritime";
+    | "maritime"
+    | "news"
+    | "forecast";
   primaryKeyword: string;
   published: boolean;
   indexable: boolean;
