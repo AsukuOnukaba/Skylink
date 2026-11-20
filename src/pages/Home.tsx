@@ -108,7 +108,7 @@ function ServiceCard({
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
-          alt={service.imageAlt || ""}
+          alt={service.imageAlt || service.title}
           className="aspect-[16/10] w-full object-cover object-center"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />

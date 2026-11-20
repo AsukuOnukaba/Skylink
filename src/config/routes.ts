@@ -1,3 +1,4 @@
+import { hasPublishedArticles } from "@/data/articles/articles";
 import { hasPublishedLocations } from "@/data/locations";
 import { hasPublishedProducts } from "@/data/products";
 
@@ -29,6 +30,7 @@ const staticRoutes: AppRoute[] = [
     footer: "explore",
   },
   { path: "/support", label: "Support", footer: "legal" },
+  // /blog inserted dynamically when articles are published
   { path: "/our-work", label: "Installation examples", footer: "explore" },
   { path: "/gallery", label: "Gallery", footer: "explore" },
   { path: "/privacy", label: "Privacy", footer: "legal" },
@@ -58,12 +60,23 @@ function catalogueNavRoutes(): AppRoute[] {
 
 export function getAppRoutes(): AppRoute[] {
   const catalogue = catalogueNavRoutes();
-  if (catalogue.length === 0) {
-    return staticRoutes;
-  }
-  const servicesIndex = staticRoutes.findIndex((r) => r.path === "/services");
   const next = [...staticRoutes];
-  next.splice(servicesIndex + 1, 0, ...catalogue);
+  if (catalogue.length > 0) {
+    const servicesIndex = next.findIndex((r) => r.path === "/services");
+    next.splice(servicesIndex + 1, 0, ...catalogue);
+  }
+  if (hasPublishedArticles()) {
+    const guideIndex = next.findIndex(
+      (r) => r.path === "/guide/starlink-nigeria",
+    );
+    const blogRoute: AppRoute = {
+      path: "/blog",
+      label: "Articles",
+      footer: "explore",
+    };
+    if (guideIndex >= 0) next.splice(guideIndex + 1, 0, blogRoute);
+    else next.push(blogRoute);
+  }
   return next;
 }
 

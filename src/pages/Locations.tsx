@@ -142,7 +142,10 @@ function LocationCard({ place }: { place: LocationRecord }) {
       {place.imageSrc ? (
         <Picture
           src={place.imageSrc}
-          alt={place.imageAlt || ""}
+          alt={
+            place.imageAlt ||
+            `Starlink installation context for ${place.placeName}`
+          }
           pictureClassName="block overflow-hidden"
           className="aspect-[16/10] w-full object-cover"
           sizes="(max-width: 640px) 100vw, 33vw"

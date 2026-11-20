@@ -18,7 +18,14 @@ async function walk(dir, acc = []) {
 const pages = (await walk(dist)).sort();
 const failures = [];
 
-if (pages.length !== 54) failures.push(`expected 54 prerendered pages, found ${pages.length}`);
+// Baseline catalogue footprint was 54 routes before the blog launch batch.
+// Blog index + published articles increase the prerender count; enforce a floor.
+const MIN_PRERENDERED_PAGES = 54;
+if (pages.length < MIN_PRERENDERED_PAGES) {
+  failures.push(
+    `expected at least ${MIN_PRERENDERED_PAGES} prerendered pages, found ${pages.length}`,
+  );
+}
 
 for (const file of pages) {
   const relative = path.relative(dist, path.dirname(file)).replaceAll(path.sep, "/");

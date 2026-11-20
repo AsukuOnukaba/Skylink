@@ -1,3 +1,4 @@
+import type { ArticleRecord } from "@/data/articles/article-types";
 import type { LocationRecord } from "@/data/locations";
 import type { ProductRecord } from "@/data/products";
 import type { ServiceRecord } from "@/data/services";
@@ -21,6 +22,18 @@ export function organizationJsonLd(siteOrigin: string | null): Record<string, un
   if (siteOrigin) {
     data.url = `${siteOrigin}/`;
     data.logo = `${siteOrigin}/brand/skylink-logo-primary.png`;
+  }
+  // ContactPoint uses only verified published channels (no invented street NAP).
+  if (site.phoneE164 || site.email) {
+    const contactPoint: Record<string, unknown> = {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      areaServed: "NG",
+      availableLanguage: ["en"],
+    };
+    if (site.phoneE164) contactPoint.telephone = site.phoneE164;
+    if (site.email) contactPoint.email = site.email;
+    data.contactPoint = [contactPoint];
   }
   return data;
 }
@@ -137,5 +150,40 @@ export function locationServiceJsonLd(
     },
   };
   if (pageUrl) data.url = pageUrl;
+  return data;
+}
+
+export function articleJsonLd(
+  article: ArticleRecord,
+  pageUrl: string | null,
+): Record<string, unknown> {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.seoDescription,
+    datePublished: article.date,
+    dateModified: article.updated ?? article.date,
+    author: {
+      "@type": "Organization",
+      name: site.brandName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.brandName,
+    },
+  };
+  if (pageUrl) {
+    data.url = pageUrl;
+    data.mainEntityOfPage = pageUrl;
+  }
+  if (article.heroImageSrc && pageUrl) {
+    try {
+      const origin = new URL(pageUrl).origin;
+      data.image = [`${origin}${article.heroImageSrc}`];
+    } catch {
+      data.image = [article.heroImageSrc];
+    }
+  }
   return data;
 }

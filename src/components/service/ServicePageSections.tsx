@@ -30,7 +30,7 @@ export function ServiceHero({
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
-          alt={service.imageAlt || ""}
+          alt={service.imageAlt || service.title}
           pictureClassName="block min-h-0 overflow-hidden bg-slate-100"
           className="h-full min-h-72 w-full object-cover object-center"
           sizes="(max-width: 768px) 100vw, 48vw"

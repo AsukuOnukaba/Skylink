@@ -17,6 +17,16 @@ describe("jsonLd builders", () => {
     expect(org.telephone).toBe("+2349060976424");
     expect(org.email).toBe("info@skylink.com");
     expect(org).not.toHaveProperty("address");
+    expect(org.contactPoint).toEqual([
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        areaServed: "NG",
+        availableLanguage: ["en"],
+        telephone: "+2349060976424",
+        email: "info@skylink.com",
+      },
+    ]);
   });
 
   it("builds Service and Product markup without Offer or FAQPage", () => {

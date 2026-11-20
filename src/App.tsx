@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Analytics } from "@/analytics/Analytics";
 import { About } from "@/pages/About";
+import { ArticleDetail } from "@/pages/ArticleDetail";
+import { Blog } from "@/pages/Blog";
 import { BrandFoundation } from "@/pages/BrandFoundation";
 import { Contact } from "@/pages/Contact";
 import { Faq } from "@/pages/Faq";
@@ -35,6 +37,8 @@ export function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/guide/starlink-nigeria" element={<Guide />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<ArticleDetail />} />
       <Route path="/support" element={<Support />} />
       <Route path="/our-work" element={<OurWork />} />
       <Route path="/gallery" element={<Gallery />} />

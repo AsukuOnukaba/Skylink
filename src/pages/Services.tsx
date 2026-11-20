@@ -80,7 +80,7 @@ function ServiceCard({ service }: { service: ServiceRecord }) {
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
-          alt={service.imageAlt || ""}
+          alt={service.imageAlt || service.title}
           className="aspect-[16/10] w-full object-cover object-center"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
@@ -109,7 +109,7 @@ function FeaturedService({ service }: { service: ServiceRecord }) {
       {service.imageSrc ? (
         <Picture
           src={service.imageSrc}
-          alt={service.imageAlt || ""}
+          alt={service.imageAlt || service.title}
           pictureClassName="block min-h-0 overflow-hidden"
           className="h-full min-h-64 w-full object-cover object-center"
           sizes="(max-width: 768px) 100vw, 48vw"

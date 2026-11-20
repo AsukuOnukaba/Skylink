@@ -26,8 +26,9 @@ export function Guide() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
               How sky view, power, Wi-Fi, and plan class actually affect a
-              Starlink install in Nigeria. This is a reference page, not a blog
-              and not a price list for monthly subscriptions.
+              Starlink install in Nigeria. This is a stable reference page — not
+              a price list for monthly subscriptions. Longer topical articles
+              live under Articles.
             </p>
             <Picture
               src="/images/service-residential-installation.jpeg"
@@ -111,6 +112,20 @@ export function Guide() {
               <li>
                 <TextLink to="/our-work">Installation examples</TextLink> from
                 the DataGram field library
+              </li>
+              <li>
+                <TextLink to="/blog">Articles</TextLink> for installation
+                checklists, hardware comparisons, troubleshooting, business and
+                maritime planning
+              </li>
+              <li>
+                <TextLink to="/blog/starlink-installation-checklist-nigeria">
+                  Home installation checklist
+                </TextLink>{" "}
+                and{" "}
+                <TextLink to="/blog/starlink-generator-inverter-power-nigeria">
+                  generator and inverter planning
+                </TextLink>
               </li>
             </ul>
           </Container>

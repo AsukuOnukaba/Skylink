@@ -1,5 +1,7 @@
 import { site } from "@/config/site";
 import { absoluteUrl, resolveIndexing } from "@/config/seo";
+import type { ArticleRecord } from "@/data/articles/article-types";
+import { publishedArticles } from "@/data/articles/articles";
 import {
   publishedLocations,
   type LocationRecord,
@@ -13,6 +15,7 @@ import {
   type ServiceRecord,
 } from "@/data/services";
 import {
+  articleJsonLd,
   breadcrumbJsonLd,
   locationServiceJsonLd,
   organizationJsonLd,
@@ -204,6 +207,24 @@ export function listPublicPages(): PageSeoRecord[] {
 
   pages.push(
     staticPage(
+      "/blog",
+      `Starlink guides and planning articles — ${site.brandName}`,
+      `Practical Nigeria-focused articles on Starlink installation planning, hardware, troubleshooting, business connectivity, local guidance, and maritime work from ${site.brandName}.`,
+      {
+        breadcrumbs: [
+          crumb("Home", "/", siteOrigin),
+          crumb("Articles"),
+        ],
+      },
+    ),
+  );
+
+  for (const article of publishedArticles()) {
+    pages.push(articlePage(article, siteOrigin));
+  }
+
+  pages.push(
+    staticPage(
       "/support",
       `Support — ${site.brandName}`,
       `Preparation notes, links to the FAQ and Nigeria guide, and the published phone, WhatsApp, and email channels.`,
@@ -358,6 +379,35 @@ function locationPage(
     prerender: true,
     indexable: place.indexable,
     lastModified: place.contentUpdatedAt,
+    breadcrumbs: crumbs,
+    jsonLd,
+  };
+}
+
+function articlePage(
+  article: ArticleRecord,
+  siteOrigin: string | null,
+): PageSeoRecord {
+  const path = `/blog/${article.slug}`;
+  const pageUrl = absoluteUrl(siteOrigin, path);
+  const crumbs: BreadcrumbItem[] = [
+    crumb("Home", "/", siteOrigin),
+    crumb("Articles", "/blog", siteOrigin),
+    crumb(article.title),
+  ];
+  const jsonLd: Record<string, unknown>[] = [];
+  const breadcrumb = breadcrumbJsonLd(crumbs);
+  if (breadcrumb) jsonLd.push(breadcrumb);
+  jsonLd.push(articleJsonLd(article, pageUrl));
+
+  return {
+    path,
+    title: article.seoTitle,
+    description: article.seoDescription,
+    prerender: true,
+    indexable: article.indexable,
+    lastModified: article.updated ?? article.date,
+    ogImagePath: article.heroImageSrc,
     breadcrumbs: crumbs,
     jsonLd,
   };

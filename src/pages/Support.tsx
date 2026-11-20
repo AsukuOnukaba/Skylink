@@ -74,6 +74,20 @@ export function Support() {
                 <TextLink to="/services/relocation">Relocation and repair</TextLink>{" "}
                 if a kit must move or a mount has failed
               </li>
+              <li>
+                <TextLink to="/blog">Articles</TextLink> including{" "}
+                <TextLink to="/blog/starlink-offline-searching-troubleshooting-nigeria">
+                  offline / searching troubleshooting
+                </TextLink>
+                ,{" "}
+                <TextLink to="/blog/starlink-installation-checklist-nigeria">
+                  the home install checklist
+                </TextLink>
+                , and{" "}
+                <TextLink to="/blog/diy-vs-professional-starlink-installation-nigeria">
+                  DIY vs professional installation
+                </TextLink>
+              </li>
             </ul>
             <h2 className="mt-10 text-2xl font-bold text-navy-950">
               Talk to a person

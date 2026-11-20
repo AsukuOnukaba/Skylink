@@ -6,7 +6,9 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Picture } from "@/components/ui/Picture";
+import { TextLink } from "@/components/ui/TextLink";
 import { PageMeta } from "@/components/seo/PageMeta";
+import { articlesForLocationKey } from "@/data/articles/articles";
 import {
   getPublishedLocation,
   locationInstallationProcess,
@@ -32,6 +34,7 @@ export function LocationDetail() {
   const relatedServices = place.relatedServiceSlugs
     .map((slug) => getPublishedService(slug))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
+  const relatedArticles = articlesForLocationKey(place.placeKey);
 
   const contactTo = `/contact?intent=quote&location=${encodeURIComponent(place.placeName)}`;
 
@@ -56,7 +59,10 @@ export function LocationDetail() {
                 <figure className="overflow-hidden rounded-xl border border-slate-200 bg-slate-100 shadow-sm">
                   <Picture
                     src={place.imageSrc}
-                    alt={place.imageAlt || ""}
+                    alt={
+                      place.imageAlt ||
+                      `Starlink installation context for ${place.placeName}`
+                    }
                     pictureClassName="block overflow-hidden"
                     className="aspect-[16/10] w-full object-cover"
                     sizes="(max-width: 1024px) 100vw, 52vw"
@@ -177,6 +183,38 @@ export function LocationDetail() {
                   </details>
                 ))}
               </div>
+            </Container>
+          </section>
+        ) : null}
+
+        {relatedArticles.length > 0 ? (
+          <section
+            aria-labelledby="location-articles-heading"
+            className="bg-slate-100 py-[var(--space-section)]"
+          >
+            <Container className="max-w-3xl">
+              <h2
+                id="location-articles-heading"
+                className="text-2xl font-bold text-navy-950"
+              >
+                Related planning articles
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-slate-700">
+                Longer topical guides that complement this location page without
+                replacing it.
+              </p>
+              <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-slate-700">
+                {relatedArticles.map((article) => (
+                  <li key={article.slug}>
+                    <TextLink to={`/blog/${article.slug}`}>
+                      {article.title}
+                    </TextLink>
+                  </li>
+                ))}
+                <li>
+                  <TextLink to="/blog">All articles</TextLink>
+                </li>
+              </ul>
             </Container>
           </section>
         ) : null}

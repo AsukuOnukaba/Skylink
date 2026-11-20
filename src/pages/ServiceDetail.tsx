@@ -14,6 +14,7 @@ import {
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { enquiryContactCtaLabel } from "@/config/enquiryCta";
+import { articlesForServicePath } from "@/data/articles/articles";
 import { hasPublishedLocations } from "@/data/locations";
 import { getPublishedProduct } from "@/data/products";
 import {
@@ -33,6 +34,7 @@ export function ServiceDetail() {
     .map((productSlug) => getPublishedProduct(productSlug))
     .filter((product): product is NonNullable<typeof product> => Boolean(product));
   const relatedServices = relatedPublishedServices(service.slug);
+  const relatedArticles = articlesForServicePath(`/services/${service.slug}`);
   const maritimePage = (maritimeServiceSlugs as readonly string[]).includes(service.slug);
   const contactTo = `/contact?intent=${service.primaryCta}&service=${encodeURIComponent(service.slug)}`;
   const ctaLabel = enquiryContactCtaLabel(service.primaryCta);
@@ -130,6 +132,34 @@ export function ServiceDetail() {
                   </details>
                 ))}
               </div>
+            </Container>
+          </section>
+        ) : null}
+
+        {relatedArticles.length > 0 ? (
+          <section
+            aria-labelledby="service-articles-heading"
+            className="bg-slate-100 py-[var(--space-section)]"
+          >
+            <Container className="max-w-3xl">
+              <h2
+                id="service-articles-heading"
+                className="text-2xl font-bold text-navy-950"
+              >
+                Related articles
+              </h2>
+              <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-slate-700">
+                {relatedArticles.map((article) => (
+                  <li key={article.slug}>
+                    <TextLink to={`/blog/${article.slug}`}>
+                      {article.title}
+                    </TextLink>
+                  </li>
+                ))}
+                <li>
+                  <TextLink to="/blog">All articles</TextLink>
+                </li>
+              </ul>
             </Container>
           </section>
         ) : null}

@@ -33,6 +33,10 @@ describe("pageRegistry", () => {
     expect(paths).toContain("/starlink-installation-akwa-ibom");
     expect(paths).toContain("/starlink-installation-cross-river");
     expect(paths).toContain("/guide/starlink-nigeria");
+    expect(paths).toContain("/blog");
+    expect(paths).toContain(
+      "/blog/starlink-installation-checklist-nigeria",
+    );
     expect(paths).toContain("/services/sales-installation");
     expect(paths).not.toContain("/dev/brand");
     expect(paths).not.toContain("/contact?intent=quote");
@@ -69,6 +73,10 @@ describe("pageRegistry", () => {
     );
     expect(entries).toContain(
       "https://www.example.com/starlink-installation-cross-river",
+    );
+    expect(entries).toContain("https://www.example.com/blog");
+    expect(entries).toContain(
+      "https://www.example.com/blog/starlink-maritime-nigeria-planning-checklist",
     );
     expect(entries.join("\n")).not.toMatch(/localhost|vercel\.app/i);
 
