@@ -17,6 +17,13 @@ export type ArticleLink = {
   label: string;
 };
 
+export type ArticleSource = {
+  title: string;
+  url: string;
+  publisher: string;
+  checked: string;
+};
+
 export type ArticleRecord = {
   /** Research-bank ID when applicable (e.g. R01). */
   researchId: string;
@@ -42,6 +49,8 @@ export type ArticleRecord = {
   heroImageSrc?: string;
   heroImageAlt?: string;
   blocks: ArticleBlock[];
+  /** Authoritative references checked during the editorial review. */
+  sources?: ArticleSource[];
   relatedServicePaths: ArticleLink[];
   relatedArticleSlugs: string[];
   cta: {

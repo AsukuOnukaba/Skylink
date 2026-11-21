@@ -47,11 +47,10 @@ export function Blog() {
               Starlink guides and planning articles
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              Practical Nigeria-focused articles on installation planning,
-              hardware choices, troubleshooting, business connectivity, local
-              considerations, and maritime work. These complement Skylink
-              service and location pages — they are not a substitute for a
-              site-specific quotation.
+              Clear, practical guidance for people who want to buy, install or
+              troubleshoot Starlink in Nigeria. Browse straightforward advice
+              for homes, businesses, equipment buyers and vessel operators,
+              with links to official information where details can change.
             </p>
           </Container>
         </section>

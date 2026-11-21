@@ -66,6 +66,38 @@ export function ArticleDetail() {
           </Container>
         </section>
 
+        {article.sources && article.sources.length > 0 ? (
+          <section className="bg-white py-[var(--space-section)]">
+            <Container className="max-w-3xl">
+              <h2 className="text-2xl font-bold text-navy-950">
+                Sources and further reading
+              </h2>
+              <p className="mt-3 leading-relaxed text-slate-700">
+                Product details, plans and support instructions can change.
+                These authoritative sources were checked during our editorial
+                review and are the best place to confirm current information.
+              </p>
+              <ul className="mt-4 list-disc space-y-3 pl-5 text-base text-slate-700">
+                {article.sources.map((source) => (
+                  <li key={source.url}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-sky-700 underline-offset-2 hover:underline"
+                    >
+                      {source.title}
+                    </a>{" "}
+                    <span className="text-slate-500">
+                      — {source.publisher}; checked {source.checked}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Container>
+          </section>
+        ) : null}
+
         {article.relatedServicePaths.length > 0 ? (
           <section className="bg-white py-[var(--space-section)]">
             <Container className="max-w-3xl">

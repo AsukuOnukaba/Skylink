@@ -7,8 +7,9 @@ import { newsForecastArticles } from "@/data/articles/articles-news-forecast";
 import { residentialArticles } from "@/data/articles/articles-residential";
 import { troubleshootingArticles } from "@/data/articles/articles-troubleshooting";
 import type { ArticleRecord } from "@/data/articles/article-types";
+import { applyEditorialReview } from "@/data/articles/editorial-review";
 
-const allArticles: ArticleRecord[] = [
+const sourceArticles: ArticleRecord[] = [
   ...batch1Articles,
   ...residentialArticles,
   ...equipmentArticles,
@@ -18,6 +19,8 @@ const allArticles: ArticleRecord[] = [
   ...maritimeArticles,
   ...newsForecastArticles,
 ];
+
+const allArticles = sourceArticles.map(applyEditorialReview);
 
 export function publishedArticles(): ArticleRecord[] {
   return allArticles.filter((article) => article.published);

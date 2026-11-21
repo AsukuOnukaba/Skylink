@@ -16,6 +16,7 @@
     "test": "vitest run",
     "seo:generate": "node scripts/seo-generate.mjs",
     "seo:check": "node scripts/check-prerender.mjs",
+    "editorial:report": "node scripts/generate-editorial-report.mjs",
     "qa:pages": "node scripts/check-page-completeness.mjs",
     "qa:http": "node scripts/check-http-routes.mjs",
     "qa:headers": "node scripts/check-security-headers.mjs",
